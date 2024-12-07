@@ -51,7 +51,7 @@ export const Services = (props) => {
                   key={`${d.name}-${i}`}
                   className="col-md-4 service-item" // Apply the service-item class here
                 >
-                  <i className={d.icon}></i>
+                  <i className={`service-item ${d.icon}`}></i>
                   <div className="service-desc">
                     <h3>{d.name}</h3>
                     <p>{d.text}</p>
