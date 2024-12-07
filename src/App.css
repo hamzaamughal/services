@@ -16,3 +16,16 @@
     width: 110%;
   }
 }
+
+/* App.css or Services.css */
+.service-item {
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+  transform: scale(1.15); /* Scale up on hover */
+}
+
+.service-item:active {
+  transform: scale(0.95); /* Scale down slightly when clicked */
+}
