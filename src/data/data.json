@@ -1,161 +1,154 @@
 {
   "Header": {
-    "title": "We are a Creative Agency",
-    "paragraph": "We provide outstanding creative services and results"
+    "title": "We are a Creative Business Services  Agency",
+    "paragraph": "We provide outstanding Business & Visa related services and results"
   },
   "About": {
-    "paragraph": "We provide outstanding creative services and results",
+    "paragraph": "We provide outstanding Business & Visa related services and results",
     "Why": [
-      "Service Number One",
-      "Service Number Two",
-      "Service Number Three",
-      "Service Number Four"
+      "Business Structure Consultation",
+      "Company Name Registration",
+      "Company Documentation Services"
     ],
-    "Why2": [
-      "Service Number One",
-      "Service Number Two",
-      "Service Number Three",
-      "Service Number Four",
-      "Service Number Five"
-    ]
+    "Why2": ["Investor Visas", "Travel Arrangements", "Financial Services"]
   },
   "Gallery": [
     {
-      "title": "Project Title",
+      "title": "Business Analysis",
       "largeImage": "img/portfolio/01-large.jpg",
       "smallImage": "img/portfolio/01-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Social Media Marketing",
       "largeImage": "img/portfolio/02-large.jpg",
       "smallImage": "img/portfolio/02-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Business Registration",
       "largeImage": "img/portfolio/03-large.jpg",
       "smallImage": "img/portfolio/03-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Business planning",
       "largeImage": "img/portfolio/04-large.jpg",
       "smallImage": "img/portfolio/04-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Visa Services ",
       "largeImage": "img/portfolio/05-large.jpg",
       "smallImage": "img/portfolio/05-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Travel Arrangements",
       "largeImage": "img/portfolio/06-large.jpg",
       "smallImage": "img/portfolio/06-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Accounting Services",
       "largeImage": "img/portfolio/07-large.jpg",
       "smallImage": "img/portfolio/07-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Online Business Consultation",
       "largeImage": "img/portfolio/08-large.jpg",
       "smallImage": "img/portfolio/08-small.jpg"
     },
     {
-      "title": "Project Title",
+      "title": "Financial Services",
       "largeImage": "img/portfolio/09-large.jpg",
       "smallImage": "img/portfolio/09-small.jpg"
     }
   ],
   "Services": [
     {
-      "icon": "fa fa-wordpress",
-      "name": "Company Formation Services",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "icon": "fa  fa-briefcase",
+      "name": "Business Structure Consultation",
+      "text": "Business Structure Consultation is a service that helps entrepreneurs select the most suitable legal structure for their business Like Liability, taxes, flexibility, goals analysis."
     },
     {
-      "icon": "fa fa-cart-arrow-down",
-      "name": "Visa-Related Services",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "icon": "fa  fa-building",
+      "name": "Company Name Registration",
+      "text": "Company Name Registration ensures your business name is unique, legally compliant, and officially recognized by the appropriate authorities. This service protects your brand identity ."
     },
     {
-      "icon": "fa fa-cloud-download",
-      "name": "Company Documentation Services",                                                   
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "icon": "fa fa-file",
+      "name": "Company Documentation Services",
+      "text": "Filing Business Formation Documents involves preparing and submitting essential legal paperwork, like Articles of Incorporation or Organization, to officially register a business with the state."
     },
     {
-      "icon": "fa fa-language",
-      "name": "Translation Services",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "icon": "fa fa-cc-visa",
+      "name": "Investor Visas",
+      "text": "An investor visa grants residency or citizenship to individuals who make significant financial investments in a country, typically through real estate, business ventures, or government-approved projects."
     },
     {
       "icon": "fa fa-plane",
       "name": "Travel Arrangements",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "text": "This service assists clients in planning and booking transportation, accommodations, and itineraries for smooth and hassle-free travel experiences."
     },
     {
-      "icon": "fa fa-pie-chart",
+      "icon": "fa fa-dollar",
       "name": "Financial Services",
-      "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at."
+      "text": "Financial services offer expert guidance in managing, investing, and growing wealth through strategic planning, budgeting, and investment advice tailored to individual or business needs."
     }
   ],
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"I had no idea where to start with forming my business, but their team guided me every step of the way. From choosing the right... \"",
       "name": "John Doe"
     },
     {
       "img": "img/testimonials/02.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"Registering my business name felt daunting, but they made the process effortless. They ensured my name met all legal requirements...\"",
       "name": "Johnathan Doe"
     },
     {
       "img": "img/testimonials/03.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"Applying for an EIN was quick and easy with their help. I received step-by-step guidance and had no issues with the IRS process.\"",
       "name": "John Doe"
     },
     {
       "img": "img/testimonials/04.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"The team made my tourist visa application stress-free! They ensured my documents were perfect, and I got my visa approved in no time.\"",
       "name": "Johnathan Doe"
     },
     {
       "img": "img/testimonials/05.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"Their work visa service was exceptional. They clarified all requirements and worked closely with my employer to ensure compliance.\"",
       "name": "John Doe"
     },
     {
       "img": "img/testimonials/06.jpg",
-      "text": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.\"",
+      "text": "\"Their support with my spouse visa application was incredible. They handled the paperwork flawlessly and kept me updated throughout.\"",
       "name": "Johnathan Doe"
     }
   ],
   "Team": [
     {
       "img": "img/team/01.jpg",
-      "name": "John Doe",
+      "name": "Mr, Ali",
       "job": "Director"
     },
     {
       "img": "img/team/02.jpg",
       "name": "Mike Doe",
-      "job": "Senior Designer"
+      "job": "Senior Business Analyst"
     },
     {
       "img": "img/team/03.jpg",
-      "name": "Jane Doe",
-      "job": "Senior Designer"
+      "name": "Sara Doe",
+      "job": "Senior Visa Expert"
     },
     {
       "img": "img/team/04.jpg",
-      "name": "Karen Doe",
-      "job": "Project Manager"
+      "name": "Karen Smith",
+      "job": "Business Consultant"
     }
   ],
   "Contact": {
-    "address": "4321 California St, San Francisco, CA 12345 ",
-    "phone": "+1 123 456 1234",
-    "email": "info@company.com",
+    "address": "Mr Ali, Zayed Road, Dubai, United Arab Emirates ",
+    "phone": "+971568140925",
+    "email": "ali@services.com",
     "facebook": "fb.com",
     "twitter": "twitter.com",
     "youtube": "youtube.com"
