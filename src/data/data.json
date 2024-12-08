@@ -59,6 +59,32 @@
       "smallImage": "img/portfolio/09-small.jpg"
     }
   ],
+  "Blog": [
+      {
+        "title": "Blog Post 1",
+        "largeImage": "img/blog1.jpg"
+      },
+      {
+        "title": "Blog Post 2",
+        "largeImage": "img/blog2.jpg"
+      },
+      {
+        "title": "Blog Post 3",
+        "largeImage": "img/blog3.jpg"
+      },
+      {
+        "title": "Blog Post 4",
+        "largeImage": "img/blog4.jpg"
+      },
+      {
+        "title": "Blog Post 5",
+        "largeImage": "img/blog5.jpg"
+      },
+      {
+        "title": "Blog Post 6",
+        "largeImage": "img/blog6.jpg"
+      }
+    ],
   "Services": [
     {
       "icon": "fa  fa-briefcase",

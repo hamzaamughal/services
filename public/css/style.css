@@ -244,6 +244,26 @@ header .intro-text {
   padding-bottom: 200px;
   text-align: center;
 }
+
+.intro-title {
+  font-size: 3rem !important; /* Default size for large screens */
+  font-weight: 700 !important;
+  font-weight: bold !important;
+  margin-bottom: 20px !important;
+}
+
+@media screen and (max-width: 768px) {
+  .intro-title {
+    font-size: 2rem !important; /* Smaller size for tablets and small screens */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .intro-title {
+    font-size: 1.5rem !important; /* Even smaller size for mobile screens */
+  }
+}
+
 /* Features Section */
 #features {
   background: #f6f6f6;

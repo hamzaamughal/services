@@ -37,7 +37,7 @@ export const Header = (props) => {
                 <div className="container">
                   <div className="row">
                     <div className="col-md-8 col-md-offset-2 intro-text">
-                      <h1>
+                      <h1 className="intro-title">
                         {props.data ? props.data.title : "Loading"}
                         <span></span>
                       </h1>

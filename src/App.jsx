@@ -8,8 +8,11 @@ import { Gallery } from "./components/gallery";
 import { Testimonials } from "./components/testimonials";
 import { Team } from "./components/Team";
 import { Contact } from "./components/contact";
+import { Blog } from "./components/blog";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./App.css";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
@@ -31,9 +34,20 @@ const App = () => {
       <About data={landingPageData.About} />
       <Services data={landingPageData.Services} />
       <Gallery data={landingPageData.Gallery} />
+      <Blog data={landingPageData.Blog} />
       <Testimonials data={landingPageData.Testimonials} />
       <Team data={landingPageData.Team} />
       <Contact data={landingPageData.Contact} />
+      {/* WhatsApp Floating Button */}
+      <div className="whatsapp-float">
+        <a
+          href="https://wa.me/+971568140925"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faWhatsapp} size="2x" />
+        </a>
+      </div>
     </div>
   );
 };
