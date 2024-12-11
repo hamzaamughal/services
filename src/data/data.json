@@ -10,7 +10,7 @@
       "Company Name Registration",
       "Company Documentation Services"
     ],
-    "Why2": ["Investor Visas", "Travel Arrangements", "Financial Services"]
+    "Why2": ["Investor Visas"]
   },
   "Gallery": [
     {
@@ -39,11 +39,6 @@
       "smallImage": "img/portfolio/05-small.jpg"
     },
     {
-      "title": "Travel Arrangements",
-      "largeImage": "img/portfolio/06-large.jpg",
-      "smallImage": "img/portfolio/06-small.jpg"
-    },
-    {
       "title": "Accounting Services",
       "largeImage": "img/portfolio/07-large.jpg",
       "smallImage": "img/portfolio/07-small.jpg"
@@ -52,11 +47,6 @@
       "title": "Online Business Consultation",
       "largeImage": "img/portfolio/08-large.jpg",
       "smallImage": "img/portfolio/08-small.jpg"
-    },
-    {
-      "title": "Financial Services",
-      "largeImage": "img/portfolio/09-large.jpg",
-      "smallImage": "img/portfolio/09-small.jpg"
     }
   ],
   "Blog": [
@@ -105,16 +95,6 @@
       "icon": "fa fa-cc-visa",
       "name": "Investor Visas",
       "text": "An investor visa grants residency or citizenship to individuals who make significant financial investments in a country, typically through real estate, business ventures, or government-approved projects."
-    },
-    {
-      "icon": "fa fa-plane",
-      "name": "Travel Arrangements",
-      "text": "This service assists clients in planning and booking transportation, accommodations, and itineraries for smooth and hassle-free travel experiences."
-    },
-    {
-      "icon": "fa fa-dollar",
-      "name": "Financial Services",
-      "text": "Financial services offer expert guidance in managing, investing, and growing wealth through strategic planning, budgeting, and investment advice tailored to individual or business needs."
     }
   ],
   "Testimonials": [
