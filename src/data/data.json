@@ -1,6 +1,6 @@
 {
   "Header": {
-    "title": "We are a Creative Business Services  Agency",
+    "title": "We are a Creative Business Services Agency",
     "paragraph": "We provide outstanding Business & Visa related services and results"
   },
   "About": {
@@ -50,53 +50,92 @@
     }
   ],
   "Blog": [
-      {
-        "title": "Blog Post 1",
-        "largeImage": "img/blog1.jpg"
-      },
-      {
-        "title": "Blog Post 2",
-        "largeImage": "img/blog2.jpg"
-      },
-      {
-        "title": "Blog Post 3",
-        "largeImage": "img/blog3.jpg"
-      },
-      {
-        "title": "Blog Post 4",
-        "largeImage": "img/blog4.jpg"
-      },
-      {
-        "title": "Blog Post 5",
-        "largeImage": "img/blog5.jpg"
-      },
-      {
-        "title": "Blog Post 6",
-        "largeImage": "img/blog6.jpg"
-      }
-    ],
-  "Services": [
     {
-      "icon": "fa  fa-briefcase",
-      "name": "Business Structure Consultation",
-      "text": "Business Structure Consultation is a service that helps entrepreneurs select the most suitable legal structure for their business Like Liability, taxes, flexibility, goals analysis."
+      "title": "Blog Post 1",
+      "largeImage": "img/blog1.jpg"
     },
     {
-      "icon": "fa  fa-building",
-      "name": "Company Name Registration",
-      "text": "Company Name Registration ensures your business name is unique, legally compliant, and officially recognized by the appropriate authorities. This service protects your brand identity ."
+      "title": "Blog Post 2",
+      "largeImage": "img/blog2.jpg"
     },
     {
-      "icon": "fa fa-file",
-      "name": "Company Documentation Services",
-      "text": "Filing Business Formation Documents involves preparing and submitting essential legal paperwork, like Articles of Incorporation or Organization, to officially register a business with the state."
+      "title": "Blog Post 3",
+      "largeImage": "img/blog3.jpg"
     },
     {
-      "icon": "fa fa-cc-visa",
-      "name": "Investor Visas",
-      "text": "An investor visa grants residency or citizenship to individuals who make significant financial investments in a country, typically through real estate, business ventures, or government-approved projects."
+      "title": "Blog Post 4",
+      "largeImage": "img/blog4.jpg"
+    },
+    {
+      "title": "Blog Post 5",
+      "largeImage": "img/blog5.jpg"
+    },
+    {
+      "title": "Blog Post 6",
+      "largeImage": "img/blog6.jpg"
     }
   ],
+  "Services": [
+    {
+      "mainCategory": "Business Formation",
+      "icon": "fa fa-building",
+      "subCategories": [
+        { "name": "Business Structure Consultation", "route": "/business-structure" },
+        { "name": "Company Name Registration", "route": "/company-name-registration" },
+        { "name": "Company Documentation Services", "route": "/company-documentation" }
+      ]
+    },
+    {
+      "mainCategory": "Visa Services",
+      "icon": "fa fa-cc-visa",
+      "subCategories": [
+        { "name": "Investor Visas", "route": "/investor-visas" },
+        { "name": "Tourist Visas", "route": "/tourist-visas" },
+        { "name": "Work Visas", "route": "/work-visas" }
+      ]
+    },
+    {
+      "mainCategory": "Corporate Bank Account Opening",
+      "icon": "fa fa-university",
+      "subCategories": [
+        { "name": "Business Structure Consultation", "route": "/business-structure" },
+        { "name": "Company Name Registration", "route": "/company-name-registration" },
+        { "name": "Company Documentation Services", "route": "/company-documentation" }
+      ]
+    }
+  ],
+  "ServiceDetails": {
+    "/business-structure": {
+      "title": "Business Structure Consultation",
+      "image": "img/business-structure.jpg",
+      "description": "Here is a detailed description of the Business Structure Consultation service..."
+    },
+    "/company-name-registration": {
+      "title": "Company Name Registration",
+      "image": "img/company-name.jpg",
+      "description": "Detailed info about Company Name Registration..."
+    },
+    "/company-documentation": {
+      "title": "Company Documentation Services",
+      "image": "img/company-docs.jpg",
+      "description": "Detailed info about Company Documentation Services..."
+    },
+    "/investor-visas": {
+      "title": "Investor Visas",
+      "image": "img/investor-visas.jpg",
+      "description": "Detailed info about Investor Visas..."
+    },
+    "/tourist-visas": {
+      "title": "Tourist Visas",
+      "image": "img/tourist-visas.jpg",
+      "description": "Detailed info about Tourist Visas..."
+    },
+    "/work-visas": {
+      "title": "Work Visas",
+      "image": "img/work-visas.jpg",
+      "description": "Detailed info about Work Visas..."
+    }
+  },
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",
@@ -152,7 +191,7 @@
     }
   ],
   "Contact": {
-    "address": "Mr Ali, Zayed Road, Dubai, United Arab Emirates ",
+    "address": "Mr Ali, Zayed Road, Dubai, United Arab Emirates",
     "phone": "+971568140925",
     "email": "ali@services.com",
     "facebook": "fb.com",

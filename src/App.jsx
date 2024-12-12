@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navigation } from "./components/navigation";
-import { Header } from "./components/header";
-import { Features } from "./components/features";
-import { About } from "./components/about";
-import { Services } from "./components/services";
-import { Gallery } from "./components/gallery";
-import { Testimonials } from "./components/testimonials";
-import { Team } from "./components/Team";
-import { Contact } from "./components/contact";
-import { Blog } from "./components/blog";
+import { Home } from "./pages/Home";
+import { ServiceDetailPage } from "./components/ServiceDetailsPage";
 import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import "./App.css";
+import { BlogDetailPage } from "./components/BlogDetailPage";
+
+// If you have a Footer component, import it here:
+// import { Footer } from "./components/footer";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -27,28 +23,29 @@ const App = () => {
   }, []);
 
   return (
-    <div>
-      <Navigation />
-      <Header data={landingPageData.Header} />
-      <Features data={landingPageData.Features} />
-      <About data={landingPageData.About} />
-      <Services data={landingPageData.Services} />
-      <Gallery data={landingPageData.Gallery} />
-      <Blog data={landingPageData.Blog} />
-      <Testimonials data={landingPageData.Testimonials} />
-      <Team data={landingPageData.Team} />
-      <Contact data={landingPageData.Contact} />
-      {/* WhatsApp Floating Button */}
-      <div className="whatsapp-float">
-        <a
-          href="https://wa.me/+971568140925"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon icon={faWhatsapp} size="2x" />
-        </a>
-      </div>
-    </div>
+    <Router>
+      {/* Navigation is always visible */}
+      <Navigation data={landingPageData.Services} />
+
+      <Switch>
+        {/* Home Route */}
+        <Route exact path="/" render={() => <Home landingPageData={landingPageData} />} />
+
+        <Route
+          path="/blog/:blogId"
+          render={(props) => <BlogDetailPage {...props} blogData={landingPageData.Blog} />}
+        />
+        {/* Service Detail Route 
+            We use a dynamic parameter :serviceRoute so any sub.route like /business-structure matches.
+        */}
+        <Route
+          path="/:serviceRoute"
+          render={(props) => <ServiceDetailPage {...props} servicesData={landingPageData.Services} />}
+        />
+
+      </Switch>
+
+    </Router>
   );
 };
 
