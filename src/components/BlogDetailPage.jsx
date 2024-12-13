@@ -1,11 +1,13 @@
-// BlogDetailPage.js
 import React from 'react';
+import { useHistory } from 'react-router-dom';
+import './BlogDetailPage.css'; // For the fade-in animation and any extra styles.
 
 export const BlogDetailPage = ({ match, blogData }) => {
+ const history = useHistory();
  const { blogId } = match.params;
  const blogIndex = parseInt(blogId, 10);
 
- // Check if blogData is available and blogIndex is valid
+ // Validate blog data
  if (!blogData || blogIndex < 0 || blogIndex >= blogData.length) {
   return (
    <div className="container" style={{ marginTop: '100px' }}>
@@ -18,9 +20,55 @@ export const BlogDetailPage = ({ match, blogData }) => {
 
  return (
   <div className="container" style={{ marginTop: '100px' }}>
-   <h1>{selectedBlog.title}</h1>
-   <img src={selectedBlog.largeImage} alt={selectedBlog.title} style={{ maxWidth: "100%", height: "auto" }} />
-   <p>Details about {selectedBlog.title} go here. You can add more content, related text, etc.</p>
+   <div className="row">
+    <div className="col-12">
+     {/* Back Button at the top */}
+     <button
+      onClick={() => history.goBack()}
+      className="btn back-btn"
+     >
+      ← Back
+     </button>
+    </div>
+   </div>
+   <div className="row fade-in" style={{ marginTop: '20px' }}>
+    {/* Image Section */}
+    <div className="col-md-6 col-sm-12 text-center">
+     <img
+      src={selectedBlog.largeImage}
+      alt={selectedBlog.title}
+      style={{
+       maxWidth: '100%',
+       height: 'auto',
+       borderRadius: '10px',
+       boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+      }}
+     />
+    </div>
+
+    {/* Text Section */}
+    <div className="col-md-6 col-sm-12" style={{ marginTop: '20px' }}>
+     <h1
+      style={{
+       fontSize: '36px',
+       fontWeight: '800',
+       color: '#333',
+      }}
+     >
+      {selectedBlog.title}
+     </h1>
+     <hr />
+     <p
+      style={{
+       fontSize: '15px',
+       lineHeight: '24px',
+       marginTop: '20px'
+      }}
+     >
+      {selectedBlog.description}
+     </p>
+    </div>
+   </div>
   </div>
  );
 };
