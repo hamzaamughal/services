@@ -7,6 +7,7 @@ import JsonData from "./data/data.json";
 import SmoothScroll from "smooth-scroll";
 import "./App.css";
 import { BlogDetailPage } from "./components/BlogDetailPage";
+import { GalleryDetailPage } from "./components/GalleryDetailPage";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -34,6 +35,10 @@ const App = () => {
         <Route
           path="/blog/:blogId"
           render={(props) => <BlogDetailPage {...props} blogData={landingPageData.Blog} />}
+        />
+        <Route
+          path="/gallery/:galleryId"
+          render={(props) => <GalleryDetailPage {...props} galleryData={landingPageData.Gallery} />}
         />
         {/* Service Detail Route 
             We use a dynamic parameter :serviceRoute so any sub.route like /business-structure matches.

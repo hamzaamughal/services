@@ -15,38 +15,45 @@
   "Gallery": [
     {
       "title": "Business Analysis",
-      "largeImage": "img/portfolio/01-large.jpg",
-      "smallImage": "img/portfolio/01-small.jpg"
+      "largeImage": "/img/portfolio/01-large.jpg",
+      "smallImage": "/img/portfolio/01-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Social Media Marketing",
-      "largeImage": "img/portfolio/02-large.jpg",
-      "smallImage": "img/portfolio/02-small.jpg"
+      "largeImage": "/img/portfolio/02-large.jpg",
+      "smallImage": "/img/portfolio/02-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Business Registration",
-      "largeImage": "img/portfolio/03-large.jpg",
-      "smallImage": "img/portfolio/03-small.jpg"
+      "largeImage": "/img/portfolio/03-large.jpg",
+      "smallImage": "/img/portfolio/03-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Business planning",
-      "largeImage": "img/portfolio/04-large.jpg",
-      "smallImage": "img/portfolio/04-small.jpg"
+      "largeImage": "/img/portfolio/04-large.jpg",
+      "smallImage": "/img/portfolio/04-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Visa Services ",
-      "largeImage": "img/portfolio/05-large.jpg",
-      "smallImage": "img/portfolio/05-small.jpg"
+      "largeImage": "/img/portfolio/05-large.jpg",
+      "smallImage": "/img/portfolio/05-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Accounting Services",
-      "largeImage": "img/portfolio/07-large.jpg",
-      "smallImage": "img/portfolio/07-small.jpg"
+      "largeImage": "/img/portfolio/07-large.jpg",
+      "smallImage": "/img/portfolio/07-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     },
     {
       "title": "Online Business Consultation",
-      "largeImage": "img/portfolio/08-large.jpg",
-      "smallImage": "img/portfolio/08-small.jpg"
+      "largeImage": "/img/portfolio/08-large.jpg",
+      "smallImage": "/img/portfolio/08-small.jpg",
+      "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. "
     }
   ],
   "Blog": [
