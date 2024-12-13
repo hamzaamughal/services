@@ -1,5 +1,6 @@
 import React from "react";
 import "./services.css";
+import { Link } from "react-router-dom";
 
 export const Services = (props) => {
   return (
@@ -22,7 +23,11 @@ export const Services = (props) => {
                   {category.subCategories && category.subCategories.length > 0 && (
                     <ul className="subcategories-list">
                       {category.subCategories.map((sub, sIndex) => (
-                        <li key={sIndex}>{sub.name}</li>
+                        <li key={sIndex}>
+                          <Link to={sub.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            {sub.name}
+                          </Link>
+                        </li>
                       ))}
                     </ul>
                   )}
