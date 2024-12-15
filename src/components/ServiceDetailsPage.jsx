@@ -6,6 +6,11 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
  const history = useHistory();
  const routeParam = match.params.serviceRoute;
 
+ // Add a condition to avoid rendering when servicesData is undefined
+ if (!servicesData || servicesData.length === 0) {
+  return <div className="loading">Loading...</div>; // Show a loading message
+ }
+
  // Find the selected service
  let selectedService = null;
  servicesData.forEach(category => {
@@ -17,20 +22,20 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
   });
  });
 
+ console.log(selectedService, 'selectedService');
+
  return (
   <div className="container" style={{ marginTop: '100px' }}>
    {selectedService ? (
     <>
-     {/* Back Button Row */}
-     <div className="row">
-      <div className="col-12">
-       <button
-        onClick={() => history.goBack()}
-        className="btn back-btn"
-       >
-        ← Back
-       </button>
-      </div>
+     {/* Back Button (Fixed Position) */}
+     <div className="fixed-back-button">
+      <button
+       onClick={() => history.goBack()}
+       className="btn back-btn"
+      >
+       ← Back
+      </button>
      </div>
 
      {/* Service Detail Row */}
@@ -69,6 +74,30 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
        >
         {selectedService.description}
        </p>
+
+       {/* Zone Details */}
+       {selectedService.zoneName && (
+        <div style={{ marginTop: '30px' }}>
+         <h3
+          style={{
+           fontSize: '24px',
+           fontWeight: '700',
+           color: '#555',
+          }}
+         >
+          Zone: {selectedService.zoneName}
+         </h3>
+         <p
+          style={{
+           fontSize: '15px',
+           lineHeight: '24px',
+           marginTop: '10px'
+          }}
+         >
+          {selectedService.zoneDescription}
+         </p>
+        </div>
+       )}
       </div>
      </div>
     </>

@@ -15,12 +15,12 @@ export const Contact = (props) => {
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
   const clearState = () => setState({ ...initialState });
-  
-  
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name, email, message);
-    
+
     emailjs
       .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
       .then(
@@ -99,7 +99,7 @@ export const Contact = (props) => {
           <div className="col-md-3 col-md-offset-1 contact-info">
             <div className="contact-item">
               <h3>Contact Info</h3>
-              <p>
+              <p style={{ fontFamily: 'Arial, sans-serif' }}>
                 <span>
                   <i className="fa fa-map-marker"></i> Address
                 </span>
@@ -107,7 +107,7 @@ export const Contact = (props) => {
               </p>
             </div>
             <div className="contact-item">
-              <p>
+              <p style={{ fontFamily: 'Arial, sans-serif' }}>
                 <span>
                   <i className="fa fa-phone"></i> Phone
                 </span>{" "}
@@ -115,7 +115,7 @@ export const Contact = (props) => {
               </p>
             </div>
             <div className="contact-item">
-              <p>
+              <p style={{ fontFamily: 'Arial, sans-serif' }}>
                 <span>
                   <i className="fa fa-envelope-o"></i> Email
                 </span>{" "}

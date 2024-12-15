@@ -7,6 +7,14 @@ export const GalleryDetailPage = ({ match, galleryData }) => {
  const { galleryId } = match.params;
  const galleryIndex = parseInt(galleryId, 10);
 
+ if (!galleryData) {
+  return (
+   <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
+    <h1>Loading...</h1>
+   </div>
+  );
+ }
+
  // Validate gallery data
  if (!galleryData || galleryIndex < 0 || galleryIndex >= galleryData.length) {
   return (

@@ -90,16 +90,16 @@
   ],
   "Services": [
     {
-      "mainCategory": "Business Formation",
+      "mainCategory": "Company Formation",
       "icon": "fa fa-building",
       "subCategories": [
-        { "name": "Business Structure Consultation", "route": "/business-structure", "image": "img/business-service.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " },
-        { "name": "Company Name Registration", "route": "/company-name-registration", "image": "img/buisness-service2.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " },
-        { "name": "Company Documentation Services", "route": "/company-documentation", "image": "img/buisness-service3.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " }
+        { "name": "Business Structure Consultation", "route": "/business-structure", "image": "img/buisness-service.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Free Zone", "zoneDescription": "Dubai Mainland Company Formation" },
+        { "name": "Company Name Registration", "route": "/company-name-registration", "image": "img/buisness-service2.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Mainland", "zoneDescription": "Sharjah Mainland Company Formation, Ajman Mainland Company Formation, Fujairah Mainland Company Formation, Ras Al Khaimah Mainland Company Formation, Umm Al Quwain Mainland Company Formation" },
+        { "name": "Company Documentation Services", "route": "/company-documentation", "image": "img/buisness-service3.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Mainland", "zoneDescription": "Sharjah Mainland Company Formation, Ajman Mainland Company Formation, Fujairah Mainland Company Formation, Ras Al Khaimah Mainland Company Formation, Umm Al Quwain Mainland Company Formation" }
       ]
     },
     {
-      "mainCategory": "Visa Services",
+      "mainCategory": "Visa Assistance",
       "icon": "fa fa-cc-visa",
       "subCategories": [
         { "name": "Investor Visas", "route": "/investor-visas", "image": "img/visa.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " },
@@ -111,44 +111,12 @@
       "mainCategory": "Corporate Bank Account Opening",
       "icon": "fa fa-university",
       "subCategories": [
-        { "name": "Business Structure Consultation", "route": "/business-structure", "image": "img/business-service.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " },
-        { "name": "Company Name Registration", "route": "/company-name-registration", "image": "img/buisness-service2.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " },
-        { "name": "Company Documentation Services", "route": "/company-documentation", "image": "img/buisness-service3.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. " }
+        { "name": "Business Structure Consultation", "route": "/business-structure", "image": "img/buisness-service.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Free Zone", "zoneDescription": "Dubai Mainland Company Formation" },
+        { "name": "Company Name Registration", "route": "/company-name-registration", "image": "img/buisness-service2.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Mainland", "zoneDescription": "Sharjah Mainland Company Formation, Ajman Mainland Company Formation, Fujairah Mainland Company Formation, Ras Al Khaimah Mainland Company Formation, Umm Al Quwain Mainland Company Formation" },
+        { "name": "Company Documentation Services", "route": "/company-documentation", "image": "img/buisness-service3.jpg", "description": "We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency. We provide outstanding Business & Visa related services and results, we are a creative business services agency.", "zoneName": "Mainland", "zoneDescription": "Sharjah Mainland Company Formation, Ajman Mainland Company Formation, Fujairah Mainland Company Formation, Ras Al Khaimah Mainland Company Formation, Umm Al Quwain Mainland Company Formation" }
       ]
     }
   ],
-  "ServiceDetails": {
-    "/business-structure": {
-      "title": "Business Structure Consultation",
-      "image": "img/business-structure.jpg",
-      "description": "Here is a detailed description of the Business Structure Consultation service..."
-    },
-    "/company-name-registration": {
-      "title": "Company Name Registration",
-      "image": "img/company-name.jpg",
-      "description": "Detailed info about Company Name Registration..."
-    },
-    "/company-documentation": {
-      "title": "Company Documentation Services",
-      "image": "img/company-docs.jpg",
-      "description": "Detailed info about Company Documentation Services..."
-    },
-    "/investor-visas": {
-      "title": "Investor Visas",
-      "image": "img/investor-visas.jpg",
-      "description": "Detailed info about Investor Visas..."
-    },
-    "/tourist-visas": {
-      "title": "Tourist Visas",
-      "image": "img/tourist-visas.jpg",
-      "description": "Detailed info about Tourist Visas..."
-    },
-    "/work-visas": {
-      "title": "Work Visas",
-      "image": "img/work-visas.jpg",
-      "description": "Detailed info about Work Visas..."
-    }
-  },
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",

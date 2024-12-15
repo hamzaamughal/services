@@ -34,18 +34,38 @@ const App = () => {
 
         <Route
           path="/blog/:blogId"
-          render={(props) => <BlogDetailPage {...props} blogData={landingPageData.Blog} />}
+          render={(props) =>
+            landingPageData.Blog ? (
+              <BlogDetailPage {...props} blogData={landingPageData.Blog} />
+            ) : (
+              <div className="loading">Loading...</div>
+            )
+          }
         />
+
         <Route
           path="/gallery/:galleryId"
-          render={(props) => <GalleryDetailPage {...props} galleryData={landingPageData.Gallery} />}
+          render={(props) =>
+            landingPageData.Gallery ? (
+              <GalleryDetailPage {...props} galleryData={landingPageData.Gallery} />
+            ) : (
+              <div className="loading">Loading...</div>
+            )
+          }
         />
+
         {/* Service Detail Route 
             We use a dynamic parameter :serviceRoute so any sub.route like /business-structure matches.
         */}
         <Route
           path="/:serviceRoute"
-          render={(props) => <ServiceDetailPage {...props} servicesData={landingPageData.Services} />}
+          render={(props) =>
+            landingPageData.Services ? (
+              <ServiceDetailPage {...props} servicesData={landingPageData.Services} />
+            ) : (
+              <div>Loading...</div>
+            )
+          }
         />
 
       </Switch>

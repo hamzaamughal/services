@@ -1,7 +1,15 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+
 @media screen and (max-width: 400px) {
   #features {
     padding: 20px;
-    width: 111%;
+    width: 100%;
+    box-sizing: border-box;
   }
   #about,
   #services,
@@ -9,13 +17,24 @@
   #team,
   #contact,
   #footer {
-    width: 111%;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
   }
 
   #portfolio {
-    width: 110%;
+    width: 100%;
+    box-sizing: border-box;
   }
 }
+
+.loading {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 50px;
+  color: #555;
+}
+
 
 /* App.css or Services.css */
 .service-item {
@@ -35,7 +54,7 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #4169e1;
+  background-color: #4FCE5D;
   width: 60px;
   height: 60px;
   border-radius: 50%;
