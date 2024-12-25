@@ -13,8 +13,8 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
 
  // Find the selected service
  let selectedService = null;
- servicesData.forEach(category => {
-  category.subCategories.forEach(sub => {
+ servicesData.forEach((category) => {
+  category.subCategories.forEach((sub) => {
    const cleanRoute = sub.route.replace('/', '');
    if (cleanRoute === routeParam) {
     selectedService = sub;
@@ -30,10 +30,7 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
     <>
      {/* Back Button (Fixed Position) */}
      <div className="fixed-back-button">
-      <button
-       onClick={() => history.goBack()}
-       className="btn back-btn"
-      >
+      <button onClick={() => history.goBack()} className="btn back-btn">
        ← Back
       </button>
      </div>
@@ -49,7 +46,7 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
          maxWidth: '100%',
          height: 'auto',
          borderRadius: '10px',
-         boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+         boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
         }}
        />
       </div>
@@ -65,15 +62,11 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
         {selectedService.name}
        </h1>
        <hr />
-       <p
-        style={{
-         fontSize: '15px',
-         lineHeight: '24px',
-         marginTop: '20px'
-        }}
-       >
-        {selectedService.description}
-       </p>
+       {/* Use dangerouslySetInnerHTML here to render HTML in the description */}
+       <div
+        style={{ fontSize: '15px', lineHeight: '24px', marginTop: '20px' }}
+        dangerouslySetInnerHTML={{ __html: selectedService.description }}
+       />
 
        {/* Zone Details */}
        {selectedService.zoneName && (
@@ -91,7 +84,7 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
           style={{
            fontSize: '15px',
            lineHeight: '24px',
-           marginTop: '10px'
+           marginTop: '10px',
           }}
          >
           {selectedService.zoneDescription}
