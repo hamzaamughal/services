@@ -145,6 +145,282 @@
   ]
 }
   ],
+  "Jurisdictions": [
+  {
+    "mainCategory": "Jurisdictions",
+    "icon": "fa fa-globe",
+    "subCategories": [
+      {
+        "name": "Dubai Mainland",
+        "route": "/dubai-mainland",
+        "icon": "fa fa-building",
+        "content": {
+          "title": "Dubai Mainland Authority & Its Benefits",
+          "table": [
+            {
+              "benefit": "100% Ownership",
+              "description": "Foreign investors can have 100% ownership of their business, without the need for a local sponsor, which is a significant advantage in Dubai Mainland."
+            },
+            {
+              "benefit": "Access to Local Market",
+              "description": "Businesses on the Dubai Mainland have unrestricted access to the UAE’s domestic market, offering greater opportunities for expansion and growth."
+            },
+            {
+              "benefit": "No Restrictions on Office Location",
+              "description": "Mainland businesses can set up offices anywhere in Dubai, providing flexibility in choosing prime locations that suit their business needs."
+            },
+            {
+              "benefit": "Government Contracts",
+              "description": "Mainland companies are eligible to bid on government contracts and tenders, providing access to lucrative business opportunities in both public and private sectors."
+            },
+            {
+              "benefit": "Wide Range of Business Activities",
+              "description": "Dubai Mainland allows a broad variety of business activities, giving entrepreneurs the freedom to operate across multiple sectors without limitations."
+            },
+            {
+              "benefit": "Easier Access to Visas",
+              "description": "Mainland companies can easily apply for employee and investor visas, making it easier to recruit talent and expand your workforce."
+            }
+          ]
+        }
+      },
+      {
+        "name": "Abu Dhabi Mainland",
+        "route": "/abu-dhabi-mainland",
+        "icon": "fa fa-globe",
+        "content": {
+          "title": "Advantages of Setting Up a Business in Abu Dhabi Mainland",
+          "table": [
+            {
+              "benefit": "Authority Name",
+              "description": "Abu Dhabi Department of Economic Development (ADDED) – The governing authority for business licenses and regulations in Abu Dhabi."
+            },
+            {
+              "benefit": "Foreign Ownership for Specific Sectors",
+              "description": "Abu Dhabi offers 100% foreign ownership in certain sectors like technology, healthcare, and tourism, making it a more attractive destination for international investors."
+            },
+            {
+              "benefit": "Strategic Hub for Energy & Industry",
+              "description": "Abu Dhabi is a global leader in energy, oil, and gas industries, providing unique opportunities for businesses in these sectors to access cutting-edge resources and partnerships."
+            },
+            {
+              "benefit": "Access to Key Global Markets",
+              "description": "Abu Dhabi’s proximity to key international markets, such as Asia, Europe, and Africa, enhances logistics, trade, and global business opportunities."
+            },
+            {
+              "benefit": "Government Support for Investment",
+              "description": "Abu Dhabi offers various incentives, such as investment subsidies and tailored support programs, to attract foreign businesses, especially in innovation-driven sectors."
+            },
+            {
+              "benefit": "No Restriction on Expats Ownership",
+              "description": "Certain industries in Abu Dhabi Mainland now allow foreign nationals to fully own businesses without the need for a local partner or sponsor."
+            },
+            {
+              "benefit": "Business-Friendly Regulations",
+              "description": "Abu Dhabi offers favorable regulatory frameworks that encourage long-term investment, with simplified business registration processes and fewer bureaucratic hurdles."
+            },
+            {
+              "benefit": "Close Proximity to International Events",
+              "description": "Abu Dhabi hosts numerous global events, such as the Abu Dhabi International Petroleum Exhibition (ADIPEC), which creates opportunities for networking, partnerships, and exposure to global clients."
+            },
+            {
+              "benefit": "Strategic Location for Tourism",
+              "description": "As the UAE’s cultural and tourism hub, Abu Dhabi offers unique business opportunities in tourism, hospitality, and entertainment industries."
+            },
+            {
+              "benefit": "Stable Economic Environment",
+              "description": "Abu Dhabi has a strong, diversified economy, backed by government-backed stability and growth, providing a secure environment for business investments."
+            }
+          ]
+        }
+      }
+      ,
+      {
+        "name": "Freezone Authorities",
+        "route": "/freezone-authorities",
+        "icon": "fa fa-briefcase",
+        "subServices": [
+          {
+            "name": "DMCC",
+            "route": "/freezone-authorities/dmcc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DMCC Free Zone",
+              "table": [
+                {
+                  "benefit": "Strategic Location",
+                  "description": "Right in the heart of Dubai with access to global markets."
+                },
+                {
+                  "benefit": "Industry Focus",
+                  "description": "Especially popular for commodities, trade, and crypto."
+                }
+              ]
+            }
+          },
+          {
+            "name": "JAFZA",
+            "route": "/freezone-authorities/jafza",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "JAFZA Free Zone",
+              "table": [
+                {
+                  "benefit": "Port Proximity",
+                  "description": "Located near Jebel Ali Port for easy import/export."
+                }
+              ]
+            }
+          },
+          {
+            "name": "DAFZA",
+            "route": "/freezone-authorities/dafza",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DAFZA Free Zone",
+              "table": [
+                {
+                  "benefit": "Airport Access",
+                  "description": "Close to Dubai International Airport, ideal for logistics."
+                }
+              ]
+            }
+          },
+          {
+            "name": "Dubai Silicon Oasis (DSO)",
+            "route": "/freezone-authorities/dso",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DSO Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "DIFC",
+            "route": "/freezone-authorities/difc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DIFC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "DHCC",
+            "route": "/freezone-authorities/dhcc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DHCC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Design District",
+            "route": "/freezone-authorities/d3",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "d3 Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Internet City",
+            "route": "/freezone-authorities/dic",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DIC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Media City",
+            "route": "/freezone-authorities/dmc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DMC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Knowledge Park",
+            "route": "/freezone-authorities/dkp",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DKP Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Production City",
+            "route": "/freezone-authorities/dpc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DPC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai World Trade Center (DWTC)",
+            "route": "/freezone-authorities/dwtc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "DWTC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "International Humanitarian City (IHC)",
+            "route": "/freezone-authorities/ihc",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "IHC Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai South (Logistics City and Aviation City)",
+            "route": "/freezone-authorities/dubai-south",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "Dubai South Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Meydan Free Zone",
+            "route": "/freezone-authorities/meydan",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "Meydan Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "Dubai Maritime City",
+            "route": "/freezone-authorities/dmc-maritime",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "Dubai Maritime City Free Zone",
+              "table": []
+            }
+          },
+          {
+            "name": "International Free Zone Authority",
+            "route": "/freezone-authorities/ifza",
+            "icon": "fa fa-briefcase",
+            "content": {
+              "title": "IFZA Free Zone",
+              "table": []
+            }
+          }
+        ],
+        "content": {
+          "title": "Freezone Authorities Overview",
+          "table": []
+        }
+      }
+    ]
+  }
+],
   "Testimonials": [
     {
       "img": "img/testimonials/01.jpg",

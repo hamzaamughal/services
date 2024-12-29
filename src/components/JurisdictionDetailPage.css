@@ -1,0 +1,83 @@
+.jurisdiction-detail-container {
+    margin-top: 100px;
+    padding: 0 20px;
+  }
+  
+  /* Title styling */
+  .jurisdiction-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #333;
+  }
+  
+  /* Subtitle styling */
+  .jurisdiction-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  
+  /* Benefit row styling */
+  .benefit-row {
+    margin-bottom: 20px;
+  }
+  
+  .benefit-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: #4169e1;
+  }
+  
+  .benefit-description {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  
+  /* Fade-in animation, same approach as your ServiceDetailPage */
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Back button styling: reuse from ServiceDetailPage or override */
+  .fixed-back-button {
+    /* similar to your existing style if you wish */
+  }
+  
+  /* See More Button */
+  .see-more-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .see-more-btn {
+    background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .see-more-btn:hover {
+    background: #2e56b7;
+  }
+  

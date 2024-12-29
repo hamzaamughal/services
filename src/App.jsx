@@ -8,6 +8,7 @@ import SmoothScroll from "smooth-scroll";
 import "./App.css";
 import { BlogDetailPage } from "./components/BlogDetailPage";
 import { GalleryDetailPage } from "./components/GalleryDetailPage";
+import { JurisdictionDetailPage } from "./components/JurisdictionDetailPage";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -26,7 +27,7 @@ const App = () => {
   return (
     <Router>
       {/* Navigation is always visible */}
-      <Navigation data={landingPageData.Services} />
+      <Navigation servicesData={landingPageData.Services} jurisdictionsData={ landingPageData.Jurisdictions} />
 
       <Switch>
         {/* Home Route */}
@@ -54,9 +55,22 @@ const App = () => {
           }
         />
 
-        {/* Service Detail Route 
-            We use a dynamic parameter :serviceRoute so any sub.route like /business-structure matches.
-        */}
+        {/* Jurisdiction Detail Route */}
+        <Route
+            path="/jurisdictions/:jurisdictionRoute"
+            render={(props) =>
+              landingPageData.Jurisdictions ? (
+                <JurisdictionDetailPage
+                  {...props}
+                  jurisdictionsData={landingPageData.Jurisdictions}
+                />
+          ) : (
+            <div className="loading">Loading...</div>
+              )
+            }
+        />
+
+        {/* Service Detail Route */}
         <Route
           path="/:serviceRoute"
           render={(props) =>
