@@ -1,0 +1,93 @@
+.subservice-detail-container {
+    margin-top: 100px;
+    padding: 0 20px;
+  }
+  
+  /* Title styling */
+  .subservice-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: #333;
+  }
+  
+  /* Subtitle styling */
+  .subservice-subtitle {
+    font-size: 24px;
+    font-weight: 700;
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Intro paragraphs */
+  .intro-paragraph {
+    margin-bottom: 15px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  /* Section block */
+  .section-block {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  
+  /* Section title */
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #4169e1;
+    margin-bottom: 15px;
+  }
+  
+  /* List of bullet points */
+  .benefits-list {
+    list-style-type: disc;
+    margin-left: 20px;
+  }
+  
+  .benefit-item {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  
+  /* Fade-in animation */
+  .fade-in {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-in-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* See More Button */
+  .see-more-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .see-more-btn {
+    background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .see-more-btn:hover {
+    background: #2e56b7;
+  }
+  

@@ -9,6 +9,7 @@ import "./App.css";
 import { BlogDetailPage } from "./components/BlogDetailPage";
 import { GalleryDetailPage } from "./components/GalleryDetailPage";
 import { JurisdictionDetailPage } from "./components/JurisdictionDetailPage";
+import { SubServiceDetailPage } from "./components/SubServiceDetailPage";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -57,6 +58,7 @@ const App = () => {
 
         {/* Jurisdiction Detail Route */}
         <Route
+            exact
             path="/jurisdictions/:jurisdictionRoute"
             render={(props) =>
               landingPageData.Jurisdictions ? (
@@ -70,8 +72,18 @@ const App = () => {
             }
         />
 
+          <Route
+            exact
+            path="/jurisdictions/freezone-authorities/:subServiceRoute"
+            render={(props) => (
+              <SubServiceDetailPage {...props} jurisdictionsData={landingPageData.Jurisdictions} />
+            )}
+          />
+
+
         {/* Service Detail Route */}
         <Route
+          exact
           path="/:serviceRoute"
           render={(props) =>
             landingPageData.Services ? (
