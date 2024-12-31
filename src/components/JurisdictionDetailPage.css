@@ -1,83 +1,128 @@
+/* Container spacing */
 .jurisdiction-detail-container {
-    margin-top: 100px;
-    padding: 0 20px;
-  }
-  
-  /* Title styling */
-  .jurisdiction-title {
-    font-size: 36px;
-    font-weight: 800;
-    color: #333;
-  }
-  
-  /* Subtitle styling */
-  .jurisdiction-subtitle {
-    font-size: 24px;
-    font-weight: 700;
-    color: #555;
-    margin-top: 20px;
-    margin-bottom: 30px;
-  }
-  
-  /* Benefit row styling */
-  .benefit-row {
-    margin-bottom: 20px;
-  }
-  
-  .benefit-title {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 5px;
-    color: #4169e1;
-  }
-  
-  .benefit-description {
-    margin: 0;
-    font-size: 15px;
-    line-height: 1.5;
-  }
-  
-  /* Fade-in animation, same approach as your ServiceDetailPage */
-  .fade-in {
+  margin-top: 60px;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Fade-in animation (we’ll reuse your fadeInUp keyframes) */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
-    animation: fadeInUp 0.8s ease-in-out forwards;
+    transform: translateY(20px);
   }
-  
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* Back button styling: reuse from ServiceDetailPage or override */
-  .fixed-back-button {
-    /* similar to your existing style if you wish */
+}
+
+/* Fixed Back Button */
+.fixed-back-button {
+  position: fixed;
+  top: 80px; /* Adjust to suit your nav height */
+  left: 20px;
+  z-index: 999; 
+}
+
+.back-btn {
+  background: #2e56b7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background: #1b3e8b;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  height: 400px; /* adjust as needed */
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  display: flex;
+  align-items: flex-end; 
+  justify-content: center;
+}
+
+/* Hero Overlay on top of the background image */
+.hero-overlay {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* semi-transparent overlay */
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.jurisdiction-name {
+  font-size: 36px;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  color: #fff;
+}
+
+.jurisdiction-content-title {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Cards Container */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px 20px;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  flex: 0 1 400px; /* each card can grow, but has a minimum width of 400px */
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  padding: 25px;
+  max-width: 500px; /* optional max width */
+}
+
+/* Bullet list */
+.benefits-list {
+  margin: 0;
+  padding: 0 0 0 20px; /* left padding for bullets */
+  list-style-type: disc;
+}
+
+.benefits-list li {
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+/* Optional: emphasize the benefit a bit more */
+.benefits-list strong {
+  color: #4169e1;
+}
+
+/* Keyframes reuse */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  /* See More Button */
-  .see-more-container {
-    margin-top: 20px;
-    text-align: center;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .see-more-btn {
-    background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 0.3s;
-  }
-  
-  .see-more-btn:hover {
-    background: #2e56b7;
-  }
-  
+}

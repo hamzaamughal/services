@@ -154,6 +154,7 @@
         "name": "Dubai Mainland",
         "route": "/dubai-mainland",
         "icon": "fa fa-building",
+        "image": "/img/dubai.jpg",
         "content": {
           "title": "Dubai Mainland Authority & Its Benefits",
           "table": [
@@ -188,6 +189,7 @@
         "name": "Abu Dhabi Mainland",
         "route": "/abu-dhabi-mainland",
         "icon": "fa fa-globe",
+        "image": "/img/dubai2.jpg",
         "content": {
           "title": "Advantages of Setting Up a Business in Abu Dhabi Mainland",
           "table": [
@@ -233,8 +235,7 @@
             }
           ]
         }
-      }
-      ,
+      },
       {
         "name": "Freezone Authorities",
         "route": "/freezone-authorities",
@@ -243,6 +244,7 @@
           {
             "name": "DMCC",
             "route": "/freezone-authorities/dmcc",
+            "image": "/img/dubai3.jpg",
             "content": {
               "title": "DMCC Free Zone - A Gateway to Global Business",
               "introParagraphs": [
@@ -269,6 +271,7 @@
           {
             "name": "JAFZA",
             "route": "/freezone-authorities/jafza",
+            "image": "/img/dubai4.jpg",
             "content": {
               "title": "JAFZA - Your Gateway to Global Trade and Business Growth",
               "introParagraphs": [
@@ -297,6 +300,7 @@
           {
             "name": "DAFZA",
             "route": "/freezone-authorities/dafza",
+            "image": "/img/dubai5.jpg",
             "content": {
               "title": "DAFZA - A Premium Business Hub for Global Connectivity and Innovation",
               "introParagraphs": [
@@ -325,6 +329,7 @@
           {
             "name": "Dubai Silicon Oasis (DSO)",
             "route": "/freezone-authorities/dso",
+            "image": "/img/dubai.jpg",
             "content": {
               "title": "Dubai Silicon Oasis (DSO) – Empowering Innovation and Shaping the Future of Technology",
               "introParagraphs": [
@@ -355,6 +360,7 @@
           {
             "name": "Dubai International Financial Centre (DIFC)",
             "route": "/freezone-authorities/difc",
+            "image": "/img/dubai2.jpg",
             "content": {
               "title": "Dubai International Financial Centre (DIFC) – The Heart of Global Finance and Innovation",
               "introParagraphs": [
@@ -384,6 +390,7 @@
           {
             "name": "Dubai Healthcare City (DHCC)",
             "route": "/freezone-authorities/dhcc",
+            "image": "/img/dubai3.jpg",
             "content": {
               "title": "Dubai Healthcare City (DHCC) – A Leading Hub for Healthcare and Life Sciences Innovation",
               "introParagraphs": [
@@ -408,11 +415,11 @@
                 "Wellness and Medical Tourism Focus: DHCC is also a hub for wellness and medical tourism, offering a wide range of healthcare services to international patients seeking treatment in Dubai, making it an attractive destination for businesses in these sectors."
               ]
             }
-          }
-          ,
+          },
           {
             "name": "Dubai Design District (D3)",
             "route": "/freezone-authorities/d3",
+            "image": "/img/dubai4.jpg",
             "content": {
               "title": "Dubai Design District (D3) – Where Creativity Meets Innovation",
               "introParagraphs": [
@@ -437,11 +444,11 @@
                 "Sustainability and Innovation: D3 is committed to sustainability and green building practices, offering businesses an environmentally conscious and forward-thinking platform to grow and innovate."
               ]
             }
-          }
-          ,
+          },
           {
             "name": "Dubai Internet City (DIC)",
             "route": "/freezone-authorities/dic",
+            "image": "/img/dubai5.jpg",
             "content": {
               "title": "Dubai Internet City (DIC) – A Global Hub for Technology and Digital Innovation",
               "introParagraphs": [
@@ -471,6 +478,7 @@
           {
             "name": "Dubai Media City (DMC)",
             "route": "/freezone-authorities/dmc",
+            "image": "/img/dubai.jpg",
             "content": {
               "title": "Dubai Media City (DMC) – The Heart of Media, Creativity, and Digital Content",
               "introParagraphs": [
@@ -500,6 +508,7 @@
           {
             "name": "Dubai Knowledge Park (DKP)",
             "route": "/freezone-authorities/dkp",
+            "image": "/img/dubai2.jpg",
             "content": {
               "title": "Dubai Knowledge Park (DKP) – Empowering Education, Innovation, and Professional Growth",
               "introParagraphs": [
@@ -529,6 +538,7 @@
           {
             "name": "Dubai Production City (DPC)",
             "route": "/freezone-authorities/dpc",
+            "image": "/img/dubai3.jpg",
             "content": {
               "title": "Dubai Production City (DPC) – The Ultimate Hub for Manufacturing, Media, and Production Excellence",
               "introParagraphs": [
@@ -558,6 +568,7 @@
           {
             "name": "Dubai World Trade Centre (DWTC)",
             "route": "/freezone-authorities/dwtc",
+            "image": "/img/dubai4.jpg",
             "content": {
               "title": "Dubai World Trade Centre (DWTC) – A Gateway to Global Business and Trade Excellence",
               "introParagraphs": [
@@ -587,6 +598,7 @@
           {
             "name": "International Humanitarian City (IHC)",
             "route": "/freezone-authorities/ihc",
+            "image": "/img/dubai5.jpg",
             "content": {
               "title": "International Humanitarian City (IHC) – A Global Hub for Humanitarian Aid and Relief Operations",
               "introParagraphs": [
@@ -616,6 +628,7 @@
           {
             "name": "Dubai South (Logistics City and Aviation City)",
             "route": "/freezone-authorities/dubai-south",
+            "image": "/img/dubai.jpg",
             "content": {
               "title": "Dubai South – The Future of Business, Logistics, and Innovation",
               "introParagraphs": [
@@ -645,6 +658,7 @@
           {
             "name": "Meydan Free Zone",
             "route": "/freezone-authorities/meydan",
+            "image": "/img/dubai2.jpg",
             "content": {
               "title": "Meydan Free Zone – A Hub for Innovation, Technology, and Business Growth",
               "introParagraphs": [
@@ -674,6 +688,7 @@
           {
             "name": "Dubai Maritime City (DMC)",
             "route": "/freezone-authorities/dmc-maritime",
+            "image": "/img/dubai3.jpg",
             "content": {
               "title": "Dubai Maritime City – The Premier Destination for Maritime and Marine Businesses",
               "introParagraphs": [
@@ -703,6 +718,7 @@
           {
             "name": "International Free Zone Authority (IFZA)",
             "route": "/freezone-authorities/ifza",
+            "image": "/img/dubai4.jpg",
             "content": {
               "title": "IFZA – A Premium Business Hub for Entrepreneurs and Global Investors",
               "introParagraphs": [

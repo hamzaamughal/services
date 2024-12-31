@@ -240,19 +240,6 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
 
             <li>
               <Link
-                to="/#portfolio"
-                className="page-scroll"
-                onClick={() => {
-                  setServicesDropdownOpen(false);
-                  setJudicementsDropdownOpen(false);
-                  setFreezoneOpenIndex(null);
-                }}
-              >
-                Gallery
-              </Link>
-            </li>
-            <li>
-              <Link
                 to="/#blog"
                 className="page-scroll"
                 onClick={() => {

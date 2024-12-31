@@ -1,93 +1,151 @@
 .subservice-detail-container {
-    margin-top: 100px;
-    padding: 0 20px;
-  }
-  
-  /* Title styling */
-  .subservice-title {
-    font-size: 36px;
-    font-weight: 800;
-    color: #333;
-  }
-  
-  /* Subtitle styling */
-  .subservice-subtitle {
-    font-size: 24px;
-    font-weight: 700;
-    color: #555;
-    margin-top: 20px;
-    margin-bottom: 20px;
-  }
-  
-  /* Intro paragraphs */
-  .intro-paragraph {
-    margin-bottom: 15px;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  
-  /* Section block */
-  .section-block {
-    margin-top: 30px;
-    margin-bottom: 30px;
-  }
-  
-  /* Section title */
-  .section-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: #4169e1;
-    margin-bottom: 15px;
-  }
-  
-  /* List of bullet points */
-  .benefits-list {
-    list-style-type: disc;
-    margin-left: 20px;
-  }
-  
-  .benefit-item {
-    margin-bottom: 10px;
-    font-size: 15px;
-    line-height: 1.4;
-  }
-  
-  /* Fade-in animation */
-  .fade-in {
+  margin-top: 60px; /* adjust if you have a fixed navbar */
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+/* Fixed Back Button */
+.fixed-back-button {
+  position: fixed;
+  top: 80px; /* Adjust to suit your nav height */
+  left: 20px;
+  z-index: 999;
+}
+
+.back-btn {
+  background: #2e56b7;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.back-btn:hover {
+  background: #1b3e8b;
+}
+
+/* Hero Section */
+.hero-section {
+  width: 100%;
+  height: 400px; /* Adjust as needed */
+  background-size: cover;
+  background-position: center center;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Overlay on top of the background image */
+.hero-overlay {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.subservice-name {
+  font-size: 36px;
+  margin: 0 0 10px 0;
+  font-weight: 800;
+  color: #fff;
+}
+
+.subservice-subtitle {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+  font-weight: 600;
+  color: #fff;
+}
+
+.intro-paragraph {
+  color: #fff;
+  margin-bottom: 15px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* Cards Container */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 30px 20px;
+  justify-content: center;
+}
+
+/* Card Styles */
+.card {
+  background: #fff;
+  flex: 0 1 400px; /* each card can expand, but min width is 400px */
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  padding: 20px;
+  max-width: 500px; /* optional max width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #4169e1;
+  margin-bottom: 15px;
+}
+
+/* Bullet list for benefits */
+.benefits-list {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.benefit-item {
+  margin-bottom: 10px;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+/* See More Button */
+.see-more-container {
+  margin-top: auto; 
+  text-align: center;
+}
+
+.see-more-btn {
+  background: #4169e1;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.see-more-btn:hover {
+  background: #2e56b7;
+}
+
+/* Fade-in animation (same as your existing fadeInUp) */
+.fade-in {
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
     opacity: 0;
-    animation: fadeInUp 0.8s ease-in-out forwards;
+    transform: translateY(20px);
   }
-  
-  @keyframes fadeInUp {
-    0% {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  /* See More Button */
-  .see-more-container {
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  .see-more-btn {
-    background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-    transition: background 0.3s;
-  }
-  
-  .see-more-btn:hover {
-    background: #2e56b7;
-  }
-  
+}

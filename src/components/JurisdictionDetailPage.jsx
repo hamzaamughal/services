@@ -5,7 +5,6 @@ import "./JurisdictionDetailPage.css";
 export const JurisdictionDetailPage = ({ match, jurisdictionsData }) => {
   // 1) Declare all hooks at the top, unconditionally
   const history = useHistory();
-  const [showFullContent, setShowFullContent] = useState(false);
 
   // 2) Get the dynamic route parameter (e.g. "dubai-mainland")
   const routeParam = match.params.jurisdictionRoute.replace("/", "");
@@ -18,7 +17,6 @@ export const JurisdictionDetailPage = ({ match, jurisdictionsData }) => {
   // 4) Find the selected jurisdiction
   let selectedJurisdiction = null;
   jurisdictionsData.forEach((category) => {
-    // Typically just 1 mainCategory, but we’ll still loop
     category.subCategories.forEach((sub) => {
       const cleanRoute = sub.route.replace("/", "");
       if (cleanRoute === routeParam) {
@@ -32,51 +30,59 @@ export const JurisdictionDetailPage = ({ match, jurisdictionsData }) => {
     return <h1>Jurisdiction not found</h1>;
   }
 
-  // 5) Extract content (title & table of benefits) from selectedJurisdiction
-  const { title, table } = selectedJurisdiction.content;
-  // Show only the first 3 items by default; “See More” toggles the rest
-  const visibleTableItems = showFullContent ? table : table.slice(0, 3);
+  // Destructure the content
+  const { name, image, content } = selectedJurisdiction;
+  const { title, table } = content;
 
-  // 6) Render the Jurisdiction Details
+  // Let's split the table into two halves for the two “cards”
+  const half = Math.ceil(table.length / 2);
+  const tableFirstHalf = table.slice(0, half);
+  const tableSecondHalf = table.slice(half);
+
   return (
     <div className="jurisdiction-detail-container fade-in">
-      {/* Back button */}
+      {/* Back button (fixed) */}
       <div className="fixed-back-button">
         <button onClick={() => history.goBack()} className="btn back-btn">
           ← Back
         </button>
       </div>
 
-      {/* Title */}
-      <h1 className="jurisdiction-title">{selectedJurisdiction.name}</h1>
-      <hr />
-
-      {/* Content Title / Description */}
-      <h2 className="jurisdiction-subtitle">{title}</h2>
-
-      {/* Table of Benefits */}
-      <div className="jurisdiction-table-container">
-        {visibleTableItems.map((row, idx) => (
-          <div className="benefit-row fade-in" key={idx}>
-            <h4 className="benefit-title">{row.benefit}</h4>
-            <p className="benefit-description">{row.description}</p>
-          </div>
-        ))}
+      {/* Hero / Background Image Section */}
+      <div
+        className="hero-section"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <div className="hero-overlay fade-in">
+          <h1 className="jurisdiction-name">{name}</h1>
+          <h2 className="jurisdiction-content-title">{title}</h2>
+        </div>
       </div>
 
-      {/* See More / See Less Button */}
-      {table.length > 3 && (
-        <div className="see-more-container">
-          <button
-            className="btn see-more-btn"
-            onClick={() => setShowFullContent(!showFullContent)}
-          >
-            {showFullContent ? "See Less" : "See More"}
-          </button>
+      {/* Cards Section */}
+      <div className="cards-container fade-in">
+        {/* First Card */}
+        <div className="card">
+          <ul className="benefits-list">
+            {tableFirstHalf.map((item, index) => (
+              <li key={index}>
+                <strong>{item.benefit}:</strong> {item.description}
+              </li>
+            ))}
+          </ul>
         </div>
-      )}
+
+        {/* Second Card */}
+        <div className="card">
+          <ul className="benefits-list">
+            {tableSecondHalf.map((item, index) => (
+              <li key={index}>
+                <strong>{item.benefit}:</strong> {item.description}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 };
-
-

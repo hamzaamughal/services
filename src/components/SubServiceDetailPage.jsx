@@ -11,7 +11,6 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
   const [showAllWhyChoose, setShowAllWhyChoose] = useState(false);
 
   // 2) Extract subService route from the URL
-  //    e.g. if route is "/freezone-authorities/dmcc", we want "dmcc".
   const routeParam = match.params.subServiceRoute.replace("/", "");
 
   // 3) Check if data is available
@@ -22,7 +21,11 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
   // 4) Find "Freezone Authorities" from jurisdictionsData
   const freezoneCategory = jurisdictionsData
     .flatMap((cat) => cat.subCategories || [])
-    .find((subCat) => subCat.name === "Freezone Authorities" || subCat.route === "/freezone-authorities");
+    .find(
+      (subCat) =>
+        subCat.name === "Freezone Authorities" ||
+        subCat.route === "/freezone-authorities"
+    );
 
   if (!freezoneCategory || !freezoneCategory.subServices) {
     return <h1>Freezone Authorities not found</h1>;
@@ -40,17 +43,25 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
 
   // 6) Extract relevant content from selectedSubService
   const {
-    title,
-    introParagraphs = [],
-    keyBenefitsTitle,
-    keyBenefits = [],
-    whyChooseTitle,
-    whyChoosePoints = []
-  } = selectedSubService.content;
+    name,
+    image,
+    content: {
+      title,
+      introParagraphs = [],
+      keyBenefitsTitle,
+      keyBenefits = [],
+      whyChooseTitle,
+      whyChoosePoints = [],
+    },
+  } = selectedSubService;
 
   // Decide how many bullet points to show by default
-  const visibleKeyBenefits = showAllKeyBenefits ? keyBenefits : keyBenefits.slice(0, 3);
-  const visibleWhyChoose = showAllWhyChoose ? whyChoosePoints : whyChoosePoints.slice(0, 3);
+  const visibleKeyBenefits = showAllKeyBenefits
+    ? keyBenefits
+    : keyBenefits.slice(0, 3);
+  const visibleWhyChoose = showAllWhyChoose
+    ? whyChoosePoints
+    : whyChoosePoints.slice(0, 3);
 
   // 7) Render
   return (
@@ -62,71 +73,75 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
         </button>
       </div>
 
-      {/* Title */}
-      <h1 className="subservice-title">{selectedSubService.name}</h1>
-      <hr />
+      {/* Hero / Background Image Section */}
+      <div
+        className="hero-section"
+        style={{ backgroundImage: `url(${image})` }}
+      >
+        <div className="hero-overlay fade-in">
+          <h1 className="subservice-name">{name}</h1>
+          <h2 className="subservice-subtitle">{title}</h2>
 
-      {/* Subtitle / main heading */}
-      <h2 className="subservice-subtitle">{title}</h2>
-
-      {/* Intro Paragraphs */}
-      {introParagraphs.map((para, idx) => (
-        <p key={idx} className="intro-paragraph">
-          {para}
-        </p>
-      ))}
-
-      {/* Key Benefits Section */}
-      {keyBenefits && keyBenefits.length > 0 && (
-        <div className="section-block">
-          <h3 className="section-title">{keyBenefitsTitle}</h3>
-          <ul className="benefits-list">
-            {visibleKeyBenefits.map((benefit, idx) => (
-              <li key={idx} className="benefit-item fade-in">
-                {benefit}
-              </li>
-            ))}
-          </ul>
-
-          {/* See More / See Less button for Key Benefits */}
-          {keyBenefits.length > 3 && (
-            <div className="see-more-container">
-              <button
-                className="btn see-more-btn"
-                onClick={() => setShowAllKeyBenefits(!showAllKeyBenefits)}
-              >
-                {showAllKeyBenefits ? "See Less" : "See More"}
-              </button>
-            </div>
-          )}
+          {introParagraphs.map((para, idx) => (
+            <p key={idx} className="intro-paragraph fade-in">
+              {para}
+            </p>
+          ))}
         </div>
-      )}
+      </div>
 
-      {/* Why Choose Section */}
-      {whyChoosePoints && whyChoosePoints.length > 0 && (
-        <div className="section-block">
-          <h3 className="section-title">{whyChooseTitle}</h3>
-          <ul className="benefits-list">
-            {visibleWhyChoose.map((item, idx) => (
-              <li key={idx} className="benefit-item fade-in">
-                {item}
-              </li>
-            ))}
-          </ul>
+      {/* Two Cards Section */}
+      <div className="cards-container fade-in">
+        {/* Card 1: Key Benefits */}
+        {keyBenefits && keyBenefits.length > 0 && (
+          <div className="card fade-in">
+            <h3 className="card-title">{keyBenefitsTitle}</h3>
+            <ul className="benefits-list">
+              {visibleKeyBenefits.map((benefit, idx) => (
+                <li key={idx} className="benefit-item">
+                  {benefit}
+                </li>
+              ))}
+            </ul>
 
-          {/* See More / See Less button for Why Choose */}
-          {whyChoosePoints.length > 3 && (
-            <div className="see-more-container">
-              <button
-                className="btn see-more-btn"
-                onClick={() => setShowAllWhyChoose(!showAllWhyChoose)}
-              >
-                {showAllWhyChoose ? "See Less" : "See More"}
-              </button>
-            </div>
-          )}
-        </div>
-      )}
+            {keyBenefits.length > 3 && (
+              <div className="see-more-container">
+                <button
+                  className="btn see-more-btn"
+                  onClick={() => setShowAllKeyBenefits(!showAllKeyBenefits)}
+                >
+                  {showAllKeyBenefits ? "See Less" : "See More"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Card 2: Why Choose */}
+        {whyChoosePoints && whyChoosePoints.length > 0 && (
+          <div className="card fade-in">
+            <h3 className="card-title">{whyChooseTitle}</h3>
+            <ul className="benefits-list">
+              {visibleWhyChoose.map((item, idx) => (
+                <li key={idx} className="benefit-item">
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            {whyChoosePoints.length > 3 && (
+              <div className="see-more-container">
+                <button
+                  className="btn see-more-btn"
+                  onClick={() => setShowAllWhyChoose(!showAllWhyChoose)}
+                >
+                  {showAllWhyChoose ? "See Less" : "See More"}
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -1,102 +1,134 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import './ServiceDetailPage.css';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import "./ServiceDetailPage.css";
+
+/**
+ * Utility function to parse the HTML description string.
+ * - Extracts the first <h2><strong>...</strong></h2> as 'introTitle'.
+ * - Takes everything before the first <h3> as 'introText'.
+ * - Splits each <h3><strong>Some Heading</strong></h3> (and the content until the next <h3>) into sections.
+ */
+function parseDescriptionIntoSections(html) {
+  // 1) Extract <h2><strong>...</strong></h2> as introTitle (if present).
+  const h2Regex = /<h2><strong>(.*?)<\/strong><\/h2>/;
+  let introTitle = "";
+  const h2Match = html.match(h2Regex);
+  if (h2Match) {
+    introTitle = h2Match[1]; // text inside <h2><strong>...</strong></h2>
+    // Remove that <h2> block from the HTML so it doesn't interfere with further splitting
+    html = html.replace(h2Regex, "");
+  }
+
+  // 2) We'll split the content by <h3><strong>…</strong></h3> sections
+  //    The 's' (dotAll) flag lets '.' match newlines.
+  const sectionRegex = /<h3><strong>(.*?)<\/strong><\/h3>((?:(?!<h3><strong>).)*)/gs;
+
+  let sections = [];
+  let match;
+  while ((match = sectionRegex.exec(html)) !== null) {
+    sections.push({
+      heading: match[1], // text inside <h3><strong>…</strong></h3>
+      body: match[2],    // HTML until the next <h3> or end
+    });
+  }
+
+  // 3) Everything before the first <h3> match is 'introText'.
+  const firstSectionIndex = html.search(/<h3><strong>/);
+  let introText = "";
+
+  if (firstSectionIndex > 0) {
+    introText = html.substring(0, firstSectionIndex).trim();
+  }
+
+  return { introTitle, introText, sections };
+}
 
 export const ServiceDetailPage = ({ match, servicesData }) => {
- const history = useHistory();
- const routeParam = match.params.serviceRoute;
+  const history = useHistory();
+  const routeParam = match.params.serviceRoute;
 
- // Add a condition to avoid rendering when servicesData is undefined
- if (!servicesData || servicesData.length === 0) {
-  return <div className="loading">Loading...</div>; // Show a loading message
- }
+  // 1) Data guard
+  if (!servicesData || servicesData.length === 0) {
+    return <div className="loading">Loading...</div>;
+  }
 
- // Find the selected service
- let selectedService = null;
- servicesData.forEach((category) => {
-  category.subCategories.forEach((sub) => {
-   const cleanRoute = sub.route.replace('/', '');
-   if (cleanRoute === routeParam) {
-    selectedService = sub;
-   }
+  // 2) Find the selected service
+  let selectedService = null;
+  servicesData.forEach((category) => {
+    category.subCategories.forEach((sub) => {
+      const cleanRoute = sub.route.replace("/", "");
+      if (cleanRoute === routeParam) {
+        selectedService = sub;
+      }
+    });
   });
- });
 
- console.log(selectedService, 'selectedService');
+  if (!selectedService) {
+    return <h1>Service not found</h1>;
+  }
 
- return (
-  <div className="container" style={{ marginTop: '100px' }}>
-   {selectedService ? (
-    <>
-     {/* Back Button (Fixed Position) */}
-     <div className="fixed-back-button">
-      <button onClick={() => history.goBack()} className="btn back-btn">
-       ← Back
-      </button>
-     </div>
+  // 3) Parse the description HTML
+  const { introTitle, introText, sections } = parseDescriptionIntoSections(
+    selectedService.description || ""
+  );
 
-     {/* Service Detail Row */}
-     <div className="service-detail row fade-in">
-      <div className="col-md-6 col-sm-12 text-center">
-       <img
-        src={selectedService.image}
-        alt={selectedService.name}
-        className="img-responsive service-detail-image"
-        style={{
-         maxWidth: '100%',
-         height: 'auto',
-         borderRadius: '10px',
-         boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
-        }}
-       />
+  return (
+    <div className="service-detail-container fade-in">
+      {/* Back Button ABOVE the image now */}
+      <div className="back-button-container">
+        <button onClick={() => history.goBack()} className="btn back-btn">
+          ← Back
+        </button>
       </div>
 
-      <div className="col-md-6 col-sm-12" style={{ marginTop: '20px' }}>
-       <h1
-        style={{
-         fontSize: '36px',
-         fontWeight: '800',
-         color: '#333',
-        }}
-       >
-        {selectedService.name}
-       </h1>
-       <hr />
-       {/* Use dangerouslySetInnerHTML here to render HTML in the description */}
-       <div
-        style={{ fontSize: '15px', lineHeight: '24px', marginTop: '20px' }}
-        dangerouslySetInnerHTML={{ __html: selectedService.description }}
-       />
-
-       {/* Zone Details */}
-       {selectedService.zoneName && (
-        <div style={{ marginTop: '30px' }}>
-         <h3
-          style={{
-           fontSize: '24px',
-           fontWeight: '700',
-           color: '#555',
-          }}
-         >
-          Zone: {selectedService.zoneName}
-         </h3>
-         <p
-          style={{
-           fontSize: '15px',
-           lineHeight: '24px',
-           marginTop: '10px',
-          }}
-         >
-          {selectedService.zoneDescription}
-         </p>
+      {/* Top Section (image + name + intro) */}
+      <div className="service-top-section fade-in">
+        <div className="service-image-wrapper">
+          <img
+            src={selectedService.image}
+            alt={selectedService.name}
+            className="service-detail-image"
+          />
         </div>
-       )}
+
+        <div className="service-info-wrapper">
+          <h1 className="service-name">{selectedService.name}</h1>
+
+          {/* If we found an <h2> in the HTML, show it as an intro heading */}
+          {introTitle && <h2 className="service-intro-title">{introTitle}</h2>}
+
+          {/* Intro text (before first <h3>) */}
+          {introText && (
+            <div
+              className="service-intro-text"
+              dangerouslySetInnerHTML={{ __html: introText }}
+            />
+          )}
+
+          {/* If there's a zoneName, display it here (optional) */}
+          {selectedService.zoneName && (
+            <div className="zone-block">
+              <h3 className="zone-title">Zone: {selectedService.zoneName}</h3>
+              <p className="zone-description">
+                {selectedService.zoneDescription}
+              </p>
+            </div>
+          )}
+        </div>
       </div>
-     </div>
-    </>
-   ) : (
-    <h1>Service not found</h1>
-   )}
-  </div>
- );
+
+      {/* Cards for each <h3> section */}
+      <div className="service-cards-container fade-in">
+        {sections.map((section, idx) => (
+          <div className="service-card" key={idx}>
+            <h3 className="service-card-heading">{section.heading}</h3>
+            <div
+              className="service-card-body"
+              dangerouslySetInnerHTML={{ __html: section.body }}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 };
