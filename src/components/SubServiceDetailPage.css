@@ -1,7 +1,6 @@
 .subservice-detail-container {
   margin-top: 60px; /* adjust if you have a fixed navbar */
   position: relative;
-  font-family: Arial, sans-serif;
 }
 
 /* Fixed Back Button */
@@ -83,7 +82,7 @@
   background: #fff;
   flex: 0 1 400px; /* each card can expand, but min width is 400px */
   border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
   padding: 20px;
   max-width: 500px; /* optional max width */
   display: flex;
@@ -113,7 +112,7 @@
 
 /* See More Button */
 .see-more-container {
-  margin-top: auto; 
+  margin-top: auto;
   text-align: center;
 }
 

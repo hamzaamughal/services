@@ -47,10 +47,10 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
   return (
     <nav
       id="menu"
-      className="navbar navbar-default navbar-fixed-top"
+      className="navbar navbar-default navbar-fixed-top "
       ref={navRef}
     >
-      <div className="container">
+      <div className="container conatiner_Box ">
         <div className="navbar-header">
           {/* Mobile toggle button */}
           <button
@@ -76,7 +76,8 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
             className="navbar-brand page-scroll"
             style={{ color: "#4169e1" }}
           >
-            MPRIVE{" "}
+            <span class="mpriveColor">MPRIVE </span>
+            {""}
             <span className="dynamic-word-container">
               <TransitionGroup component={null}>
                 {letters.map((letter, index) => (
@@ -107,9 +108,7 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                 About Us
               </Link>
             </li>
-            <li
-              className={`dropdown ${judicementsDropdownOpen ? "open" : ""}`}
-            >
+            <li className={`dropdown ${judicementsDropdownOpen ? "open" : ""}`}>
               <a
                 href="#!"
                 className="dropdown-toggle page-scroll"
@@ -165,24 +164,25 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                         </Link>
 
                         {/* Sub-menu for Freezone Authorities */}
-                        {jurisdiction.subServices && freezoneOpenIndex === idx && (
-                          <ul className="dropdown-menu sub-menu">
-                            {jurisdiction.subServices.map((sub, sIdx) => (
-                              <li key={sIdx}>
-                                <Link
-                                  to={`/jurisdictions${sub.route}`}
-                                  onClick={() => {
-                                    setJudicementsDropdownOpen(false);
-                                    setServicesDropdownOpen(false);
-                                    setFreezoneOpenIndex(null);
-                                  }}
-                                >
-                                  <i className={sub.icon}></i> {sub.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                        {jurisdiction.subServices &&
+                          freezoneOpenIndex === idx && (
+                            <ul className="dropdown-menu sub-menu">
+                              {jurisdiction.subServices.map((sub, sIdx) => (
+                                <li key={sIdx}>
+                                  <Link
+                                    to={`/jurisdictions${sub.route}`}
+                                    onClick={() => {
+                                      setJudicementsDropdownOpen(false);
+                                      setServicesDropdownOpen(false);
+                                      setFreezoneOpenIndex(null);
+                                    }}
+                                  >
+                                    <i className={sub.icon}></i> {sub.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                       </li>
                     )
                   )}

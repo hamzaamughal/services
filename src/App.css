@@ -1,6 +1,11 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
+  font-family: "Roboto", serif !important;
+  font-weight: 300;
+  font-style: normal;
+  color: black;
   overflow-x: hidden;
   width: 100%;
 }
@@ -35,7 +40,6 @@ html, body {
   color: #555;
 }
 
-
 /* App.css or Services.css */
 .service-item {
   transition: transform 0.3s ease;
@@ -49,12 +53,11 @@ html, body {
   transform: scale(0.95); /* Scale down slightly when clicked */
 }
 
-
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #4FCE5D;
+  background-color: #4fce5d;
   width: 60px;
   height: 60px;
   border-radius: 50%;

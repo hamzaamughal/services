@@ -30,6 +30,6 @@
   .back-btn {
     /* On mobile, the button will remain a reasonably sized button, not full width */
     margin-bottom: 20px;
-    display: inline-block; 
+    display: inline-block;
   }
 }
