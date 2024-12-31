@@ -1,34 +1,32 @@
-/* Dynamic Word Animation */
-
-/* .conatiner_Box {
-  background-color: #007bff;
-} */
 #menu.navbar-default {
   background-color: #007bff;
 }
 
+/* Branding Color for "MPRIVE" */
 .mpriveColor {
   color: #fff;
 }
 
+/* Navbar Links - Default */
 #menu.navbar-default .navbar-nav > li > a {
   color: #fff;
 }
 
-/* Add underline effect on hover */
+/* Underline effect on hover */
 #menu.navbar-default .navbar-nav > li > a:hover {
   color: #ec9f05;
-  text-decoration: underline; /* Adds underline */
-  text-underline-offset: 3px; /* Optional: Adjust distance of underline */
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* Add underline effect on active state */
+/* Underline effect on active state */
 #menu.navbar-default .navbar-nav > li > a:active {
   color: #ec9f05;
-  text-decoration: underline; /* Adds underline */
-  text-underline-offset: 3px; /* Optional: Adjust distance of underline */
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
+/* Dynamic Word Animation */
 .dynamic-word-container {
   display: inline-block;
   position: relative;
@@ -60,67 +58,18 @@
   transition: all 0.5s ease;
 }
 
-/* Mega Dropdown Styling */
-.mega-dropdown {
-  position: static !important; /* Prevent overflow issues */
-}
+/* ------------------------------------ */
+/* Remove/Disable Mega Dropdown Styles  */
+/* ------------------------------------ */
+/* 
+   Removed or commented out:
+   - .mega-dropdown 
+   - .mega-menu-content
+   - .mega-menu-category
+   - Any references to row, col-sm-3, etc.
+*/
 
-.mega-dropdown .dropdown-toggle {
-  cursor: pointer;
-}
-
-/* Mega Menu Content - Larger Screens */
-.mega-menu-content {
-  width: 50%;
-  padding: 20px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  position: absolute;
-  left: 50%;
-  top: 100%;
-  z-index: 999;
-  display: flex;
-  flex-wrap: wrap;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  transform: translateX(-50%);
-}
-
-.mega-menu-category {
-  padding: 10px;
-  min-width: 200px;
-}
-
-.mega-menu-category h4 {
-  margin-top: 0;
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  word-wrap: break-word;
-}
-
-.mega-menu-category ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mega-menu-category ul li {
-  margin-bottom: 5px;
-}
-
-.mega-menu-category ul li a {
-  color: #333;
-  text-decoration: none;
-  display: inline-block;
-  word-wrap: break-word;
-}
-
-.mega-menu-category ul li a:hover {
-  text-decoration: underline;
-  color: #007bff;
-}
-
-/* Regular Dropdown */
+/* Regular Dropdown (Applies to both Jurisdictions and Services) */
 .dropdown-menu {
   position: absolute;
   left: 0;
@@ -132,67 +81,36 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  display: none; /* Hidden by default */
 }
 
 .dropdown-menu li {
   padding: 5px 10px;
 }
 
-.dropdown-menu li:hover {
-  background-color: #f5f5f5;
+.dropdown-menu li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
 }
 
-/* Responsive Mega Dropdown for Mobile Screens */
-@media (max-width: 767px) {
-  .mega-menu-content {
-    position: static; /* Remove absolute positioning */
-    width: 100%; /* Take full width */
-    box-shadow: none; /* Remove shadow */
-    border: none; /* Remove border */
-    background-color: transparent;
-    padding: 10px;
-    display: block;
-    flex-direction: column;
-    transform: none; /* Reset transform */
-  }
-
-  .mega-menu-category {
-    width: 100%; /* Stack categories vertically */
-    margin-bottom: 15px;
-  }
-
-  .mega-menu-category h4 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #333;
-  }
-
-  .mega-menu-category ul {
-    padding-left: 15px; /* Indent subcategories */
-  }
-
-  .mega-menu-category ul li {
-    margin-bottom: 8px;
-  }
-
-  .mega-menu-category ul li a {
-    font-size: 14px;
-    color: #555;
-    text-decoration: none;
-  }
-
-  .mega-menu-category ul li a:hover {
-    text-decoration: underline;
-    color: #007bff;
-  }
+.dropdown-menu li a:hover {
+  text-decoration: underline;
+  color: #007bff;
 }
 
-/* Navbar General Styling */
+/* Show the dropdown when parent li has .open */
+.navbar-nav > li.open .dropdown-menu {
+  display: block;
+}
+
+/* ------------------------------------ */
+/* Navbar General Styling               */
+/* ------------------------------------ */
 .navbar {
   margin-bottom: 0;
   border: none;
-  background-color: #007bff;
+  background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
   box-shadow: 0 2px 4px rgba(10, 9, 9, 0.1);
 }
 
@@ -231,9 +149,12 @@
 
 .navbar-collapse {
   overflow-x: hidden;
-  background-color: #007bff; /* Ensure background color matches navbar */
+  background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
 }
 
+/* ------------------------------------ */
+/* Responsive Adjustments               */
+/* ------------------------------------ */
 @media (max-width: 767px) {
   .navbar-nav {
     margin: 0;
@@ -252,34 +173,59 @@
   .navbar-nav > li > a {
     padding: 10px 15px;
   }
-}
 
-@media (max-width: 767px) {
+  .dropdown-menu {
+    position: static;
+    display: block;
+    box-shadow: none;
+    border: none;
+  }
+
+  .dropdown-menu li a {
+    font-size: 14px;
+    color: #555;
+  }
+
+  .dropdown-menu li a:hover {
+    color: #007bff;
+    background-color: transparent;
+  }
+
   .navbar-brand {
-    font-size: 16px; /* Smaller font size for "MPRIVE" */
-    padding: 10px 0; /* Adjust padding to reduce height */
+    font-size: 16px;
+    padding: 10px 0;
   }
 
   .dynamic-word-container {
-    font-size: 14px; /* Reduce dynamic word font size */
-    line-height: 1.2; /* Adjust line spacing */
+    font-size: 14px;
+    line-height: 1.2;
   }
 
   .dynamic-letter {
-    font-size: inherit; /* Ensure it scales with parent */
+    font-size: inherit;
   }
 
   .navbar-header {
-    padding: 0 10px; /* Add small padding to fit the screen */
+    padding: 0 10px;
   }
 }
 
-/* Nested Dropdown (Freezone Authorities) */
+/* ------------------------------------ */
+/* Nested Dropdown (Freezone)           */
+/* ------------------------------------ */
 .dropdown-submenu {
   position: relative;
 }
 
 .dropdown-submenu > a .arrow-right {
+  float: right;
+  margin-top: 4px;
+  border: solid transparent;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #333; /* Arrow color */
+}
+
+.dropdown-submenu .arrow-right {
   float: right;
   margin-top: 4px;
   border: solid transparent;
@@ -290,27 +236,23 @@
 .dropdown-submenu .sub-menu {
   top: 0;
   left: 100%;
-  min-width: 350px;
-  max-width: 550px;
+  min-width: 250px; /* or more/less, as you prefer */
   padding: 10px;
   background-color: #fff;
-  white-space: normal;
-  word-wrap: break-word;
-  box-sizing: border-box;
-  border-radius: 0 4px 4px 4px;
   border: 1px solid #ddd;
+  border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: none; /* Hidden by default */
-  animation: fadeInRight 0.3s ease-in-out;
+  animation: fadeInRight 0.3s ease-in-out; /* optional animation */
   z-index: 999;
 }
 
-/* Show the submenu on hover (desktop) */
+/* Show the sub-menu on hover (desktop) */
 .dropdown-submenu:hover .sub-menu {
   display: block;
 }
 
-/* Transition / keyframes for subtle animation */
+/* Keyframes for subtle animation */
 @keyframes fadeInRight {
   from {
     opacity: 0;
@@ -322,7 +264,7 @@
   }
 }
 
-/* Responsiveness for nested dropdown on mobile */
+/* Nested Dropdown on Mobile */
 @media (max-width: 767px) {
   .dropdown-submenu .sub-menu {
     position: static;
@@ -330,7 +272,7 @@
     margin-left: 0;
     animation: none;
     border: none;
-    box-shadow: none; /* If you don’t want a shadow on mobile */
-    min-width: 100%; /* or auto, if you want it to fill the container */
+    box-shadow: none;
+    min-width: 100%;
   }
 }

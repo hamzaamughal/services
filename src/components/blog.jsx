@@ -7,7 +7,7 @@ export const Blog = (props) => {
     <div id="blog" className="text-center">
       <div className="container">
         <div className="section-title">
-          <h2>Our Blog</h2>
+          <h2 className="text-orange">Our Blog</h2>
           <p>"Stay Informed – Explore Our Latest Posts!"</p>
         </div>
         <div className="row">

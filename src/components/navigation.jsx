@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Link } from "react-router-dom";
-import "./navigation.css";
+import "./navigation.css"; // You can still keep a separate CSS file if you prefer
 
 export const Navigation = ({ servicesData, jurisdictionsData }) => {
   const words = ["Services", "Consulting", "Commercial"];
@@ -12,7 +12,15 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [judicementsDropdownOpen, setJudicementsDropdownOpen] = useState(false);
 
-  // For nested (freezone) dropdown:
+  // Track which main service index is open/hovered
+const [openServicesIndex, setOpenServicesIndex] = useState(null);
+
+// Toggle hover (similar to handleFreezoneHover)
+const handleServicesHover = (index) => {
+  setOpenServicesIndex(openServicesIndex === index ? null : index);
+};
+
+  // For nested (freezone) dropdown in "Jurisdictions":
   const [freezoneOpenIndex, setFreezoneOpenIndex] = useState(null);
 
   const navRef = useRef(null);
@@ -25,7 +33,7 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
     return () => clearInterval(intervalId);
   }, [words.length]);
 
-  // Close dropdown if clicked outside
+  // Close dropdowns if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -38,19 +46,18 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Toggle sub-menu open/close on hover or click
+  // Toggle sub-menu (freezone) on hover or click
   const handleFreezoneHover = (index) => {
-    // If hovered on the same item, close it; else open that item
     setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
   };
 
   return (
     <nav
       id="menu"
-      className="navbar navbar-default navbar-fixed-top "
+      className="navbar navbar-default navbar-fixed-top"
       ref={navRef}
     >
-      <div className="container conatiner_Box ">
+      <div className="container conatiner_Box">
         <div className="navbar-header">
           {/* Mobile toggle button */}
           <button
@@ -65,9 +72,9 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
             }}
           >
             <span className="sr-only">Toggle navigation</span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
-            <span className="icon-bar"></span>
+            <span className="icon-bar" />
+            <span className="icon-bar" />
+            <span className="icon-bar" />
           </button>
 
           {/* Dynamic Branding */}
@@ -76,7 +83,7 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
             className="navbar-brand page-scroll"
             style={{ color: "#4169e1" }}
           >
-            <span class="mpriveColor">MPRIVE </span>
+            <span className="mpriveColor">MPRIVE </span>
             {""}
             <span className="dynamic-word-container">
               <TransitionGroup component={null}>
@@ -95,6 +102,7 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
           id="bs-example-navbar-collapse-1"
         >
           <ul className="nav navbar-nav navbar-right">
+            {/* About Us */}
             <li>
               <Link
                 to="/#about"
@@ -108,6 +116,8 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                 About Us
               </Link>
             </li>
+
+            {/* Jurisdictions Dropdown */}
             <li className={`dropdown ${judicementsDropdownOpen ? "open" : ""}`}>
               <a
                 href="#!"
@@ -118,11 +128,10 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                   setServicesDropdownOpen(false);
                 }}
               >
-                Jurisdictions <span className="caret"></span>
+                Jurisdictions <span className="caret" />
               </a>
               {judicementsDropdownOpen && (
                 <ul className="dropdown-menu">
-                  {/* Map through each jurisdiction */}
                   {jurisdictionsData[0].subCategories.map(
                     (jurisdiction, idx) => (
                       <li
@@ -139,31 +148,28 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                         <Link
                           to={
                             jurisdiction.subServices
-                              ? "#!" // prevent immediate route if it has sub-services
+                              ? "#!"
                               : `/jurisdictions${jurisdiction.route}`
                           }
                           onClick={() => {
-                            // On mobile or direct click, we can toggle open
+                            // On click, toggle or navigate
                             if (jurisdiction.subServices) {
-                              // If user clicked a parent item, prevent route
                               setFreezoneOpenIndex(
                                 freezoneOpenIndex === idx ? null : idx
                               );
                             } else {
-                              // If no subServices, navigate
                               setJudicementsDropdownOpen(false);
                               setServicesDropdownOpen(false);
                             }
                           }}
                         >
-                          <i className={jurisdiction.icon}></i>{" "}
-                          {jurisdiction.name}
+                          <i className={jurisdiction.icon} /> {jurisdiction.name}
                           {jurisdiction.subServices && (
-                            <span className="arrow-right"></span>
+                            <span className="arrow-right" />
                           )}
                         </Link>
 
-                        {/* Sub-menu for Freezone Authorities */}
+                        {/* Sub-menu (if subServices exist) */}
                         {jurisdiction.subServices &&
                           freezoneOpenIndex === idx && (
                             <ul className="dropdown-menu sub-menu">
@@ -177,7 +183,7 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                                       setFreezoneOpenIndex(null);
                                     }}
                                   >
-                                    <i className={sub.icon}></i> {sub.name}
+                                    <i className={sub.icon} /> {sub.name}
                                   </Link>
                                 </li>
                               ))}
@@ -190,54 +196,85 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
               )}
             </li>
 
-            {/* Mega Dropdown Toggle for Services */}
-            <li
-              className={`dropdown mega-dropdown ${
-                servicesDropdownOpen ? "open" : ""
-              }`}
-            >
-              <a
-                href="#!"
-                className="dropdown-toggle page-scroll"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setServicesDropdownOpen(!servicesDropdownOpen);
-                  setJudicementsDropdownOpen(false);
-                  setFreezoneOpenIndex(null);
-                }}
-              >
-                Services <span className="caret"></span>
-              </a>
-              {servicesDropdownOpen && (
-                <div className="dropdown-menu mega-menu-content row">
-                  {servicesData &&
-                    servicesData.map((category, idx) => (
-                      <div className="col-sm-3 mega-menu-category" key={idx}>
-                        <h4>
-                          <i className={category.icon}></i>{" "}
-                          {category.mainCategory}
-                        </h4>
-                        <ul className="list-unstyled">
-                          {category.subCategories.map((sub, sIdx) => (
-                            <li key={sIdx}>
-                              <Link
-                                to={sub.route}
-                                onClick={() => {
-                                  setServicesDropdownOpen(false);
-                                  setFreezoneOpenIndex(null);
-                                }}
-                              >
-                                {sub.name}
-                              </Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                </div>
-              )}
-            </li>
+            {/* Services Dropdown (Simple Dropdown) */}
+            <li className={`dropdown ${servicesDropdownOpen ? "open" : ""}`}>
+  <a
+    href="#!"
+    className="dropdown-toggle page-scroll"
+    onClick={(e) => {
+      e.preventDefault();
+      setServicesDropdownOpen(!servicesDropdownOpen);
+      setJudicementsDropdownOpen(false);
+      setFreezoneOpenIndex(null);
+    }}
+  >
+    Services <span className="caret" />
+  </a>
 
+  {servicesDropdownOpen && (
+    <ul className="dropdown-menu">
+      {servicesData &&
+        servicesData.map((category, idx) => (
+          <li
+            key={idx}
+            // If this category has subCategories, apply 'dropdown-submenu'
+            className={category.subCategories ? "dropdown-submenu" : ""}
+            // On hover, toggle which index is open
+            onMouseEnter={() => handleServicesHover(idx)}
+            onMouseLeave={() => handleServicesHover(null)}
+          >
+            <Link
+              to={category.subCategories ? "#!" : category.route}
+              onClick={() => {
+                // If subCategories exist, don't navigate immediately
+                if (category.subCategories) {
+                  setOpenServicesIndex(
+                    openServicesIndex === idx ? null : idx
+                  );
+                } else {
+                  // If no subCategories, navigate away
+                  setServicesDropdownOpen(false);
+                  setFreezoneOpenIndex(null);
+                }
+              }}
+            >
+              {/* Optional icon */}
+              {category.icon && <i className={category.icon} />}{" "}
+              {category.mainCategory}
+
+              {/* Display arrow if subCategories exist */}
+              {category.subCategories && (
+                <span className="arrow-right" />
+              )}
+            </Link>
+
+            {/* Nested Sub-Menu if subCategories exist and hovered index matches */}
+            {category.subCategories && openServicesIndex === idx && (
+              <ul className="dropdown-menu sub-menu">
+                {category.subCategories.map((sub, sIdx) => (
+                  <li key={sIdx}>
+                    <Link
+                      to={sub.route}
+                      onClick={() => {
+                        // Close dropdown after navigating
+                        setServicesDropdownOpen(false);
+                        setFreezoneOpenIndex(null);
+                        setOpenServicesIndex(null);
+                      }}
+                    >
+                      {sub.icon && <i className={sub.icon} />} {sub.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+    </ul>
+  )}
+</li>
+
+            {/* Blogs */}
             <li>
               <Link
                 to="/#blog"
@@ -251,6 +288,8 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                 Blogs
               </Link>
             </li>
+
+            {/* Contact */}
             <li>
               <Link
                 to="/#contact"
