@@ -89,7 +89,7 @@ const App = () => {
             landingPageData.Services ? (
               <ServiceDetailPage {...props} servicesData={landingPageData.Services} />
             ) : (
-              <div>Loading...</div>
+              <div>Loading.......</div>
             )
           }
         />
