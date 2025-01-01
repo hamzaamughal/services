@@ -51,14 +51,14 @@
   font-size: 36px;
   margin: 0 0 10px 0;
   font-weight: 800;
-  color: #fff;
+  color: #ec9f05;
 }
 
 .subservice-subtitle {
   font-size: 20px;
   margin: 0 0 20px 0;
   font-weight: 600;
-  color: #fff;
+  color: #ec9f05;
 }
 
 .intro-paragraph {
@@ -99,9 +99,21 @@
 
 /* Bullet list for benefits */
 .benefits-list {
-  list-style-type: disc;
+  list-style-type: none;
   margin-left: 20px;
   margin-bottom: 20px;
+}
+
+.benefits-list li::before {
+  content: "*";
+  font-weight: bold;
+  font-size: 20px;
+  color: #ec9f05;
+  margin-right: 15px;
+} 
+
+.benefits-list li::marker {
+  color: #ec9f05; /* Set bullet color to orange  */
 }
 
 .benefit-item {

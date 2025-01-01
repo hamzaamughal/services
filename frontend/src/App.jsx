@@ -84,7 +84,7 @@ const App = () => {
         {/* Service Detail Route */}
         <Route
           exact
-          path="/:serviceRoute"
+          path="/services/:serviceRoute"
           render={(props) =>
             landingPageData.Services ? (
               <ServiceDetailPage {...props} servicesData={landingPageData.Services} />
@@ -93,6 +93,7 @@ const App = () => {
             )
           }
         />
+
 
       </Switch>
 

@@ -1,29 +1,38 @@
 import React, { useState, useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { Link } from "react-router-dom";
-import "./navigation.css"; // You can still keep a separate CSS file if you prefer
+import { Link, useLocation } from "react-router-dom";
+import "./navigation.css"; // Ensure CSS is correctly imported
 
 export const Navigation = ({ servicesData, jurisdictionsData }) => {
+  const location = useLocation();
+  const { pathname, hash } = location;
+
+  // Helper function to check if a main link is active
+  const isActiveLink = (linkPath, isHash = false, hashLink = "") => {
+    if (isHash) {
+      return pathname === "/" && hash === hashLink;
+    }
+    return pathname.startsWith(linkPath);
+  };
+
   const words = ["Services", "Consulting", "Commercial"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const currentWord = words[currentWordIndex];
   const letters = currentWord.split("");
 
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const [judicementsDropdownOpen, setJudicementsDropdownOpen] = useState(false);
-
-  // Track which main service index is open/hovered
-const [openServicesIndex, setOpenServicesIndex] = useState(null);
-
-// Toggle hover (similar to handleFreezoneHover)
-const handleServicesHover = (index) => {
-  setOpenServicesIndex(openServicesIndex === index ? null : index);
-};
-
-  // For nested (freezone) dropdown in "Jurisdictions":
+  const [juridictionsDropdownOpen, setJuridictionsDropdownOpen] = useState(false);
+  const [openServicesIndex, setOpenServicesIndex] = useState(null);
   const [freezoneOpenIndex, setFreezoneOpenIndex] = useState(null);
-
   const navRef = useRef(null);
+
+  const handleServicesHover = (index) => {
+    setOpenServicesIndex(openServicesIndex === index ? null : index);
+  };
+
+  const handleFreezoneHover = (index) => {
+    setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
+  };
 
   // Rotate the word every 3 seconds
   useEffect(() => {
@@ -38,18 +47,13 @@ const handleServicesHover = (index) => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
         setServicesDropdownOpen(false);
-        setJudicementsDropdownOpen(false);
+        setJuridictionsDropdownOpen(false);
         setFreezoneOpenIndex(null);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
-
-  // Toggle sub-menu (freezone) on hover or click
-  const handleFreezoneHover = (index) => {
-    setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
-  };
 
   return (
     <nav
@@ -67,7 +71,7 @@ const handleServicesHover = (index) => {
             data-target="#bs-example-navbar-collapse-1"
             onClick={() => {
               setServicesDropdownOpen(false);
-              setJudicementsDropdownOpen(false);
+              setJuridictionsDropdownOpen(false);
               setFreezoneOpenIndex(null);
             }}
           >
@@ -84,7 +88,6 @@ const handleServicesHover = (index) => {
             style={{ color: "#4169e1" }}
           >
             <span className="mpriveColor">MPRIVE </span>
-            {""}
             <span className="dynamic-word-container">
               <TransitionGroup component={null}>
                 {letters.map((letter, index) => (
@@ -103,13 +106,13 @@ const handleServicesHover = (index) => {
         >
           <ul className="nav navbar-nav navbar-right">
             {/* About Us */}
-            <li>
+            <li className={isActiveLink("/", true, "#about") ? "active" : ""}>
               <Link
                 to="/#about"
                 className="page-scroll"
                 onClick={() => {
                   setServicesDropdownOpen(false);
-                  setJudicementsDropdownOpen(false);
+                  setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
                 }}
               >
@@ -118,19 +121,23 @@ const handleServicesHover = (index) => {
             </li>
 
             {/* Jurisdictions Dropdown */}
-            <li className={`dropdown ${judicementsDropdownOpen ? "open" : ""}`}>
+            <li
+              className={`dropdown ${
+                juridictionsDropdownOpen ? "open" : ""
+              } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
+            >
               <a
                 href="#!"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
-                  setJudicementsDropdownOpen(!judicementsDropdownOpen);
+                  setJuridictionsDropdownOpen(!juridictionsDropdownOpen);
                   setServicesDropdownOpen(false);
                 }}
               >
                 Jurisdictions <span className="caret" />
               </a>
-              {judicementsDropdownOpen && (
+              {juridictionsDropdownOpen && (
                 <ul className="dropdown-menu">
                   {jurisdictionsData[0].subCategories.map(
                     (jurisdiction, idx) => (
@@ -158,7 +165,7 @@ const handleServicesHover = (index) => {
                                 freezoneOpenIndex === idx ? null : idx
                               );
                             } else {
-                              setJudicementsDropdownOpen(false);
+                              setJuridictionsDropdownOpen(false);
                               setServicesDropdownOpen(false);
                             }
                           }}
@@ -178,7 +185,7 @@ const handleServicesHover = (index) => {
                                   <Link
                                     to={`/jurisdictions${sub.route}`}
                                     onClick={() => {
-                                      setJudicementsDropdownOpen(false);
+                                      setJuridictionsDropdownOpen(false);
                                       setServicesDropdownOpen(false);
                                       setFreezoneOpenIndex(null);
                                     }}
@@ -197,91 +204,94 @@ const handleServicesHover = (index) => {
             </li>
 
             {/* Services Dropdown (Simple Dropdown) */}
-            <li className={`dropdown ${servicesDropdownOpen ? "open" : ""}`}>
-  <a
-    href="#!"
-    className="dropdown-toggle page-scroll"
-    onClick={(e) => {
-      e.preventDefault();
-      setServicesDropdownOpen(!servicesDropdownOpen);
-      setJudicementsDropdownOpen(false);
-      setFreezoneOpenIndex(null);
-    }}
-  >
-    Services <span className="caret" />
-  </a>
-
-  {servicesDropdownOpen && (
-    <ul className="dropdown-menu">
-      {servicesData &&
-        servicesData.map((category, idx) => (
-          <li
-            key={idx}
-            // If this category has subCategories, apply 'dropdown-submenu'
-            className={category.subCategories ? "dropdown-submenu" : ""}
-            // On hover, toggle which index is open
-            onMouseEnter={() => handleServicesHover(idx)}
-            onMouseLeave={() => handleServicesHover(null)}
-          >
-            <Link
-              to={category.subCategories ? "#!" : category.route}
-              onClick={() => {
-                // If subCategories exist, don't navigate immediately
-                if (category.subCategories) {
-                  setOpenServicesIndex(
-                    openServicesIndex === idx ? null : idx
-                  );
-                } else {
-                  // If no subCategories, navigate away
-                  setServicesDropdownOpen(false);
-                  setFreezoneOpenIndex(null);
-                }
-              }}
+            <li
+              className={`dropdown ${
+                servicesDropdownOpen ? "open" : ""
+              } ${isActiveLink("/services") ? "active" : ""}`}
             >
-              {/* Optional icon */}
-              {category.icon && <i className={category.icon} />}{" "}
-              {category.mainCategory}
+              <a
+                href="#!"
+                className="dropdown-toggle page-scroll"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setServicesDropdownOpen(!servicesDropdownOpen);
+                  setJuridictionsDropdownOpen(false);
+                  setFreezoneOpenIndex(null);
+                }}
+              >
+                Services <span className="caret" />
+              </a>
 
-              {/* Display arrow if subCategories exist */}
-              {category.subCategories && (
-                <span className="arrow-right" />
+              {servicesDropdownOpen && (
+                <ul className="dropdown-menu">
+                  {servicesData &&
+                    servicesData.map((category, idx) => (
+                      <li
+                        key={idx}
+                        className={category.subCategories ? "dropdown-submenu" : ""}
+                        onMouseEnter={() => handleServicesHover(idx)}
+                        onMouseLeave={() => handleServicesHover(null)}
+                      >
+                        <Link
+                          to={
+                            category.subCategories
+                              ? "#!"
+                              : `/services${category.route}`
+                          }
+                          onClick={() => {
+                            if (category.subCategories) {
+                              setOpenServicesIndex(
+                                openServicesIndex === idx ? null : idx
+                              );
+                            } else {
+                              setServicesDropdownOpen(false);
+                              setFreezoneOpenIndex(null);
+                            }
+                          }}
+                        >
+                          {/* Optional icon */}
+                          {category.icon && <i className={category.icon} />}{" "}
+                          {category.mainCategory}
+
+                          {/* Display arrow if subCategories exist */}
+                          {category.subCategories && (
+                            <span className="arrow-right" />
+                          )}
+                        </Link>
+
+                        {/* Nested Sub-Menu for subCategories */}
+                        {category.subCategories && openServicesIndex === idx && (
+                          <ul className="dropdown-menu sub-menu">
+                            {category.subCategories.map((sub, sIdx) => (
+                              <li key={sIdx}>
+                                <Link
+                                  to={`/services${sub.route}`}
+                                  onClick={() => {
+                                    setServicesDropdownOpen(false);
+                                    setFreezoneOpenIndex(null);
+                                    setOpenServicesIndex(null);
+                                  }}
+                                >
+                                  {sub.icon && <i className={sub.icon} />} {sub.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                </ul>
               )}
-            </Link>
-
-            {/* Nested Sub-Menu if subCategories exist and hovered index matches */}
-            {category.subCategories && openServicesIndex === idx && (
-              <ul className="dropdown-menu sub-menu">
-                {category.subCategories.map((sub, sIdx) => (
-                  <li key={sIdx}>
-                    <Link
-                      to={sub.route}
-                      onClick={() => {
-                        // Close dropdown after navigating
-                        setServicesDropdownOpen(false);
-                        setFreezoneOpenIndex(null);
-                        setOpenServicesIndex(null);
-                      }}
-                    >
-                      {sub.icon && <i className={sub.icon} />} {sub.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-    </ul>
-  )}
-</li>
+            </li>
 
             {/* Blogs */}
-            <li>
+            <li className={isActiveLink("/blog") ? "active" : ""}>
               <Link
-                to="/#blog"
+                to="/blog/2"
                 className="page-scroll"
                 onClick={() => {
                   setServicesDropdownOpen(false);
-                  setJudicementsDropdownOpen(false);
+                  setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
                 }}
               >
@@ -290,13 +300,13 @@ const handleServicesHover = (index) => {
             </li>
 
             {/* Contact */}
-            <li>
+            <li className={isActiveLink("/", true, "#contact") ? "active" : ""}>
               <Link
                 to="/#contact"
                 className="page-scroll"
                 onClick={() => {
                   setServicesDropdownOpen(false);
-                  setJudicementsDropdownOpen(false);
+                  setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
                 }}
               >
