@@ -58,7 +58,7 @@
   font-size: 20px;
   margin: 0 0 20px 0;
   font-weight: 600;
-  color: #ec9f05;
+  color: #ec9f05 !important;
 }
 
 .intro-paragraph {

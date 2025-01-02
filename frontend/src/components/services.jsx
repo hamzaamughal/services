@@ -24,7 +24,7 @@ export const Services = (props) => {
                     <ul className="subcategories-list">
                       {category.subCategories.map((sub, sIndex) => (
                         <li key={sIndex}>
-                          <Link to={sub.route} style={{ textDecoration: 'none', color: 'inherit' }}>
+                          <Link to={`/services/${sub.route}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                             {sub.name}
                           </Link>
                         </li>
