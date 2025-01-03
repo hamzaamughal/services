@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Link, useLocation } from "react-router-dom";
 import "./navigation.css"; // Ensure CSS is correctly imported
 
-export const Navigation = ({ servicesData, jurisdictionsData }) => {
+export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
   const location = useLocation();
   const { pathname, hash } = location;
 
@@ -21,7 +21,8 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
   const letters = currentWord.split("");
 
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-  const [juridictionsDropdownOpen, setJuridictionsDropdownOpen] = useState(false);
+  const [juridictionsDropdownOpen, setJuridictionsDropdownOpen] =
+    useState(false);
   const [openServicesIndex, setOpenServicesIndex] = useState(null);
   const [freezoneOpenIndex, setFreezoneOpenIndex] = useState(null);
   const navRef = useRef(null);
@@ -122,9 +123,9 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${
-                juridictionsDropdownOpen ? "open" : ""
-              } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
+                isActiveLink("/jurisdictions") ? "active" : ""
+              }`}
             >
               <a
                 href="#!"
@@ -170,7 +171,8 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                             }
                           }}
                         >
-                          <i className={jurisdiction.icon} /> {jurisdiction.name}
+                          <i className={jurisdiction.icon} />{" "}
+                          {jurisdiction.name}
                           {jurisdiction.subServices && (
                             <span className="arrow-right" />
                           )}
@@ -205,9 +207,9 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
 
             {/* Services Dropdown (Simple Dropdown) */}
             <li
-              className={`dropdown ${
-                servicesDropdownOpen ? "open" : ""
-              } ${isActiveLink("/services") ? "active" : ""}`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
+                isActiveLink("/services") ? "active" : ""
+              }`}
             >
               <a
                 href="#!"
@@ -228,7 +230,9 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                     servicesData.map((category, idx) => (
                       <li
                         key={idx}
-                        className={category.subCategories ? "dropdown-submenu" : ""}
+                        className={
+                          category.subCategories ? "dropdown-submenu" : ""
+                        }
                         onMouseEnter={() => handleServicesHover(idx)}
                         onMouseLeave={() => handleServicesHover(null)}
                       >
@@ -250,9 +254,10 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                           }}
                         >
                           {/* Optional icon */}
-                          {category.icon && <i className={category.icon} />}{" "}
+                          {category.icon && (
+                            <i className={category.icon} />
+                          )}{" "}
                           {category.mainCategory}
-
                           {/* Display arrow if subCategories exist */}
                           {category.subCategories && (
                             <span className="arrow-right" />
@@ -260,24 +265,26 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                         </Link>
 
                         {/* Nested Sub-Menu for subCategories */}
-                        {category.subCategories && openServicesIndex === idx && (
-                          <ul className="dropdown-menu sub-menu">
-                            {category.subCategories.map((sub, sIdx) => (
-                              <li key={sIdx}>
-                                <Link
-                                  to={`/services${sub.route}`}
-                                  onClick={() => {
-                                    setServicesDropdownOpen(false);
-                                    setFreezoneOpenIndex(null);
-                                    setOpenServicesIndex(null);
-                                  }}
-                                >
-                                  {sub.icon && <i className={sub.icon} />} {sub.name}
-                                </Link>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
+                        {category.subCategories &&
+                          openServicesIndex === idx && (
+                            <ul className="dropdown-menu sub-menu">
+                              {category.subCategories.map((sub, sIdx) => (
+                                <li key={sIdx}>
+                                  <Link
+                                    to={`/services${sub.route}`}
+                                    onClick={() => {
+                                      setServicesDropdownOpen(false);
+                                      setFreezoneOpenIndex(null);
+                                      setOpenServicesIndex(null);
+                                    }}
+                                  >
+                                    {sub.icon && <i className={sub.icon} />}{" "}
+                                    {sub.name}
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                       </li>
                     ))}
                 </ul>
@@ -311,6 +318,12 @@ export const Navigation = ({ servicesData, jurisdictionsData }) => {
                 }}
               >
                 Contact
+              </Link>
+            </li>
+
+            <li>
+              <Link to="/#login" className="page-scroll">
+                Login
               </Link>
             </li>
           </ul>

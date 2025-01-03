@@ -14,14 +14,14 @@
 
 /* Underline effect on hover */
 #menu.navbar-default .navbar-nav > li > a:hover {
-  color: #ec9f05;
+  color: #fff;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
 /* Underline effect on active state */
 #menu.navbar-default .navbar-nav > li > a:active {
-  color: #ec9f05;
+  color: #fff;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -134,7 +134,7 @@
 
 .navbar-nav > li > a:hover,
 .navbar-nav > li > a:focus {
-  color: #ec9f05;
+  color: #fff;
   background-color: transparent;
 }
 
@@ -287,7 +287,7 @@
 .navbar-nav > li.active > a,
 .navbar-nav > li.active > a:hover,
 .navbar-nav > li.active > a:focus {
-  color: #ec9f05 !important;
+  color: #fff !important;
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -302,5 +302,3 @@
   text-decoration: underline;
   color: #007bff;
 }
-
-

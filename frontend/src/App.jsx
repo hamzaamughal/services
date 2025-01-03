@@ -10,6 +10,8 @@ import { BlogDetailPage } from "./components/BlogDetailPage";
 import { GalleryDetailPage } from "./components/GalleryDetailPage";
 import { JurisdictionDetailPage } from "./components/JurisdictionDetailPage";
 import { SubServiceDetailPage } from "./components/SubServiceDetailPage";
+import Register from "./components/Register";
+import Login from "./components/Login";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -28,11 +30,19 @@ const App = () => {
   return (
     <Router>
       {/* Navigation is always visible */}
-      <Navigation servicesData={landingPageData.Services} jurisdictionsData={ landingPageData.Jurisdictions} />
+      <Navigation
+        servicesData={landingPageData.Services}
+        jurisdictionsData={landingPageData.Jurisdictions}
+        loginData={landingPageData.Login}
+      />
 
       <Switch>
         {/* Home Route */}
-        <Route exact path="/" render={() => <Home landingPageData={landingPageData} />} />
+        <Route
+          exact
+          path="/"
+          render={() => <Home landingPageData={landingPageData} />}
+        />
 
         <Route
           path="/blog/:blogId"
@@ -49,7 +59,10 @@ const App = () => {
           path="/gallery/:galleryId"
           render={(props) =>
             landingPageData.Gallery ? (
-              <GalleryDetailPage {...props} galleryData={landingPageData.Gallery} />
+              <GalleryDetailPage
+                {...props}
+                galleryData={landingPageData.Gallery}
+              />
             ) : (
               <div className="loading">Loading...</div>
             )
@@ -58,28 +71,30 @@ const App = () => {
 
         {/* Jurisdiction Detail Route */}
         <Route
-            exact
-            path="/jurisdictions/:jurisdictionRoute"
-            render={(props) =>
-              landingPageData.Jurisdictions ? (
-                <JurisdictionDetailPage
-                  {...props}
-                  jurisdictionsData={landingPageData.Jurisdictions}
-                />
-          ) : (
-            <div className="loading">Loading...</div>
-              )
-            }
+          exact
+          path="/jurisdictions/:jurisdictionRoute"
+          render={(props) =>
+            landingPageData.Jurisdictions ? (
+              <JurisdictionDetailPage
+                {...props}
+                jurisdictionsData={landingPageData.Jurisdictions}
+              />
+            ) : (
+              <div className="loading">Loading...</div>
+            )
+          }
         />
 
-          <Route
-            exact
-            path="/jurisdictions/freezone-authorities/:subServiceRoute"
-            render={(props) => (
-              <SubServiceDetailPage {...props} jurisdictionsData={landingPageData.Jurisdictions} />
-            )}
-          />
-
+        <Route
+          exact
+          path="/jurisdictions/freezone-authorities/:subServiceRoute"
+          render={(props) => (
+            <SubServiceDetailPage
+              {...props}
+              jurisdictionsData={landingPageData.Jurisdictions}
+            />
+          )}
+        />
 
         {/* Service Detail Route */}
         <Route
@@ -87,16 +102,18 @@ const App = () => {
           path="/services/:serviceRoute"
           render={(props) =>
             landingPageData.Services ? (
-              <ServiceDetailPage {...props} servicesData={landingPageData.Services} />
+              <ServiceDetailPage
+                {...props}
+                servicesData={landingPageData.Services}
+              />
             ) : (
               <div>Loading.......</div>
             )
           }
         />
-
-
+        <Route exact path="/register" render={() => <Register />} />
+        <Route exact path="/login" render={() => <Login />} />
       </Switch>
-
     </Router>
   );
 };

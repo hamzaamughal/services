@@ -796,9 +796,9 @@
     }
   ],
   "Contact": {
-    "address": "Mr Ali, Zayed Road, Dubai, United Arab Emirates",
-    "phone": "+971568140925",
-    "email": "ali@services.com",
+    "address": "Unit 701, Concord Tower, Media City, Dubai, UAE",
+    "phone": "+97145572251",
+    "email": "Office@mprive.com",
     "facebook": "fb.com",
     "twitter": "twitter.com",
     "youtube": "youtube.com"
@@ -823,6 +823,14 @@
       "icon": "fa fa-magic",
       "title": "Creativity",
       "text": "We provide outstanding creative services and results"
+    }
+  ],
+  "Login": [
+    {
+      "firstname": "ali",
+      "lastname": "sahib",
+      "email": "office@mprive.com",
+      "password": 123456
     }
   ]
 }
