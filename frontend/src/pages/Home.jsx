@@ -42,7 +42,7 @@ export const Home = ({ landingPageData }) => {
       {/* WhatsApp Floating Button */}
       <div className="whatsapp-float">
         <a
-          href="https://wa.me/+97145572251"
+          href="https://wa.me/+971568140925"
           target="_blank"
           rel="noopener noreferrer"
         >
