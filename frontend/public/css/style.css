@@ -366,9 +366,7 @@ header .intro-text {
   padding: 5px 0;
   color: #fff;
 }
-#services p {
-  color: rgba(255, 255, 255, 0.75);
-}
+
 #services .service-desc {
   margin-bottom: 40px;
 }
@@ -487,6 +485,7 @@ header .intro-text {
 }
 #contact .section-title {
   margin-bottom: 40px;
+  color: #fff;
 }
 #contact .section-title p {
   font-size: 16px;
@@ -572,6 +571,7 @@ label {
 }
 #contact .contact-item {
   margin: 20px 0;
+  color: #fff;
 }
 #contact .contact-item span {
   color: rgba(255, 255, 255, 1);
