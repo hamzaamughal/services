@@ -104,7 +104,8 @@ hr {
   bottom: -1px;
   width: 0;
   height: 2px;
-  background: linear-gradient(to right, #4169e1 0%, #4169e1 100%);
+  /* background: linear-gradient(to right, #4169e1 0%, #4169e1 100%); */
+  background: #fff;
   content: "";
   transition: width 0.2s;
 }
@@ -134,7 +135,7 @@ hr {
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #fff;
+  background-color: #ec9f05;
   border-color: #4169e1;
 }
 .navbar-default .navbar-toggle:hover > .icon-bar {
@@ -175,7 +176,7 @@ hr {
   font-weight: 500;
   border-radius: 25px;
   transition: all 0.5s linear;
-  border: 0;
+    border: 0;
 }
 .btn-custom:hover,
 .btn-custom:focus,
@@ -225,7 +226,7 @@ a:focus,
   font-weight: 700;
   text-transform: uppercase;
   margin-top: 0;
-  margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .intro h1 span {
   font-weight: 800;

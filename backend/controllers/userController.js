@@ -133,7 +133,8 @@ const jwt = require("jsonwebtoken");
 // Register Controller
 const registerController = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body;
+    const { name, email, password, role } = req.body.formData;
+    console.log("req.body", req.body);
 
     // Validate input
     if (!name || !email || !password) {
@@ -192,6 +193,8 @@ const registerController = async (req, res) => {
 const loginUserController = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    console.log("req.body", req.body);
 
     // Validate input
     if (!email || !password) {

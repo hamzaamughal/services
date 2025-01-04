@@ -10,8 +10,8 @@ import { BlogDetailPage } from "./components/BlogDetailPage";
 import { GalleryDetailPage } from "./components/GalleryDetailPage";
 import { JurisdictionDetailPage } from "./components/JurisdictionDetailPage";
 import { SubServiceDetailPage } from "./components/SubServiceDetailPage";
-import Register from "./components/Register";
 import Login from "./components/Login";
+import Register from "./components/Register";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -111,8 +111,8 @@ const App = () => {
             )
           }
         />
+        <Route exact path="/user/login" render={() => <Login />} />
         <Route exact path="/register" render={() => <Register />} />
-        <Route exact path="/login" render={() => <Login />} />
       </Switch>
     </Router>
   );

@@ -322,9 +322,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             </li>
 
             <li>
-              <Link to="/#login" className="page-scroll">
-                Login
-              </Link>
+              <Link to="/user/login">Login</Link>
             </li>
           </ul>
         </div>
