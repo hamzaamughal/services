@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Register.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import axios from "axios";

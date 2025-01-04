@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import "./Login.css";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
