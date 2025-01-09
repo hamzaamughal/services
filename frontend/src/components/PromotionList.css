@@ -1,71 +1,93 @@
+/* Promotion List Container */
 .promotion-list-container {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
   background-color: #f9f9f9;
 }
 
+/* Title */
 .promotion-title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
-  margin-bottom: 20px;
   text-align: center;
   color: #333;
+  margin-bottom: 30px;
 }
 
-.no-promotions-message {
-  text-align: center;
-  color: #888;
-}
-
+/* Promotion List */
 .promotion-list {
-  list-style-type: none;
+  list-style: none;
   padding: 0;
+  margin: 0;
 }
 
-.promotion-item {
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.promotion-header {
+/* Promotion Card */
+.promotion-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  background-color: #fff;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 320px; /* Increased height for a taller card */
+}
+
+.promotion-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image Section */
+.promotion-image-container {
+  flex: 1;
+  height: 100%; /* Ensure image fills the card height */
+  overflow: hidden;
+}
+
+.promotion-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio */
+}
+
+/* Content Section */
+.promotion-content {
+  flex: 2;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .promotion-name {
-  font-size: 20px;
+  font-size: 24px;
+  font-weight: bold;
   color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.promotion-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5; /* Better readability */
 }
 
 .promotion-expiry {
   font-size: 14px;
   color: #e74c3c;
-}
-
-.expiry-date {
-  font-weight: bold;
-}
-
-.promotion-description {
-  margin-top: 10px;
-  color: #555;
-  font-size: 16px;
+  margin-bottom: 15px;
 }
 
 .claim-promotion-button {
-  margin-top: 15px;
+  align-self: flex-start; /* Align button to the left */
   padding: 10px 20px;
-  font-size: 14px;
   background-color: #4169e1;
   color: #fff;
+  font-size: 14px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -73,4 +95,25 @@
 
 .claim-promotion-button:hover {
   background-color: #355abf;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .promotion-card {
+    flex-direction: column; /* Stack image and content vertically */
+    height: auto; /* Adjust height for smaller screens */
+  }
+
+  .promotion-image-container {
+    height: 200px; /* Limit image height on mobile */
+  }
+
+  .promotion-content {
+    padding: 15px;
+    text-align: center; /* Center align text */
+  }
+
+  .claim-promotion-button {
+    align-self: center; /* Center button */
+  }
 }

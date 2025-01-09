@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
+import AddPromotionForm from "./components/AddPromotionForm";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -23,29 +24,6 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speedAsDuration: true,
 });
 
-const promotions = [
-  {
-    title: "New Year Discount",
-    description:
-      "Get 20% off on all services. Offer valid till January 15, 2025.",
-    expiryDate: "2025-01-15",
-  },
-  {
-    title: "Free Consultation",
-    description: "Book a free consultation session for your business setup.",
-    expiryDate: "2025-01-20",
-  },
-  {
-    title: "Winter Sale",
-    description: "Up to 50% off on selected packages. Don't miss out!",
-    expiryDate: "2025-02-01",
-  },
-  {
-    title: "Free Consultation",
-    description: "Book a free consultation session for your business setup.",
-    expiryDate: "2025-01-20",
-  },
-];
 
 const pressReleaseData = [
   {
@@ -174,7 +152,11 @@ const App = () => {
         <Route exact path="/register" render={() => <Register />} />
         <Route
           path="/promotion"
-          render={() => <PromotionList promotions={promotions} />}
+          render={() => <PromotionList />}
+        />
+        <Route
+          path="/add-promotion"
+          render={() => <AddPromotionForm />}
         />
         <Route
           path="/pressrelease"

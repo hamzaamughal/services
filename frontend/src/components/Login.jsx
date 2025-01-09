@@ -20,21 +20,40 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Replace with actual authentication logic
+
+    // Basic validation
     if (!formData.email || !formData.password) {
       setError("Both fields are required");
       return;
     }
-    setError("");
-    console.log("Login submitted:", formData);
 
-    const response = await axios.post("http://localhost:5000/api/users/login", {
-      email: formData.email,
-      password: formData.password,
-    });
+    setError(""); // Clear any previous error messages
 
-    console.log(response.data);
+    try {
+      // Make API call to authenticate the user
+      const response = await axios.post("http://localhost:5000/api/users/login", {
+        email: formData.email,
+        password: formData.password,
+      });
+
+      console.log("Login response:", response.data);
+      const { token, isAdmin, user } = response.data; // Assuming the API returns these fields
+
+      // Store the token and admin status in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("isAdmin", isAdmin); // If you need admin-specific logic
+      localStorage.setItem("user", JSON.stringify(user)); // Save the user data as a string
+
+      // Redirect or show success message
+      console.log("Login successful");
+      alert("Login successful");
+      window.location.href = "/"; // Redirect to homepage or dashboard
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Invalid email or password. Please try again."); // Show error to the user
+    }
   };
+
 
   return (
     <div className="login-container">

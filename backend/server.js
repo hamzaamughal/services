@@ -34,6 +34,7 @@ const authRoutes = require("./routes/authRoutes");
 const promotionRoutes = require("./routes/promotionRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const translationRoutes = require("./routes/translationRoutes");
+const morgan = require("morgan");
 
 console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
 
@@ -45,6 +46,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(morgan("dev"));
+
 app.use("/api", translationRoutes);
 // Routes
 app.use("/api/users", userRoutes); // User routes
