@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import api from "../api";
+import api from "../../api";
 import "./AddPromotionForm.css";
 
 const AddPromotionForm = ({ onAddPromotion }) => {

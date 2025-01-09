@@ -1,44 +1,62 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import "./BlogDetailPage.css"; // For the fade-in animation and any extra styles.
 import Whatsapp from "./Whatsapp";
+import api from "../api";
 
-export const BlogDetailPage = ({ match, blogData }) => {
+export const BlogDetailPage = () => {
   const history = useHistory();
-  const { blogId } = match.params;
-  const blogIndex = parseInt(blogId, 10);
+  const { id } = useParams(); // Get blog ID from URL parameters
+  const [blog, setBlog] = useState(null); // Store the blog data
+  const [loading, setLoading] = useState(true); // Track loading state
+  const [error, setError] = useState(null); // Track error state
 
-  // Check if blogData is still loading or blogId is invalid
-  if (!blogData) {
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get(`/blogs/${id}`);
+        setBlog(response.data); // Assuming API returns the blog object
+        setError(null); // Clear any previous errors
+      } catch (err) {
+        console.error("Error fetching blog:", err);
+        setError("Failed to load blog post. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [id]);
+
+  // Handle cases where the blog is still loading or there's an error
+  if (loading) {
     return (
-      <div
-        className="container"
-        style={{ marginTop: "100px", textAlign: "center" }}
-      >
+      <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
         <h1>Loading...</h1>
       </div>
     );
   }
 
-  if (blogIndex < 0 || blogIndex >= blogData.length) {
+  if (error || !blog) {
     return (
-      <div
-        className="container"
-        style={{ marginTop: "100px", textAlign: "center" }}
-      >
-        <h1>Blog Post not found</h1>
+      <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
+        <h1>{error || "Blog Post not found"}</h1>
+        <button onClick={() => history.goBack()} className="btn back-btn">
+          ← Back
+        </button>
       </div>
     );
   }
 
-  const selectedBlog = blogData[blogIndex];
+  console.log(blog, 'blogsss>>>>>>>>>>>>>>>.');
 
   return (
     <>
       <div className="container" style={{ marginTop: "100px" }}>
         <div className="row">
           <div className="col-12">
-            {/* Back Button at the top */}
+            {/* Back Button */}
             <button onClick={() => history.goBack()} className="btn back-btn">
               ← Back
             </button>
@@ -48,8 +66,8 @@ export const BlogDetailPage = ({ match, blogData }) => {
           {/* Image Section */}
           <div className="col-md-6 col-sm-12 text-center">
             <img
-              src={selectedBlog.largeImage}
-              alt={selectedBlog.title}
+              src={blog.largeImage || blog.image}
+              alt={blog.title}
               style={{
                 maxWidth: "100%",
                 height: "auto",
@@ -68,7 +86,7 @@ export const BlogDetailPage = ({ match, blogData }) => {
                 color: "#333",
               }}
             >
-              {selectedBlog.title}
+              {blog.title}
             </h1>
             <hr />
             <p
@@ -78,7 +96,7 @@ export const BlogDetailPage = ({ match, blogData }) => {
                 marginTop: "20px",
               }}
             >
-              {selectedBlog.description}
+              {blog.description}
             </p>
           </div>
         </div>

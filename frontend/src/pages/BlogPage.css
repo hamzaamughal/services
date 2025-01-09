@@ -1,0 +1,120 @@
+.service-page-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.service-page-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.blog-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.blog-card {
+  display: flex;
+  flex-direction: row; /* Image on left, text on right */
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  cursor: pointer; /* Indicate clickable area */
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.blog-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.blog-image-container {
+  flex: 0 0 200px; /* Fixed width for the image container */
+  height: 150px;   /* Or auto, depending on your needs */
+  overflow: hidden;
+}
+
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.blog-content {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.blog-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.blog-date {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 1rem;
+}
+
+.read-more-button {
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.read-more-button:hover {
+  background-color: #cc5200;
+}
+
+.add-blog-button{
+  padding: 0.5rem 1rem;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+/* Loading and error styling */
+.loading-message,
+.error-message,
+.no-blogs-message {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
+}
+
+.delete-icon {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 10px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-icon:hover {
+  color: darkred;
+}

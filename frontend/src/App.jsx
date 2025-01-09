@@ -14,7 +14,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
-import AddPromotionForm from "./components/AddPromotionForm";
+import AddPromotionForm from "./components/forms/AddPromotionForm";
+import AddBlogForm from "./components/forms/AddBlogForm";
+import BlogPage from "./pages/BlogPage";
 
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
@@ -82,14 +84,26 @@ const App = () => {
         />
 
         <Route
-          path="/blog/:blogId"
+          exact
+          path="/blog"
+          render={() =>
+            <BlogPage />
+          }
+        />
+        <Route
+          path="/blog/:id"
           render={(props) =>
             landingPageData.Blog ? (
-              <BlogDetailPage {...props} blogData={landingPageData.Blog} />
+              <BlogDetailPage {...props} />
             ) : (
               <div className="loading">Loading...</div>
             )
           }
+          exact
+        />
+        <Route
+          path="/add-blog"
+          render={() => <AddBlogForm />}
         />
 
         <Route

@@ -26,7 +26,7 @@ export const Services = (props) => {
                         {category.subCategories.map((sub, sIndex) => (
                           <li key={sIndex}>
                             <Link
-                              to={`/services/${sub.route}`}
+                              to={`/services${sub.route}`}
                               style={{
                                 textDecoration: "none",
                                 color: "inherit",

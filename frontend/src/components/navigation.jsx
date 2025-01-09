@@ -144,9 +144,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
-                isActiveLink("/jurisdictions") ? "active" : ""
-              }`}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${isActiveLink("/jurisdictions") ? "active" : ""
+                }`}
             >
               <a
                 href="#!"
@@ -228,9 +227,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Services Dropdown (Simple Dropdown) */}
             <li
-              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
-                isActiveLink("/services") ? "active" : ""
-              }`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${isActiveLink("/services") ? "active" : ""
+                }`}
             >
               <a
                 href="#!"
@@ -315,7 +313,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             {/* Blogs */}
             <li className={isActiveLink("/blog") ? "active" : ""}>
               <Link
-                to="/blog/2"
+                to="/blog"
                 className="page-scroll"
                 onClick={() => {
                   setServicesDropdownOpen(false);

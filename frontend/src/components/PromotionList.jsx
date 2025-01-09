@@ -36,7 +36,7 @@ const PromotionList = () => {
     <>
       <div className="promotion-list-container">
         <h2 className="promotion-title">Promotions</h2>
-        {false && (
+        {true && (
           <button
             className="add-promotion-button"
             onClick={() => history.push("/add-promotion")}
