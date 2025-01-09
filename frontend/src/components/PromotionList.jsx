@@ -10,8 +10,10 @@ const PromotionList = () => {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(true); // Hardcoded admin for now
+  //const [isAdmin, setIsAdmin] = useState(false); // Hardcoded admin for now
   const history = useHistory();
+
+
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -34,7 +36,7 @@ const PromotionList = () => {
     <>
       <div className="promotion-list-container">
         <h2 className="promotion-title">Promotions</h2>
-        {isAdmin && (
+        {false && (
           <button
             className="add-promotion-button"
             onClick={() => history.push("/add-promotion")}

@@ -1,7 +1,6 @@
 import React from "react";
 import "./services.css";
 import { Link } from "react-router-dom";
-import Whatsapp from "./Whatsapp";
 
 export const Services = (props) => {
   return (

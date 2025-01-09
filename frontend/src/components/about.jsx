@@ -1,5 +1,4 @@
 import React from "react";
-import Whatsapp from "./Whatsapp";
 export const About = (props) => {
   const data = props.data;
 
@@ -42,11 +41,11 @@ export const About = (props) => {
                   <ul>
                     {data
                       ? data.Why.map((item, i) => (
-                          <li
-                            key={i}
-                            dangerouslySetInnerHTML={{ __html: item }}
-                          />
-                        ))
+                        <li
+                          key={i}
+                          dangerouslySetInnerHTML={{ __html: item }}
+                        />
+                      ))
                       : "loading..."}
                   </ul>
                 </div>
@@ -54,11 +53,11 @@ export const About = (props) => {
                   <ul>
                     {data
                       ? data.Why2.map((item, i) => (
-                          <li
-                            key={i}
-                            dangerouslySetInnerHTML={{ __html: item }}
-                          />
-                        ))
+                        <li
+                          key={i}
+                          dangerouslySetInnerHTML={{ __html: item }}
+                        />
+                      ))
                       : "loading..."}
                   </ul>
                 </div>
