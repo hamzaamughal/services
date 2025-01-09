@@ -1,0 +1,76 @@
+.promotion-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.promotion-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.no-promotions-message {
+  text-align: center;
+  color: #888;
+}
+
+.promotion-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.promotion-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.promotion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promotion-name {
+  font-size: 20px;
+  color: #2c3e50;
+}
+
+.promotion-expiry {
+  font-size: 14px;
+  color: #e74c3c;
+}
+
+.expiry-date {
+  font-weight: bold;
+}
+
+.promotion-description {
+  margin-top: 10px;
+  color: #555;
+  font-size: 16px;
+}
+
+.claim-promotion-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #4169e1;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.claim-promotion-button:hover {
+  background-color: #355abf;
+}

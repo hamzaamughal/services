@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import "./JurisdictionDetailPage.css";
+import Whatsapp from "./Whatsapp";
 
 export const JurisdictionDetailPage = ({ match, jurisdictionsData }) => {
   // 1) Declare all hooks at the top, unconditionally
@@ -40,49 +41,52 @@ export const JurisdictionDetailPage = ({ match, jurisdictionsData }) => {
   const tableSecondHalf = table.slice(half);
 
   return (
-    <div className="jurisdiction-detail-container fade-in">
-      {/* Back button (fixed) */}
-      <div className="fixed-back-button">
-        <button onClick={() => history.goBack()} className="btn back-btn">
-          ← Back
-        </button>
-      </div>
-
-      {/* Hero / Background Image Section */}
-      <div
-        className="hero-section"
-        style={{ backgroundImage: `url(${image})` }}
-      >
-        <div className="hero-overlay fade-in">
-          <h1 className="jurisdiction-name">{name}</h1>
-          <h2 className="jurisdiction-content-title">{title}</h2>
-        </div>
-      </div>
-
-      {/* Cards Section */}
-      <div className="cards-container fade-in">
-        {/* First Card */}
-        <div className="card">
-          <ul className="benefits-list">
-            {tableFirstHalf.map((item, index) => (
-              <li key={index}>
-                <strong>{item.benefit}:</strong> {item.description}
-              </li>
-            ))}
-          </ul>
+    <div>
+      <div className="jurisdiction-detail-container fade-in">
+        {/* Back button (fixed) */}
+        <div className="fixed-back-button">
+          <button onClick={() => history.goBack()} className="btn back-btn">
+            ← Back
+          </button>
         </div>
 
-        {/* Second Card */}
-        <div className="card">
-          <ul className="benefits-list">
-            {tableSecondHalf.map((item, index) => (
-              <li key={index}>
-                <strong>{item.benefit}:</strong> {item.description}
-              </li>
-            ))}
-          </ul>
+        {/* Hero / Background Image Section */}
+        <div
+          className="hero-section"
+          style={{ backgroundImage: `url(${image})` }}
+        >
+          <div className="hero-overlay fade-in">
+            <h1 className="jurisdiction-name">{name}</h1>
+            <h2 className="jurisdiction-content-title">{title}</h2>
+          </div>
+        </div>
+
+        {/* Cards Section */}
+        <div className="cards-container fade-in">
+          {/* First Card */}
+          <div className="card">
+            <ul className="benefits-list">
+              {tableFirstHalf.map((item, index) => (
+                <li key={index}>
+                  <strong>{item.benefit}:</strong> {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Second Card */}
+          <div className="card">
+            <ul className="benefits-list">
+              {tableSecondHalf.map((item, index) => (
+                <li key={index}>
+                  <strong>{item.benefit}:</strong> {item.description}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
+      <Whatsapp />
     </div>
   );
 };

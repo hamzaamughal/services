@@ -14,20 +14,20 @@ export const Blog = (props) => {
           <div className="portfolio-items">
             {props.data
               ? props.data.map((d, i) => (
-                <div
-                  key={`${d.title}-${i}`}
-                  className="col-sm-6 col-md-4 col-lg-4"
-                >
-                  {/* Wrap the image in a Link to navigate to the detail page */}
-                  <Link to={`/blog/${i}`}>
-                    <Image
-                      title={d.title}
-                      largeImage={d.largeImage}
-                      smallImage={d.largeImage}
-                    />
-                  </Link>
-                </div>
-              ))
+                  <div
+                    key={`${d.title}-${i}`}
+                    className="col-sm-6 col-md-4 col-lg-4"
+                  >
+                    {/* Wrap the image in a Link to navigate to the detail page */}
+                    <Link to={`/blog/${i}`}>
+                      <Image
+                        title={d.title}
+                        largeImage={d.largeImage}
+                        smallImage={d.largeImage}
+                      />
+                    </Link>
+                  </div>
+                ))
               : "Loading..."}
           </div>
         </div>

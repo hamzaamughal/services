@@ -7,8 +7,9 @@ import { Testimonials } from "../components/testimonials";
 import { Team } from "../components/Team";
 import { Contact } from "../components/contact";
 import { Blog } from "../components/blog";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import Whatsapp from "../components/Whatsapp";
 import { useLocation } from "react-router-dom";
 
 export const Home = ({ landingPageData }) => {
@@ -40,7 +41,7 @@ export const Home = ({ landingPageData }) => {
       <Contact data={landingPageData.Contact} />
 
       {/* WhatsApp Floating Button */}
-      <div className="whatsapp-float">
+      {/* <div className="whatsapp-float">
         <a
           href="https://wa.me/+971568140925"
           target="_blank"
@@ -48,7 +49,9 @@ export const Home = ({ landingPageData }) => {
         >
           <FontAwesomeIcon icon={faWhatsapp} size="2x" />
         </a>
-      </div>
+      </div> */}
+
+      <Whatsapp />
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import "./services.css";
 import { Link } from "react-router-dom";
+import Whatsapp from "./Whatsapp";
 
 export const Services = (props) => {
   return (
@@ -20,17 +21,24 @@ export const Services = (props) => {
                 <i className={category.icon}></i>
                 <div className="service-desc">
                   <h3>{category.mainCategory}</h3>
-                  {category.subCategories && category.subCategories.length > 0 && (
-                    <ul className="subcategories-list">
-                      {category.subCategories.map((sub, sIndex) => (
-                        <li key={sIndex}>
-                          <Link to={`/services/${sub.route}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                            {sub.name}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
+                  {category.subCategories &&
+                    category.subCategories.length > 0 && (
+                      <ul className="subcategories-list">
+                        {category.subCategories.map((sub, sIndex) => (
+                          <li key={sIndex}>
+                            <Link
+                              to={`/services/${sub.route}`}
+                              style={{
+                                textDecoration: "none",
+                                color: "inherit",
+                              }}
+                            >
+                              {sub.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                 </div>
               </div>
             ))

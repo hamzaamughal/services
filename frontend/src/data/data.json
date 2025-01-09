@@ -121,6 +121,18 @@
       ]
     },
     {
+      "mainCategory": " Golden Visa",
+      "icon": "fa fa-cc-visa",
+      "subCategories": [
+        {
+          "name": "Golden Visa Services",
+          "route": "/residence-visas",
+          "image": "/img/visa.jpg",
+          "description": "<h2><strong>Visa Services – Hassle-Free Solutions for Your Workforce and Shareholders</strong></h2>\n\n<p>At <strong>MPRIVE COMMERCIAL</strong>, we simplify the process of securing work and residency visas for your employees and shareholders. Once your company is established, we provide end-to-end visa services, ensuring compliance with UAE immigration laws, and making sure that your team can operate smoothly and legally in the UAE. Whether you're an entrepreneur setting up your business or a growing company needing to bring on employees, we’re here to manage all your visa requirements with ease and professionalism.</p>\n\n<h3><strong>Our Comprehensive Visa Services:</strong></h3>\n<ul>\n  <li><strong>Staff Visa Processing:</strong> From the moment your company is formed, we handle the entire process of obtaining work visas for your employees. We manage all required paperwork, medical tests, and Emirates ID applications, ensuring your employees are legally authorized to work in the UAE.</li>\n  <li><strong>Investor and Shareholder Visas:</strong> For business owners and investors, we ensure you receive the necessary investor or shareholder visas that allow you to live and manage your company in the UAE. Our service ensures you meet all the legal requirements for business owners, making it easier to focus on running your operations.</li>\n  <li><strong>Family and Dependents Visas:</strong> We understand that your employees' families are an important part of their move to the UAE. Once work visas are secured, we assist with processing residency visas for dependents, ensuring a smooth transition for your workforce and their loved ones.</li>\n  <li><strong>Visa Renewals and Amendments:</strong> We don’t just help with initial visa applications. Our services also include renewals, amendments (such as changes in job roles or employment status), and cancellations, so your workforce remains in full compliance with UAE laws at all times.</li>\n</ul>\n\n<h3><strong>Why Choose MPRIVE COMMERCIAL for Your Visa Needs?</strong></h3>\n<ul>\n  <li><strong>Expert Guidance:</strong> Navigating UAE’s visa regulations can be complex. Our experienced team provides clear, reliable advice to ensure your business and employees are always compliant. We guide you through every step, simplifying the process for you.</li>\n  <li><strong>Quick and Efficient Service:</strong> At <strong>MPRIVE COMMERCIAL</strong>, we understand the importance of time. Our streamlined visa process is designed to get your employees and shareholders authorized quickly, so your business can start operating without delays.</li>\n  <li><strong>Full Legal Compliance:</strong> We prioritize compliance with all UAE immigration laws. From application submission to processing, we ensure that all visa-related procedures are handled correctly, safeguarding your business from potential legal issues.</li>\n  <li><strong>Tailored Solutions for Every Business:</strong> Whether you are a small startup or an established enterprise, our visa services are personalized to meet your specific needs. We work with businesses of all sizes and industries, offering customized solutions for all visa types.</li>\n  <li><strong>End-to-End Support:</strong> We manage every aspect of the visa process, from documentation to Emirates ID collection, renewals, and family visas, ensuring a smooth, hassle-free experience for your entire team.</li>\n</ul>\n\n<h3><strong>Our Simple Process:</strong></h3>\n<ol>\n  <li><strong>Consultation:</strong> Our team will assess your needs and recommend the right visa options for your employees, shareholders, and dependents.</li>\n  <li><strong>Document Preparation:</strong> We handle all the paperwork, making sure everything is in order for submission to the relevant authorities.</li>\n  <li><strong>Application and Processing:</strong> We take care of medical tests, submission to the authorities, and follow-up until the visa is approved.</li>\n  <li><strong>Visa Issuance &amp; Emirates ID:</strong> Once the visa is issued, we assist in obtaining Emirates IDs for your team, ensuring all legal requirements are met.</li>\n  <li><strong>Ongoing Support:</strong> From renewals to amendments, we continue to support you throughout the lifespan of your employee and shareholder visas, ensuring continuous compliance.</li>\n</ol>\n\n<p>With <strong>MPRIVE COMMERCIAL</strong>, your visa processing is in expert hands. We make the complex immigration process simple, fast, and fully compliant with UAE laws, allowing you to focus on growing your business. Contact us today to learn more about how our Visa Services can help your business succeed in the UAE.</p>"
+        }
+      ]
+    },
+    {
       "mainCategory": "Corporate Account Opening",
       "icon": "fa fa-university",
       "subCategories": [
@@ -503,7 +515,7 @@
             {
               "name": "Dubai Knowledge Park (DKP)",
               "route": "/freezone-authorities/dkp",
-              "image": "/img/DKP.jpg",
+              "image": "/img/Dubai_Knowledge_Park.jpg",
               "content": {
                 "title": "Dubai Knowledge Park (DKP) – Empowering Education, Innovation, and Professional Growth",
                 "introParagraphs": [
@@ -532,7 +544,7 @@
             {
               "name": "Dubai Production City (DPC)",
               "route": "/freezone-authorities/dpc",
-              "image": "/img/dubai3.jpg",
+              "image": "/img/dubai_production_city.jpg",
               "content": {
                 "title": "Dubai Production City (DPC) – The Ultimate Hub for Manufacturing, Media, and Production Excellence",
                 "introParagraphs": [
@@ -561,7 +573,7 @@
             {
               "name": "Dubai World Trade Centre (DWTC)",
               "route": "/freezone-authorities/dwtc",
-              "image": "/img/dubai4.jpg",
+              "image": "/img/Dubai_World_Trade_Center.webp",
               "content": {
                 "title": "Dubai World Trade Centre (DWTC) – A Gateway to Global Business and Trade Excellence",
                 "introParagraphs": [
@@ -590,7 +602,7 @@
             {
               "name": "International Humanitarian City (IHC)",
               "route": "/freezone-authorities/ihc",
-              "image": "/img/dubai5.jpg",
+              "image": "/img/Dubai_International_Humanitarian_City.jpg",
               "content": {
                 "title": "International Humanitarian City (IHC) – A Global Hub for Humanitarian Aid and Relief Operations",
                 "introParagraphs": [
@@ -619,7 +631,7 @@
             {
               "name": "Dubai South (Logistics City and Aviation City)",
               "route": "/freezone-authorities/dubai-south",
-              "image": "/img/dubai.jpg",
+              "image": "/img/Dubai_South.jpg",
               "content": {
                 "title": "Dubai South – The Future of Business, Logistics, and Innovation",
                 "introParagraphs": [
@@ -648,7 +660,7 @@
             {
               "name": "Meydan Free Zone",
               "route": "/freezone-authorities/meydan",
-              "image": "/img/Meydan.jpg",
+              "image": "/img/Meydan_Free_Zone.jpg",
               "content": {
                 "title": "Meydan Free Zone – A Hub for Innovation, Technology, and Business Growth",
                 "introParagraphs": [

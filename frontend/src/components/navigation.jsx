@@ -35,6 +35,27 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setServicesDropdownOpen(false);
+        setJuridictionsDropdownOpen(false);
+        setFreezoneOpenIndex(null);
+
+        // Close the mobile menu if open
+        const collapseElement = document.getElementById(
+          "bs-example-navbar-collapse-1"
+        );
+        if (collapseElement && collapseElement.classList.contains("in")) {
+          collapseElement.classList.remove("in");
+        }
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   // Rotate the word every 3 seconds
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -174,7 +195,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                           <i className={jurisdiction.icon} />{" "}
                           {jurisdiction.name}
                           {jurisdiction.subServices && (
-                            <span className="arrow-right" />
+                            <span className=" arrow-right" />
                           )}
                         </Link>
 
@@ -307,18 +328,11 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             </li>
 
             {/* Contact */}
-            <li className={isActiveLink("/", true, "#contact") ? "active" : ""}>
-              <Link
-                to="/#contact"
-                className="page-scroll"
-                onClick={() => {
-                  setServicesDropdownOpen(false);
-                  setJuridictionsDropdownOpen(false);
-                  setFreezoneOpenIndex(null);
-                }}
-              >
-                Contact
-              </Link>
+            <li>
+              <Link to="/promotion">Promotions</Link>
+            </li>
+            <li>
+              <Link to="/pressrelease">PressRelease </Link>
             </li>
 
             <li>

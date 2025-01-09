@@ -36,7 +36,6 @@ const serviceRoutes = require("./routes/serviceRoutes");
 const translationRoutes = require("./routes/translationRoutes");
 
 console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
-// const cors = require("cors");
 
 const app = express();
 connectDB();
