@@ -1,87 +1,96 @@
-/* Promotion List Container */
+/* Container for promotions, ensuring it starts below navbar */
 .promotion-list-container {
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 2rem;
+  padding-top: 8rem; /* Extra top padding so it's not under navbar */
   background-color: #f9f9f9;
 }
 
-/* Title */
+/* Title styling */
 .promotion-title {
-  font-size: 32px; /* Larger font size for emphasis */
+  font-size: 2rem;
   font-weight: bold;
   text-align: center;
   color: #333;
-  margin-bottom: 10px; /* Space between title and the button */
+  margin-bottom: 1rem;
 }
 
-/* Add Promotion Button */
+/* "Add Promotion" button container + button */
 .add-promotion-container {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 1.5rem;
 }
 
 .add-promotion-button {
-  padding: 12px 20px;
-  background-color: #4169e1;
+  padding: 0.75rem 1.25rem;
+  background-color: #ec9f05 !important; /* Updated color */
   color: #fff;
-  font-size: 16px;
+  font-size: 1rem;
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-
 .add-promotion-button:hover {
-  background-color: #355abf;
+  background-color: #d98b05; /* Slightly darker on hover */
 }
 
-/* Promotion List */
-.promotion-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Loading, error, no promotions messages */
+.loading-message,
+.error-message,
+.no-promotions-message {
+  text-align: center;
+  margin-top: 2rem;
+  color: #666;
 }
 
-/* Promotion Card */
+/* The grid container for promotions */
+.promotion-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-gap: 2rem; /* spacing between cards */
+}
+
+/* Each promotion card: image on left, content on right */
 .promotion-card {
-  position: relative;
-  display: flex;
-  align-items: center;
+  position: relative; /* for the delete button to be top-right */
+  display: flex;      /* row layout: image (left), content (right) */
+  flex-direction: row;
   background-color: #fff;
-  margin-bottom: 20px;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 320px;
 }
 
+/* Hover effect on the card */
 .promotion-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Delete Button */
+/* Delete (X) button at top-right corner */
 .delete-promotion-button {
   position: absolute;
   top: 15px;
   right: 15px;
   background: none;
   border: none;
-  color: red;
+  color: #ec9f05; /* match brand color for the "X" */
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
-
 .delete-promotion-button:hover {
-  color: darkred;
+  color: #d98b05;
 }
 
-/* Image Section */
+/* Image container (left) */
 .promotion-image-container {
-  flex: 1;
+  flex: 0 0 40%; /* 40% width for image side */
   height: 100%;
   overflow: hidden;
 }
@@ -92,58 +101,65 @@
   object-fit: cover;
 }
 
-/* Content Section */
+/* Content section (right) */
 .promotion-content {
-  flex: 2;
+  flex: 1;
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* stack text vertically */
   justify-content: center;
 }
 
 .promotion-name {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: bold;
   color: #2c3e50;
-  margin-bottom: 10px;
+  margin-bottom: 0.5rem;
 }
 
 .promotion-description {
-  font-size: 16px;
+  font-size: 1rem;
   color: #555;
-  margin-bottom: 15px;
+  margin-bottom: 0.75rem;
   line-height: 1.5;
 }
 
 .promotion-expiry {
-  font-size: 14px;
+  font-size: 0.9rem;
   color: #e74c3c;
-  margin-bottom: 15px;
+  margin-bottom: 0.75rem;
 }
 
+/* "Learn More" button */
 .claim-promotion-button {
   align-self: flex-start;
-  padding: 10px 20px;
-  background-color: #4169e1;
+  padding: 0.75rem 1.25rem;
+  background-color: #ec9f05;
   color: #fff;
-  font-size: 14px;
+  font-size: 0.9rem;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
-
 .claim-promotion-button:hover {
-  background-color: #355abf;
+  background-color: #d98b05;
 }
 
-/* Responsive Design */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
+  .promotion-grid {
+    grid-template-columns: 1fr; /* single column layout on smaller screens */
+  }
+
   .promotion-card {
-    flex-direction: column;
+    flex-direction: column; /* stack image above content */
     height: auto;
   }
 
   .promotion-image-container {
+    flex: none;
+    width: 100%;
     height: 200px;
   }
 
@@ -153,6 +169,6 @@
   }
 
   .claim-promotion-button {
-    align-self: center;
+    align-self: center; /* center the button in mobile layout */
   }
 }

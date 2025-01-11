@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; // Replaces useHistory
 import moment from "moment";
+import api from "../api";
 import "./PromotionList.css";
 import Whatsapp from "./Whatsapp";
-import api from "../api";
+
+// 1) Import Framer Motion
+import { motion } from "framer-motion";
 
 const PromotionList = () => {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const history = useHistory();
+
+  // useNavigate from React Router v6
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -51,11 +55,12 @@ const PromotionList = () => {
         <div className="add-promotion-container">
           <button
             className="add-promotion-button"
-            onClick={() => history.push("/add-promotion")}
+            onClick={() => navigate("/add-promotion")}
           >
             Add New Promotion
           </button>
         </div>
+
         {loading ? (
           <p className="loading-message">Loading promotions...</p>
         ) : error ? (
@@ -65,15 +70,34 @@ const PromotionList = () => {
             No promotions available at the moment.
           </p>
         ) : (
-          <ul className="promotion-list">
-            {promotions.map((promotion, index) => (
-              <li key={index} className="promotion-card">
-                <button
+          // 2) Use a motion.div container for the grid
+          <motion.div
+            className="promotion-grid"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            {promotions.map((promotion) => (
+              // 3) Animate each promotion card
+              <motion.div
+                key={promotion.id}
+                className="promotion-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+              >
+                {/* Delete button at top-right */}
+                <motion.button
                   className="delete-promotion-button"
                   onClick={() => handleDelete(promotion.id)}
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   &times;
-                </button>
+                </motion.button>
+
+                {/* Image on the left */}
                 <div className="promotion-image-container">
                   <img
                     src={promotion.image}
@@ -81,6 +105,8 @@ const PromotionList = () => {
                     className="promotion-image"
                   />
                 </div>
+
+                {/* Content on the right */}
                 <div className="promotion-content">
                   <h3 className="promotion-name">{promotion.title}</h3>
                   <p className="promotion-description">
@@ -94,35 +120,25 @@ const PromotionList = () => {
                       )}
                     </span>
                   </p>
-                  <button
+                  <motion.button
                     className="claim-promotion-button"
                     onClick={() =>
                       alert(`Claimed promotion: ${promotion.title}`)
                     }
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     Learn More
-                  </button>
+                  </motion.button>
                 </div>
-              </li>
+              </motion.div>
             ))}
-          </ul>
+          </motion.div>
         )}
       </div>
       <Whatsapp />
     </>
   );
-};
-
-PromotionList.propTypes = {
-  promotions: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      endDate: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired,
-    })
-  ),
 };
 
 export default PromotionList;

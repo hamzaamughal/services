@@ -1,34 +1,59 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
+import { toast } from "react-toastify";   // <-- Import toast
+import "react-toastify/dist/ReactToastify.css";
 import api from "../../api";
 import "./AddPromotionForm.css";
+import { useNavigate } from "react-router-dom";
 
-const AddPromotionForm = ({ onAddPromotion }) => {
+const AddPromotionForm = () => {
+ const navigate = useNavigate();
+
  const [title, setTitle] = useState("");
  const [description, setDescription] = useState("");
  const [startDate, setStartDate] = useState("");
  const [endDate, setEndDate] = useState("");
- const [image, setImage] = useState(""); // New state for image upload
+ const [image, setImage] = useState(""); // State for image URL
  const [error, setError] = useState("");
 
  const handleSubmit = async (e) => {
   e.preventDefault();
 
+  // Create promotion object
   const newPromotion = {
    title,
    description,
    image:
-    "https://www.shutterstock.com/image-vector/special-offer-banner-vector-template-260nw-2474802375.jpg", // Hardcoded URL for now
+    image ||
+    "https://www.shutterstock.com/image-vector/special-offer-banner-vector-template-260nw-2474802375.jpg",
    startDate,
    endDate,
   };
 
   try {
    const response = await api.post("/promotions", newPromotion);
-   onAddPromotion(response.data); // Pass the new promotion to the parent
+   console.log("Server response:", response);
+
+   // If status not in 2xx range, show error
+   if (response.status < 200 || response.status >= 300) {
+    toast.error("Failed to add promotion. Please try again.");
+    return;
+   }
+
+   // Otherwise, success
+   toast.success("Promotion added successfully!");
+
+   // Clear form fields
+   setTitle("");
+   setDescription("");
+   setStartDate("");
+   setEndDate("");
+   setImage("");
+   setError("");
+   navigate("/promotion");
   } catch (err) {
    console.error("Error adding promotion:", err);
    setError("Failed to add promotion. Please try again.");
+   toast.error("Failed to add promotion. Please try again.");
   }
  };
 
@@ -37,6 +62,7 @@ const AddPromotionForm = ({ onAddPromotion }) => {
    <form className="add-promotion-form" onSubmit={handleSubmit}>
     <h3>Add New Promotion</h3>
     {error && <p className="error-message">{error}</p>}
+
     <div className="form-group">
      <label>Title:</label>
      <input
@@ -46,6 +72,7 @@ const AddPromotionForm = ({ onAddPromotion }) => {
       required
      />
     </div>
+
     <div className="form-group">
      <label>Description:</label>
      <textarea
@@ -54,6 +81,7 @@ const AddPromotionForm = ({ onAddPromotion }) => {
       required
      />
     </div>
+
     <div className="form-group">
      <label>Start Date:</label>
      <input
@@ -63,6 +91,7 @@ const AddPromotionForm = ({ onAddPromotion }) => {
       required
      />
     </div>
+
     <div className="form-group">
      <label>End Date:</label>
      <input
@@ -72,25 +101,23 @@ const AddPromotionForm = ({ onAddPromotion }) => {
       required
      />
     </div>
+
     <div className="form-group">
      <label>Image (URL for now):</label>
      <input
       type="text"
       value={image}
       onChange={(e) => setImage(e.target.value)}
-      placeholder="Image URL (Hardcoded for now)"
+      placeholder="Paste an Image URL (optional)"
      />
     </div>
+
     <button type="submit" className="submit-button">
      Add Promotion
     </button>
    </form>
   </div>
  );
-};
-
-AddPromotionForm.propTypes = {
- onAddPromotion: PropTypes.func.isRequired,
 };
 
 export default AddPromotionForm;

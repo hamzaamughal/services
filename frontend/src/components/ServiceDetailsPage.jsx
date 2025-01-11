@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./ServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
 
@@ -36,22 +36,30 @@ function parseDescriptionIntoSections(html) {
   return { introTitle, introText, sections };
 }
 
-export const ServiceDetailPage = ({ match, servicesData }) => {
-  const history = useHistory();
-  const routeParam = match.params.serviceRoute;
+export const ServiceDetailPage = ({ servicesData }) => {
+  const navigate = useNavigate();
+  const { serviceRoute } = useParams();
 
   if (!servicesData || servicesData.length === 0) {
     return <div className="loading">Loading...</div>;
   }
 
   let selectedService = null;
+
+  // Convert the route (e.g., "/accounting") to something we can compare
+  // (remove leading slash if needed)
+  const cleanRouteParam = serviceRoute.replace("/", "");
+
+  // Find the matching sub-service by its route
   servicesData.forEach((category) => {
-    category.subCategories.forEach((sub) => {
-      const cleanRoute = sub.route.replace("/", "");
-      if (cleanRoute === routeParam) {
-        selectedService = sub;
-      }
-    });
+    if (category.subCategories) {
+      category.subCategories.forEach((sub) => {
+        const cleanRoute = sub.route.replace("/", "");
+        if (cleanRoute === cleanRouteParam) {
+          selectedService = sub;
+        }
+      });
+    }
   });
 
   if (!selectedService) {
@@ -66,7 +74,8 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
     <div>
       <div className="service-detail-container fade-in">
         <div className="back-button-container">
-          <button onClick={() => history.goBack()} className="btn back-btn">
+          {/* Use navigate(-1) to simulate a "go back" action */}
+          <button onClick={() => navigate(-1)} className="btn back-btn">
             ← Back
           </button>
         </div>
@@ -93,7 +102,9 @@ export const ServiceDetailPage = ({ match, servicesData }) => {
             )}
             {selectedService.zoneName && (
               <div className="zone-block">
-                <h3 className="zone-title">Zone: {selectedService.zoneName}</h3>
+                <h3 className="zone-title">
+                  Zone: {selectedService.zoneName}
+                </h3>
                 <p className="zone-description">
                   {selectedService.zoneDescription}
                 </p>

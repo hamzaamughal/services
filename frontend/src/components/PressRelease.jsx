@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import "./PressRelease.css"; // Ensure the CSS file is correctly linked
 import Whatsapp from "./Whatsapp";
@@ -10,7 +10,7 @@ const PressRelease = () => {
   const [error, setError] = useState(null); // Error state
   const [isAdmin, setIsAdmin] = useState(true); // Simulate admin status (hardcoded for now)
 
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch data from the server
@@ -18,7 +18,6 @@ const PressRelease = () => {
       try {
         const response = await api.get("/press-releases"); // Fetch from your server URL
         console.log(response.data);
-
         setReleases(response.data); // Store the fetched data
         setLoading(false);
       } catch (err) {
@@ -61,7 +60,8 @@ const PressRelease = () => {
         <div className="press-release-actions">
           <button
             className="add-new-press-release"
-            onClick={() => history.push("/add-pressrelease")}
+            // Use navigate("/add-pressrelease") instead of navigate.push(...)
+            onClick={() => navigate("/add-pressrelease")}
           >
             Add New Press Release
           </button>
@@ -86,7 +86,7 @@ const PressRelease = () => {
           </div>
 
           {/* Delete button visible only for admins */}
-          {true && (
+          {isAdmin && (
             <button
               className="delete-press-release"
               onClick={() => handleDelete(release._id)}

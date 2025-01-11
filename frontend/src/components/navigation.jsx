@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { Link, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
 import "./navigation.css"; // Ensure CSS is correctly imported
 
 export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
@@ -35,6 +35,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
   };
 
+  // Close dropdowns if clicked outside
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -53,7 +54,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Rotate the word every 3 seconds
@@ -64,7 +66,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     return () => clearInterval(intervalId);
   }, [words.length]);
 
-  // Close dropdowns if clicked outside
+  // Another listener in case you want to specifically close dropdown on clicks
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
@@ -74,8 +76,23 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    return () =>
+      document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  // Framer Motion variants for the animated letters
+  const letterVariants = {
+    initial: { y: 10, opacity: 0 },
+    animate: { y: 0, opacity: 1 },
+    exit: { y: -10, opacity: 0 },
+  };
+
+  // Framer Motion variants for the dropdown menus
+  const dropdownVariants = {
+    initial: { opacity: 0, height: 0 },
+    animate: { opacity: 1, height: "auto" },
+    exit: { opacity: 0, height: 0 },
+  };
 
   return (
     <nav
@@ -111,13 +128,22 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
           >
             <span className="mpriveColor">MPRIVE </span>
             <span className="dynamic-word-container">
-              <TransitionGroup component={null}>
+              {/* AnimatePresence to handle letter animations */}
+              <AnimatePresence mode="popLayout">
                 {letters.map((letter, index) => (
-                  <CSSTransition key={index} timeout={500} classNames="letter">
-                    <span className="dynamic-letter">{letter}</span>
-                  </CSSTransition>
+                  <motion.span
+                    key={`${currentWordIndex}-${index}-${letter}`}
+                    className="dynamic-letter"
+                    variants={letterVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.4 }}
+                  >
+                    {letter}
+                  </motion.span>
                 ))}
-              </TransitionGroup>
+              </AnimatePresence>
             </span>
           </Link>
         </div>
@@ -144,12 +170,11 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
-                isActiveLink("/jurisdictions") ? "active" : ""
-              }`}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""
+                } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
             >
               <a
-                href="#!"
+                href="#"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
@@ -159,81 +184,98 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               >
                 Jurisdictions <span className="caret" />
               </a>
-              {juridictionsDropdownOpen && (
-                <ul className="dropdown-menu">
-                  {jurisdictionsData[0].subCategories.map(
-                    (jurisdiction, idx) => (
-                      <li
-                        key={idx}
-                        className={
-                          jurisdiction.subServices
-                            ? "dropdown-submenu"
-                            : undefined
-                        }
-                        onMouseEnter={() => handleFreezoneHover(idx)}
-                        onMouseLeave={() => handleFreezoneHover(null)}
-                      >
-                        {/* If there are subServices, show arrow */}
-                        <Link
-                          to={
+              <AnimatePresence>
+                {juridictionsDropdownOpen && (
+                  <motion.ul
+                    className="dropdown-menu"
+                    variants={dropdownVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                  >
+                    {jurisdictionsData[0].subCategories.map(
+                      (jurisdiction, idx) => (
+                        <li
+                          key={idx}
+                          className={
                             jurisdiction.subServices
-                              ? "#!"
-                              : `/jurisdictions${jurisdiction.route}`
+                              ? "dropdown-submenu"
+                              : undefined
                           }
-                          onClick={() => {
-                            // On click, toggle or navigate
-                            if (jurisdiction.subServices) {
-                              setFreezoneOpenIndex(
-                                freezoneOpenIndex === idx ? null : idx
-                              );
-                            } else {
-                              setJuridictionsDropdownOpen(false);
-                              setServicesDropdownOpen(false);
-                            }
-                          }}
+                          onMouseEnter={() => handleFreezoneHover(idx)}
+                          onMouseLeave={() => handleFreezoneHover(null)}
                         >
-                          <i className={jurisdiction.icon} />{" "}
-                          {jurisdiction.name}
-                          {jurisdiction.subServices && (
-                            <span className=" arrow-right" />
-                          )}
-                        </Link>
+                          <Link
+                            to={
+                              jurisdiction.subServices
+                                ? "#"
+                                : `/jurisdictions${jurisdiction.route}`
+                            }
+                            onClick={() => {
+                              // On click, toggle or navigate
+                              if (jurisdiction.subServices) {
+                                setFreezoneOpenIndex(
+                                  freezoneOpenIndex === idx ? null : idx
+                                );
+                              } else {
+                                setJuridictionsDropdownOpen(false);
+                                setServicesDropdownOpen(false);
+                              }
+                            }}
+                          >
+                            {/* Icon for the main jurisdiction */}
+                            <i className={jurisdiction.icon} />{" "}
+                            {jurisdiction.name}
+                            {jurisdiction.subServices && (
+                              <span className=" arrow-right" />
+                            )}
+                          </Link>
 
-                        {/* Sub-menu (if subServices exist) */}
-                        {jurisdiction.subServices &&
-                          freezoneOpenIndex === idx && (
-                            <ul className="dropdown-menu sub-menu">
-                              {jurisdiction.subServices.map((sub, sIdx) => (
-                                <li key={sIdx}>
-                                  <Link
-                                    to={`/jurisdictions${sub.route}`}
-                                    onClick={() => {
-                                      setJuridictionsDropdownOpen(false);
-                                      setServicesDropdownOpen(false);
-                                      setFreezoneOpenIndex(null);
-                                    }}
-                                  >
-                                    <i className={sub.icon} /> {sub.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                      </li>
-                    )
-                  )}
-                </ul>
-              )}
+                          {/* Sub-menu (if subServices exist) */}
+                          <AnimatePresence>
+                            {jurisdiction.subServices &&
+                              freezoneOpenIndex === idx && (
+                                <motion.ul
+                                  className="dropdown-menu sub-menu"
+                                  variants={dropdownVariants}
+                                  initial="initial"
+                                  animate="animate"
+                                  exit="exit"
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  {jurisdiction.subServices.map((sub, sIdx) => (
+                                    <li key={sIdx}>
+                                      <Link
+                                        to={`/jurisdictions${sub.route}`}
+                                        onClick={() => {
+                                          setJuridictionsDropdownOpen(false);
+                                          setServicesDropdownOpen(false);
+                                          setFreezoneOpenIndex(null);
+                                        }}
+                                      >
+                                        <i className={sub.icon} /> {sub.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                          </AnimatePresence>
+                        </li>
+                      )
+                    )}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
 
             {/* Services Dropdown (Simple Dropdown) */}
             <li
-              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
-                isActiveLink("/services") ? "active" : ""
-              }`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""
+                } ${isActiveLink("/services") ? "active" : ""}`}
             >
               <a
-                href="#!"
+                href="#"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
@@ -244,72 +286,87 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               >
                 Services <span className="caret" />
               </a>
-
-              {servicesDropdownOpen && (
-                <ul className="dropdown-menu">
-                  {servicesData &&
-                    servicesData.map((category, idx) => (
-                      <li
-                        key={idx}
-                        className={
-                          category.subCategories ? "dropdown-submenu" : ""
-                        }
-                        onMouseEnter={() => handleServicesHover(idx)}
-                        onMouseLeave={() => handleServicesHover(null)}
-                      >
-                        <Link
-                          to={
-                            category.subCategories
-                              ? "#!"
-                              : `/services${category.route}`
+              <AnimatePresence>
+                {servicesDropdownOpen && (
+                  <motion.ul
+                    className="dropdown-menu"
+                    variants={dropdownVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={{ duration: 0.3 }}
+                  >
+                    {servicesData &&
+                      servicesData.map((category, idx) => (
+                        <li
+                          key={idx}
+                          className={
+                            category.subCategories ? "dropdown-submenu" : ""
                           }
-                          onClick={() => {
-                            if (category.subCategories) {
-                              setOpenServicesIndex(
-                                openServicesIndex === idx ? null : idx
-                              );
-                            } else {
-                              setServicesDropdownOpen(false);
-                              setFreezoneOpenIndex(null);
-                            }
-                          }}
+                          onMouseEnter={() => handleServicesHover(idx)}
+                          onMouseLeave={() => handleServicesHover(null)}
                         >
-                          {/* Optional icon */}
-                          {category.icon && (
-                            <i className={category.icon} />
-                          )}{" "}
-                          {category.mainCategory}
-                          {/* Display arrow if subCategories exist */}
-                          {category.subCategories && (
-                            <span className="arrow-right" />
-                          )}
-                        </Link>
+                          <Link
+                            to={
+                              category.subCategories
+                                ? "#"
+                                : `/services${category.route}`
+                            }
+                            onClick={() => {
+                              if (category.subCategories) {
+                                setOpenServicesIndex(
+                                  openServicesIndex === idx ? null : idx
+                                );
+                              } else {
+                                setServicesDropdownOpen(false);
+                                setFreezoneOpenIndex(null);
+                              }
+                            }}
+                          >
+                            {/* Optional icon */}
+                            {category.icon && <i className={category.icon} />}{" "}
+                            {category.mainCategory}
+                            {/* Display arrow if subCategories exist */}
+                            {category.subCategories && (
+                              <span className="arrow-right" />
+                            )}
+                          </Link>
 
-                        {/* Nested Sub-Menu for subCategories */}
-                        {category.subCategories &&
-                          openServicesIndex === idx && (
-                            <ul className="dropdown-menu sub-menu">
-                              {category.subCategories.map((sub, sIdx) => (
-                                <li key={sIdx}>
-                                  <Link
-                                    to={`/services${sub.route}`}
-                                    onClick={() => {
-                                      setServicesDropdownOpen(false);
-                                      setFreezoneOpenIndex(null);
-                                      setOpenServicesIndex(null);
-                                    }}
-                                  >
-                                    {sub.icon && <i className={sub.icon} />}{" "}
-                                    {sub.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-                      </li>
-                    ))}
-                </ul>
-              )}
+                          {/* Nested Sub-Menu for subCategories */}
+                          <AnimatePresence>
+                            {category.subCategories &&
+                              openServicesIndex === idx && (
+                                <motion.ul
+                                  className="dropdown-menu sub-menu"
+                                  variants={dropdownVariants}
+                                  initial="initial"
+                                  animate="animate"
+                                  exit="exit"
+                                  transition={{ duration: 0.3 }}
+                                >
+                                  {category.subCategories.map((sub, sIdx) => (
+                                    <li key={sIdx}>
+                                      <Link
+                                        to={`/services${sub.route}`}
+                                        onClick={() => {
+                                          setServicesDropdownOpen(false);
+                                          setFreezoneOpenIndex(null);
+                                          setOpenServicesIndex(null);
+                                        }}
+                                      >
+                                        {sub.icon && <i className={sub.icon} />}{" "}
+                                        {sub.name}
+                                      </Link>
+                                    </li>
+                                  ))}
+                                </motion.ul>
+                              )}
+                          </AnimatePresence>
+                        </li>
+                      ))}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
             </li>
 
             {/* Blogs */}
@@ -327,14 +384,17 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               </Link>
             </li>
 
-            {/* Contact */}
+            {/* Promotions */}
             <li>
               <Link to="/promotion">Promotions</Link>
             </li>
+
+            {/* Press Release */}
             <li>
-              <Link to="/pressrelease">Press Release </Link>
+              <Link to="/pressrelease">Press Release</Link>
             </li>
 
+            {/* Login */}
             <li>
               <Link to="/user/login">Login</Link>
             </li>

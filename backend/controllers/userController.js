@@ -1,149 +1,21 @@
-// const User = require("../models/userModel");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
-
-// const registerController = async (req, res) => {
-//   try {
-//     const { name, email, password, role } = req.body;
-
-//     console.log("name", name);
-
-//     // Validate input
-//     if (!name || !email || !password) {
-//       return res.status(400).json({ message: "All fields are required" });
-//     }
-
-//     // Check if the user already exists
-//     const existingUser = await User.findOne({
-//       $or: [{ name }, { email }],
-//     });
-
-//     if (existingUser) {
-//       return res.status(400).json({
-//         success: false,
-//         message: "user already exist with same eamail or name",
-//       });
-//     }
-
-//     // Hash the password
-//     const salt = await bcrypt.genSalt(10);
-//     const hashedPassword = await bcrypt.hash(password, salt);
-
-//     // Create a new user
-//     const newUser = await new User({
-//       name,
-//       email,
-//       password: hashedPassword,
-//       role: role || "user",
-//     });
-
-//     console.log("name", newUser);
-//     // Save the user to the database
-//     await newUser.save();
-
-//     // Respond with success
-//     res.status(201).json({
-//       success: true,
-//       message: "user created successfully",
-//       user: {
-//         id: newUser._id,
-//         name: newUser.name,
-//         email: newUser.email,
-//         role: newUser.role,
-//       },
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "internal server error please try again",
-//     });
-//   }
-// };
-
-// const loginUserController = async () => {
-//   try {
-//     const { email, password } = req.body;
-
-//     // Validate input
-//     if (!email || !password) {
-//       return res
-//         .status(400)
-//         .json({ message: "All fields are required", success: false });
-//     }
-
-//     // Check if the user exists
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return res
-//         .status(400)
-//         .json({ message: "user not found", success: false });
-//     }
-//     // Compare password
-//     const isPasswordMatch = await bcrypt.compare(password, user.password);
-//     if (!isPasswordMatch) {
-//       return res
-//         .status(400)
-//         .json({ message: "invalid credentials", success: false });
-//     }
-
-//     // Generate a JWT token
-//     const token = jwt.sign(
-//       { id: user.id, role: user.role, name: user.name, email: user.email },
-//       process.env.JWT_SECRET,
-//       {
-//         expiresIn: "30m",
-//       }
-//     );
-
-//     // Set the token as a cookie
-//     // res.cookie("token", token, {
-//     //   httpOnly: true,
-//     //   secure: true,
-//     //   sameSite: "none",
-//     //   maxAge: 30 * 60 * 1000,
-//     // });
-
-//     //Respond with success
-//     res.status(200).json({
-//       success: true,
-//       message: "user login successfully",
-//       // token,
-//       user: {
-//         id: user._id,
-//         name: user.name,
-//         email: user.email,
-//         role: user.role,
-//         token,
-//       },
-//     });
-//   } catch (error) {
-//     res.status(500).json({
-//       success: false,
-//       message: "internal server error please try again",
-//     });
-//   }
-// };
-
-// module.exports = { registerController, loginUserController };
-
 const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// Register Controller
+// REGISTER CONTROLLER
 const registerController = async (req, res) => {
   try {
-    const { name, email, password, role } = req.body.formData;
-    console.log("req.body", req.body);
+    const { name, email, password, role } = req.body;
+    console.log("req.body (register):", req.body);
 
-    // Validate input
+    // 1) Validate input
     if (!name || !email || !password) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are required" });
     }
 
-    // Check if the user already exists
+    // 2) Check if user already exists by name OR email
     const existingUser = await User.findOne({ $or: [{ name }, { email }] });
     if (existingUser) {
       return res.status(400).json({
@@ -152,13 +24,13 @@ const registerController = async (req, res) => {
       });
     }
 
-    // Hash the password
+    // 3) Generate salt and hash password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    console.log(hashedPassword);
+    console.log("hashedPassword:", hashedPassword);
 
-    // Create a new user
+    // 4) Create a new user
     const newUser = new User({
       name,
       email,
@@ -166,11 +38,11 @@ const registerController = async (req, res) => {
       role: role || "user",
     });
 
-    // Save the user to the database
+    // 5) Save the new user to the DB
     await newUser.save();
 
-    // Respond with success
-    res.status(201).json({
+    // 6) Respond with success
+    return res.status(201).json({
       success: true,
       message: "User created successfully",
       user: {
@@ -181,7 +53,8 @@ const registerController = async (req, res) => {
       },
     });
   } catch (error) {
-    res.status(500).json({
+    console.error("Register error:", error);
+    return res.status(500).json({
       success: false,
       message: "Internal server error, please try again",
       error: error.message,
@@ -189,21 +62,20 @@ const registerController = async (req, res) => {
   }
 };
 
-// Login Controller
+// LOGIN CONTROLLER
 const loginUserController = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log("req.body (login):", req.body);
 
-    console.log("req.body", req.body);
-
-    // Validate input
+    // 1) Validate input
     if (!email || !password) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are required" });
     }
 
-    // Check if the user exists
+    // 2) Find the user by email
     const user = await User.findOne({ email });
     if (!user) {
       return res
@@ -211,23 +83,31 @@ const loginUserController = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
-    // Compare password
+    // 3) Compare the plain text password with hashed password in DB
+    console.log("user.password:", user.password);
+    console.log("password:", password);
     const isPasswordMatch = await bcrypt.compare(password, user.password);
+    console.log("isPasswordMatch:", isPasswordMatch);
     if (!isPasswordMatch) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid credentials" });
     }
 
-    // Generate a JWT token
+    // 4) Generate a JWT
     const token = jwt.sign(
-      { id: user._id, role: user.role, name: user.name, email: user.email },
+      {
+        id: user._id,
+        role: user.role,
+        name: user.name,
+        email: user.email,
+      },
       process.env.JWT_SECRET,
       { expiresIn: "30m" }
     );
 
-    // Respond with success
-    res.status(200).json({
+    // 5) Respond with success
+    return res.status(200).json({
       success: true,
       message: "User logged in successfully",
       user: {
@@ -235,11 +115,12 @@ const loginUserController = async (req, res) => {
         name: user.name,
         email: user.email,
         role: user.role,
-        token,
+        token, // attach token here
       },
     });
   } catch (error) {
-    res.status(500).json({
+    console.error("Login error:", error);
+    return res.status(500).json({
       success: false,
       message: "Internal server error, please try again",
       error: error.message,

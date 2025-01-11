@@ -1,18 +1,24 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./SubServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
 
-export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
+export const SubServiceDetailPage = ({ jurisdictionsData }) => {
   // 1) Hooks
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { subServiceRoute } = useParams(); // <-- useParams hook instead of match.params
 
   // We'll track "see more" toggles separately for Key Benefits and Why Choose points
   const [showAllKeyBenefits, setShowAllKeyBenefits] = useState(false);
   const [showAllWhyChoose, setShowAllWhyChoose] = useState(false);
 
   // 2) Extract subService route from the URL
-  const routeParam = match.params.subServiceRoute.replace("/", "");
+  // subServiceRoute comes directly from useParams()
+  // e.g. if the URL is "/sub-service-detail/your-sub-service-route"
+  // then subServiceRoute === "your-sub-service-route"
+
+  // Remove any leading/trailing slashes if needed (optional)
+  const routeParam = subServiceRoute.replace("/", "");
 
   // 3) Check if data is available
   if (!jurisdictionsData || jurisdictionsData.length === 0) {
@@ -34,6 +40,8 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
 
   // 5) Find the subService that matches routeParam
   const selectedSubService = freezoneCategory.subServices.find((sub) => {
+    // For example, if sub.route is "/freezone-authorities/ajman-free-zone"
+    // we'll remove "/freezone-authorities/" part and compare it to routeParam
     const cleanRoute = sub.route.replace("/freezone-authorities/", "");
     return cleanRoute === routeParam;
   });
@@ -70,7 +78,8 @@ export const SubServiceDetailPage = ({ match, jurisdictionsData }) => {
       <div className="subservice-detail-container fade-in">
         {/* Back button */}
         <div className="fixed-back-button">
-          <button onClick={() => history.goBack()} className="btn back-btn">
+          {/* Use navigate(-1) to go one step back in history */}
+          <button onClick={() => navigate(-1)} className="btn back-btn">
             ← Back
           </button>
         </div>

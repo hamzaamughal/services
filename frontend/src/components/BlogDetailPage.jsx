@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom"; // Updated for react-router-dom v6+
 import "./BlogDetailPage.css"; // For the fade-in animation and any extra styles.
 import Whatsapp from "./Whatsapp";
 import api from "../api";
 
 export const BlogDetailPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate(); // Replaced useHistory with useNavigate
   const { id } = useParams(); // Get blog ID from URL parameters
   const [blog, setBlog] = useState(null); // Store the blog data
   const [loading, setLoading] = useState(true); // Track loading state
@@ -42,14 +42,12 @@ export const BlogDetailPage = () => {
     return (
       <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
         <h1>{error || "Blog Post not found"}</h1>
-        <button onClick={() => history.goBack()} className="btn back-btn">
+        <button onClick={() => navigate(-1)} className="btn back-btn">
           ← Back
         </button>
       </div>
     );
   }
-
-  console.log(blog, 'blogsss>>>>>>>>>>>>>>>.');
 
   return (
     <>
@@ -57,7 +55,7 @@ export const BlogDetailPage = () => {
         <div className="row">
           <div className="col-12">
             {/* Back Button */}
-            <button onClick={() => history.goBack()} className="btn back-btn">
+            <button onClick={() => navigate(-1)} className="btn back-btn">
               ← Back
             </button>
           </div>

@@ -5,7 +5,7 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  padding-top: 6rem; /* Extra space at the top to prevent content from hiding behind the navbar */
+  padding-top: 6rem; /* Extra space at the top so navbar won't cover */
 }
 
 /* Page title */
@@ -13,99 +13,22 @@
   font-size: 2rem;
   margin-bottom: 1.5rem;
   text-align: center;
-  padding-top: 2rem; /* Extra space from the top for the title */
+  padding-top: 2rem;
 }
 
-/* Centered and responsive button styles */
+/* "Add Blog" button */
 .add-blog-button {
+  display: block;
+  margin: 2rem auto 1rem auto; /* center horizontally, add space on top */
   padding: 0.5rem 1rem;
-  background-color: #ff6600;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 1rem;
-  margin-top: 2rem; /* Space above the button */
-  display: block; /* Allows centering */
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Blog list styling */
-.blog-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin-top: 2rem; /* Add space above the first blog card */
-}
-
-.blog-card {
-  display: flex;
-  flex-direction: row; /* Image on left, text on right */
-  align-items: flex-start;
-  margin-bottom: 2rem;
-  cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: box-shadow 0.2s ease-in-out;
-}
-
-.blog-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Blog image container and image */
-.blog-image-container {
-  flex: 0 0 200px; /* Fixed width for the image container */
-  height: 150px;
-  overflow: hidden;
-}
-
-.blog-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Blog content */
-.blog-content {
-  flex: 1;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.blog-title {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.blog-description {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 1rem;
-}
-
-.blog-date {
-  font-size: 0.9rem;
-  color: #999;
-  margin-bottom: 1rem;
-}
-
-/* "Read More" button */
-.read-more-button {
-  align-self: flex-start;
-  padding: 0.5rem 1rem;
-  background-color: #ff6600;
+  background-color: #ec9f05;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-
-.read-more-button:hover {
-  background-color: #cc5200;
+.add-blog-button:hover {
+  background-color: #d98b05;
 }
 
 /* Loading and error styling */
@@ -117,41 +40,127 @@
   color: #666;
 }
 
-/* Delete icon styling */
+/* The container that holds the "cards" in 2 columns */
+.blog-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  /* Explanation:
+     - auto-fill tries to fit as many columns as it can
+     - minmax(350px, 1fr) sets a minimum card width of 350px, max = 1 fraction
+  */
+  gap: 2rem; /* space between cards */
+  margin-top: 2rem;
+}
+
+/* Each individual blog card */
+.blog-card {
+  position: relative; /* For top-right delete icon */
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.blog-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Delete icon in the top-right */
 .delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   background: none;
   border: none;
-  color: red;
-  font-size: 1.5rem;
+  color: #ec9f05;
+  font-size: 3.0rem;
   cursor: pointer;
-  margin-left: 10px;
-  align-self: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  z-index: 2;
 }
-
 .delete-icon:hover {
-  color: darkred;
+  color: #d98b05;
 }
 
-/* Responsive styling for mobile */
-@media (max-width: 768px) {
-  .blog-card {
-    flex-direction: column; /* Stack image and content vertically */
-  }
+/* Image container */
+.blog-image-container {
+  width: 100%;
+  height: 200px; /* Adjust as desired */
+  overflow: hidden;
+  cursor: pointer;
+}
+.blog-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
+/* Content section: title, date, desc, button */
+.blog-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column; 
+  cursor: pointer;
+  padding: 1rem;
+  /* This ensures the button can stick to the bottom if we want */
+}
+
+/* Title */
+.blog-title {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Date */
+.blog-date {
+  font-size: 0.9rem;
+  color: #999;
+  margin-bottom: 0.5rem;
+}
+
+/* Description */
+.blog-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: auto; /* pushes the button to the bottom if there's space */
+  margin-top: 0.5rem;
+}
+
+/* "Learn More" button */
+.read-more-button {
+  align-self: flex-end; /* push button to the right */
+  background-color: #ec9f05;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+  transition: background-color 0.2s ease;
+}
+.read-more-button:hover {
+  background-color: #d98b05;
+}
+
+/* For smaller screens, we can keep the same approach 
+   but the grid auto-fills until it can't. 
+   If you'd like a simpler approach, you can add a media query. */
+@media (max-width: 768px) {
+  .blog-cards-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
   .blog-image-container {
-    width: 100%; /* Full width for mobile */
-    height: 200px; /* Adjust height for better display */
+    height: 180px;
   }
 
   .add-blog-button {
-    width: 100%; /* Make button full width */
-    max-width: 300px; /* Optional: Set a max width */
-  }
-
-  .service-page-title {
-    font-size: 1.5rem; /* Adjust font size for smaller screens */
+    width: 100%;
+    max-width: 300px;
   }
 }

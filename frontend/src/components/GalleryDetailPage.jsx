@@ -1,10 +1,10 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import './GalleryDetailPage.css';
 
-export const GalleryDetailPage = ({ match, galleryData }) => {
- const history = useHistory();
- const { galleryId } = match.params;
+export const GalleryDetailPage = ({ galleryData }) => {
+ const navigate = useNavigate();
+ const { galleryId } = useParams();           // <-- useParams replaces match.params.galleryId
  const galleryIndex = parseInt(galleryId, 10);
 
  if (!galleryData) {
@@ -16,7 +16,7 @@ export const GalleryDetailPage = ({ match, galleryData }) => {
  }
 
  // Validate gallery data
- if (!galleryData || galleryIndex < 0 || galleryIndex >= galleryData.length) {
+ if (galleryIndex < 0 || galleryIndex >= galleryData.length) {
   return (
    <div className="container" style={{ marginTop: '100px' }}>
     <h1>Gallery item not found</h1>
@@ -31,10 +31,8 @@ export const GalleryDetailPage = ({ match, galleryData }) => {
    {/* Back Button Row */}
    <div className="row">
     <div className="col-12">
-     <button
-      onClick={() => history.goBack()}
-      className="btn back-btn"
-     >
+     {/* Use navigate(-1) to go back in history */}
+     <button onClick={() => navigate(-1)} className="btn back-btn">
       ← Back
      </button>
     </div>

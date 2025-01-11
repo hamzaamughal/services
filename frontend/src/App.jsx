@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Navigation } from "./components/navigation";
 import { Home } from "./pages/Home";
 import { ServiceDetailPage } from "./components/ServiceDetailsPage";
@@ -19,6 +19,10 @@ import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";
 
+// Import ToastContainer and CSS
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 // If you have a Footer component, import it here:
 // import { Footer } from "./components/footer";
 
@@ -26,39 +30,6 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
   speedAsDuration: true,
 });
-
-// const pressReleaseData = [
-//   {
-//     title: "Company Launches New Product Line",
-//     date: "January 7, 2025",
-//     content:
-//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-//   },
-//   {
-//     title: "Company Launches New Product Line",
-//     date: "January 7, 2025",
-//     content:
-//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-//   },
-//   {
-//     title: "Company Launches New Product Line",
-//     date: "January 7, 2025",
-//     content:
-//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-//   },
-//   {
-//     title: "Company Launches New Product Line",
-//     date: "January 7, 2025",
-//     content:
-//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-//   },
-//   {
-//     title: "Company Launches New Product Line",
-//     date: "January 7, 2025",
-//     content:
-//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-//   },
-// ];
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
@@ -75,36 +46,28 @@ const App = () => {
         loginData={landingPageData.Login}
       />
 
-      <Switch>
+      <Routes>
         {/* Home Route */}
-        <Route
-          exact
-          path="/"
-          render={() => <Home landingPageData={landingPageData} />}
-        />
+        <Route path="/" element={<Home landingPageData={landingPageData} />} />
 
-        <Route exact path="/blog" render={() => <BlogPage />} />
+        <Route path="/blog" element={<BlogPage />} />
         <Route
           path="/blog/:id"
-          render={(props) =>
+          element={
             landingPageData.Blog ? (
-              <BlogDetailPage {...props} />
+              <BlogDetailPage />
             ) : (
               <div className="loading">Loading...</div>
             )
           }
-          exact
         />
-        <Route path="/add-blog" render={() => <AddBlogForm />} />
+        <Route path="/add-blog" element={<AddBlogForm />} />
 
         <Route
           path="/gallery/:galleryId"
-          render={(props) =>
+          element={
             landingPageData.Gallery ? (
-              <GalleryDetailPage
-                {...props}
-                galleryData={landingPageData.Gallery}
-              />
+              <GalleryDetailPage galleryData={landingPageData.Gallery} />
             ) : (
               <div className="loading">Loading...</div>
             )
@@ -113,12 +76,10 @@ const App = () => {
 
         {/* Jurisdiction Detail Route */}
         <Route
-          exact
           path="/jurisdictions/:jurisdictionRoute"
-          render={(props) =>
+          element={
             landingPageData.Jurisdictions ? (
               <JurisdictionDetailPage
-                {...props}
                 jurisdictionsData={landingPageData.Jurisdictions}
               />
             ) : (
@@ -128,41 +89,38 @@ const App = () => {
         />
 
         <Route
-          exact
           path="/jurisdictions/freezone-authorities/:subServiceRoute"
-          render={(props) => (
+          element={
             <SubServiceDetailPage
-              {...props}
               jurisdictionsData={landingPageData.Jurisdictions}
             />
-          )}
+          }
         />
 
         {/* Service Detail Route */}
         <Route
-          exact
           path="/services/:serviceRoute"
-          render={(props) =>
+          element={
             landingPageData.Services ? (
-              <ServiceDetailPage
-                {...props}
-                servicesData={landingPageData.Services}
-              />
+              <ServiceDetailPage servicesData={landingPageData.Services} />
             ) : (
               <div>Loading.......</div>
             )
           }
         />
-        <Route exact path="/user/login" render={() => <Login />} />
-        <Route exact path="/register" render={() => <Register />} />
-        <Route path="/promotion" render={() => <PromotionList />} />
-        <Route path="/add-promotion" render={() => <AddPromotionForm />} />
-        <Route path="/pressrelease" render={() => <PressRelease />} />
-        <Route
-          path="/add-pressrelease"
-          render={() => <AddPressReleaseForm />}
-        />
-      </Switch>
+        <Route path="/user/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/promotion" element={<PromotionList />} />
+        <Route path="/add-promotion" element={<AddPromotionForm />} />
+        <Route path="/pressrelease" element={<PressRelease />} />
+        <Route path="/add-pressrelease" element={<AddPressReleaseForm />} />
+      </Routes>
+
+      {/* Place the ToastContainer once in your app (often near the end) */}
+      <ToastContainer />
+
+      {/* If you have a Footer component, place it here */}
+      {/* <Footer /> */}
     </Router>
   );
 };

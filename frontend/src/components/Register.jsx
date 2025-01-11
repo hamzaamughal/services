@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import api from "../api"; // Your axios instance
 import "./Register.css";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
-import axios from "axios";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,16 +12,21 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
+
+  // Toggles for showing/hiding password
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // Basic validation
     if (
       !formData.name ||
@@ -27,39 +34,39 @@ const Register = () => {
       !formData.password ||
       !formData.confirmPassword
     ) {
-      setError("All fields are required");
-      setSuccess("");
+      toast.error("All fields are required");
       return;
     }
+
     if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      setSuccess("");
+      toast.error("Passwords do not match");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/users/register",
-        { formData }
-      );
-      console.log(response.data);
-    } catch (error) {
-      setError(error.message);
-      console.log(error.message, "error");
-    }
+      const response = await api.post("/users/register", formData);
+      console.log("Register response:", response.data);
 
-    // Submit form logic (API call can go here)
-    console.log("Registration Successful:", formData);
-    setError("");
-    setSuccess("Registration successful! You can now log in.");
+      toast.success("Registration successful! Redirecting to login...");
+      setTimeout(() => {
+        navigate("/user/login");
+      }, 2000);
+    } catch (err) {
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error(err.response.data.message);
+      } else {
+        toast.error("An error occurred. Please try again.");
+      }
+      console.error(err.message || "Error during registration");
+    }
   };
 
   return (
     <div className="register-container">
       <form className="register-form" onSubmit={handleSubmit}>
         <h2>Register</h2>
-        {error && <p className="error-message">{error}</p>}
-        {success && <p className="success-message">{success}</p>}
+
+        {/* Name */}
         <div className="form-group">
           <label htmlFor="name">Full Name</label>
           <input
@@ -72,6 +79,8 @@ const Register = () => {
             required
           />
         </div>
+
+        {/* Email */}
         <div className="form-group">
           <label htmlFor="email">Email</label>
           <input
@@ -84,30 +93,47 @@ const Register = () => {
             required
           />
         </div>
+
+        {/* Password */}
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
+          <div className="password-input-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+            <i
+              className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
         </div>
+
+        {/* Confirm Password */}
         <div className="form-group">
           <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
+          <div className="password-input-container">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              id="confirmPassword"
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+            />
+            <i
+              className={showConfirmPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+          </div>
         </div>
+
         <button type="submit" className="register-button">
           Register
         </button>
