@@ -3,6 +3,8 @@
 }
 
 .add-blog-form {
+  position: relative;
+  top: 70;
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;

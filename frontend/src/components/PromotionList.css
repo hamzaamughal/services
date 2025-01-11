@@ -1,5 +1,6 @@
 /* Promotion List Container */
 .promotion-list-container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
@@ -8,11 +9,31 @@
 
 /* Title */
 .promotion-title {
-  font-size: 28px;
+  font-size: 32px; /* Larger font size for emphasis */
   font-weight: bold;
   text-align: center;
   color: #333;
-  margin-bottom: 30px;
+  margin-bottom: 10px; /* Space between title and the button */
+}
+
+/* Add Promotion Button */
+.add-promotion-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-promotion-button {
+  padding: 12px 20px;
+  background-color: #4169e1;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-promotion-button:hover {
+  background-color: #355abf;
 }
 
 /* Promotion List */
@@ -24,6 +45,7 @@
 
 /* Promotion Card */
 .promotion-card {
+  position: relative;
   display: flex;
   align-items: center;
   background-color: #fff;
@@ -32,7 +54,7 @@
   overflow: hidden;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 320px; /* Increased height for a taller card */
+  height: 320px;
 }
 
 .promotion-card:hover {
@@ -40,17 +62,34 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Delete Button */
+.delete-promotion-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-promotion-button:hover {
+  color: darkred;
+}
+
 /* Image Section */
 .promotion-image-container {
   flex: 1;
-  height: 100%; /* Ensure image fills the card height */
+  height: 100%;
   overflow: hidden;
 }
 
 .promotion-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Maintain aspect ratio */
+  object-fit: cover;
 }
 
 /* Content Section */
@@ -73,7 +112,7 @@
   font-size: 16px;
   color: #555;
   margin-bottom: 15px;
-  line-height: 1.5; /* Better readability */
+  line-height: 1.5;
 }
 
 .promotion-expiry {
@@ -83,7 +122,7 @@
 }
 
 .claim-promotion-button {
-  align-self: flex-start; /* Align button to the left */
+  align-self: flex-start;
   padding: 10px 20px;
   background-color: #4169e1;
   color: #fff;
@@ -100,20 +139,20 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .promotion-card {
-    flex-direction: column; /* Stack image and content vertically */
-    height: auto; /* Adjust height for smaller screens */
+    flex-direction: column;
+    height: auto;
   }
 
   .promotion-image-container {
-    height: 200px; /* Limit image height on mobile */
+    height: 200px;
   }
 
   .promotion-content {
     padding: 15px;
-    text-align: center; /* Center align text */
+    text-align: center;
   }
 
   .claim-promotion-button {
-    align-self: center; /* Center button */
+    align-self: center;
   }
 }

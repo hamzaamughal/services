@@ -30,7 +30,9 @@
 }
 
 .press-release-footer {
-  margin-top: 30px;
+  position: relative;
+  top: 50%;
+  margin-top: 50px;
   text-align: center;
 }
 
@@ -47,4 +49,127 @@
 
 .press-release-button:hover {
   background-color: #355abf;
+}
+
+.press-release-actions {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.add-new-press-release {
+  position: absolute;
+  top: 80;
+  right: 100;
+  background-color: #28a745;
+
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-new-press-release:hover {
+  background-color: #218838;
+}
+
+.delete-press-release {
+  background-color: transparent;
+  color: red;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.delete-press-release:hover {
+  color: darkred;
+}
+
+.press-release-container {
+  position: relative; /* Required for positioning the delete button */
+  top: 100;
+  margin: 40px auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.press-release-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.press-release-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #4169e1;
+}
+
+.press-release-date {
+  font-size: 16px;
+  color: #999;
+}
+
+.press-release-content {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.press-release-footer {
+  position: relative;
+  top: 50%;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.press-release-button {
+  background-color: #4169e1;
+  color: #fff;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.press-release-button:hover {
+  background-color: #355abf;
+}
+
+.delete-press-release {
+  position: absolute; /* Positioning it at the top-right corner */
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  color: red;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.delete-press-release:hover {
+  color: darkred;
+}
+
+.add-new-press-release {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-new-press-release:hover {
+  background-color: #218838;
 }

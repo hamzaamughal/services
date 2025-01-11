@@ -1,20 +1,42 @@
+/* General page container */
 .service-page-container {
+  position: relative;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  padding-top: 6rem; /* Extra space at the top to prevent content from hiding behind the navbar */
 }
 
+/* Page title */
 .service-page-title {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  padding-top: 2rem; /* Extra space from the top for the title */
 }
 
+/* Centered and responsive button styles */
+.add-blog-button {
+  padding: 0.5rem 1rem;
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  margin-top: 2rem; /* Space above the button */
+  display: block; /* Allows centering */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Blog list styling */
 .blog-list {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-top: 2rem; /* Add space above the first blog card */
 }
 
 .blog-card {
@@ -22,7 +44,7 @@
   flex-direction: row; /* Image on left, text on right */
   align-items: flex-start;
   margin-bottom: 2rem;
-  cursor: pointer; /* Indicate clickable area */
+  cursor: pointer;
   border: 1px solid #ddd;
   border-radius: 6px;
   overflow: hidden;
@@ -33,9 +55,10 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* Blog image container and image */
 .blog-image-container {
   flex: 0 0 200px; /* Fixed width for the image container */
-  height: 150px;   /* Or auto, depending on your needs */
+  height: 150px;
   overflow: hidden;
 }
 
@@ -45,6 +68,7 @@
   object-fit: cover;
 }
 
+/* Blog content */
 .blog-content {
   flex: 1;
   padding: 1rem;
@@ -69,6 +93,7 @@
   margin-bottom: 1rem;
 }
 
+/* "Read More" button */
 .read-more-button {
   align-self: flex-start;
   padding: 0.5rem 1rem;
@@ -83,16 +108,6 @@
   background-color: #cc5200;
 }
 
-.add-blog-button{
-  padding: 0.5rem 1rem;
-  background-color: #ff6600;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-bottom: 1rem;
-}
-
 /* Loading and error styling */
 .loading-message,
 .error-message,
@@ -102,6 +117,7 @@
   color: #666;
 }
 
+/* Delete icon styling */
 .delete-icon {
   background: none;
   border: none;
@@ -117,4 +133,25 @@
 
 .delete-icon:hover {
   color: darkred;
+}
+
+/* Responsive styling for mobile */
+@media (max-width: 768px) {
+  .blog-card {
+    flex-direction: column; /* Stack image and content vertically */
+  }
+
+  .blog-image-container {
+    width: 100%; /* Full width for mobile */
+    height: 200px; /* Adjust height for better display */
+  }
+
+  .add-blog-button {
+    width: 100%; /* Make button full width */
+    max-width: 300px; /* Optional: Set a max width */
+  }
+
+  .service-page-title {
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+  }
 }

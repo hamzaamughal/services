@@ -144,8 +144,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${isActiveLink("/jurisdictions") ? "active" : ""
-                }`}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
+                isActiveLink("/jurisdictions") ? "active" : ""
+              }`}
             >
               <a
                 href="#!"
@@ -227,8 +228,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Services Dropdown (Simple Dropdown) */}
             <li
-              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${isActiveLink("/services") ? "active" : ""
-                }`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
+                isActiveLink("/services") ? "active" : ""
+              }`}
             >
               <a
                 href="#!"
@@ -330,7 +332,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               <Link to="/promotion">Promotions</Link>
             </li>
             <li>
-              <Link to="/pressrelease">PressRelease </Link>
+              <Link to="/pressrelease">Press Release </Link>
             </li>
 
             <li>

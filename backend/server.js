@@ -14,6 +14,7 @@ const promotionRoutes = require("./routes/promotionRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
 const translationRoutes = require("./routes/translationRoutes");
 const blogRoutes = require("./routes/blogRoutes");
+const pressReleaseRoutes = require("./routes/pressReleaseRoutes");
 
 console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
 
@@ -28,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
- res.json({ message: "Hello from MPRIVE backend🎖️" });
+  res.json({ message: "Hello from MPRIVE backend🎖️" });
 });
 
 app.use("/api", translationRoutes);
@@ -37,6 +38,7 @@ app.use("/api/users", userRoutes); // User routes
 app.use("/api/stripe", stripeRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/promotions", promotionRoutes);
+app.use("/api/press-releases", pressReleaseRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api/blogs", blogRoutes);
 

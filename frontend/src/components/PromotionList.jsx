@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
-import moment from "moment"; // Import moment for date formatting
+import moment from "moment";
 import "./PromotionList.css";
 import Whatsapp from "./Whatsapp";
 import api from "../api";
@@ -10,10 +10,7 @@ const PromotionList = () => {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  //const [isAdmin, setIsAdmin] = useState(false); // Hardcoded admin for now
   const history = useHistory();
-
-
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -32,18 +29,33 @@ const PromotionList = () => {
     fetchPromotions();
   }, []);
 
+  const handleDelete = async (id) => {
+    if (window.confirm("Are you sure you want to delete this promotion?")) {
+      try {
+        await api.delete(`/promotions/${id}`);
+        setPromotions((prevPromotions) =>
+          prevPromotions.filter((promotion) => promotion.id !== id)
+        );
+        alert("Promotion deleted successfully!");
+      } catch (err) {
+        console.error("Error deleting promotion:", err);
+        alert("Failed to delete the promotion. Please try again.");
+      }
+    }
+  };
+
   return (
     <>
       <div className="promotion-list-container">
-        <h2 className="promotion-title">Promotions</h2>
-        {true && (
+        <h2 className="promotion-title">Our Promotions</h2>
+        <div className="add-promotion-container">
           <button
             className="add-promotion-button"
             onClick={() => history.push("/add-promotion")}
           >
             Add New Promotion
           </button>
-        )}
+        </div>
         {loading ? (
           <p className="loading-message">Loading promotions...</p>
         ) : error ? (
@@ -56,6 +68,12 @@ const PromotionList = () => {
           <ul className="promotion-list">
             {promotions.map((promotion, index) => (
               <li key={index} className="promotion-card">
+                <button
+                  className="delete-promotion-button"
+                  onClick={() => handleDelete(promotion.id)}
+                >
+                  &times;
+                </button>
                 <div className="promotion-image-container">
                   <img
                     src={promotion.image}
@@ -65,11 +83,15 @@ const PromotionList = () => {
                 </div>
                 <div className="promotion-content">
                   <h3 className="promotion-name">{promotion.title}</h3>
-                  <p className="promotion-description">{promotion.description}</p>
+                  <p className="promotion-description">
+                    {promotion.description}
+                  </p>
                   <p className="promotion-expiry">
                     Offer valid until:{" "}
                     <span>
-                      {moment(promotion.endDate).format("MMMM Do, YYYY [at] h:mm A")}
+                      {moment(promotion.endDate).format(
+                        "MMMM Do, YYYY [at] h:mm A"
+                      )}
                     </span>
                   </p>
                   <button
@@ -91,10 +113,10 @@ const PromotionList = () => {
   );
 };
 
-// Prop types for validation
 PromotionList.propTypes = {
   promotions: PropTypes.arrayOf(
     PropTypes.shape({
+      id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       endDate: PropTypes.string.isRequired,

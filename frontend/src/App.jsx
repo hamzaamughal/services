@@ -14,6 +14,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
+import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
 import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";
@@ -26,39 +27,38 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
   speedAsDuration: true,
 });
 
-
-const pressReleaseData = [
-  {
-    title: "Company Launches New Product Line",
-    date: "January 7, 2025",
-    content:
-      "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-  },
-  {
-    title: "Company Launches New Product Line",
-    date: "January 7, 2025",
-    content:
-      "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-  },
-  {
-    title: "Company Launches New Product Line",
-    date: "January 7, 2025",
-    content:
-      "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-  },
-  {
-    title: "Company Launches New Product Line",
-    date: "January 7, 2025",
-    content:
-      "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-  },
-  {
-    title: "Company Launches New Product Line",
-    date: "January 7, 2025",
-    content:
-      "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
-  },
-];
+// const pressReleaseData = [
+//   {
+//     title: "Company Launches New Product Line",
+//     date: "January 7, 2025",
+//     content:
+//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
+//   },
+//   {
+//     title: "Company Launches New Product Line",
+//     date: "January 7, 2025",
+//     content:
+//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
+//   },
+//   {
+//     title: "Company Launches New Product Line",
+//     date: "January 7, 2025",
+//     content:
+//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
+//   },
+//   {
+//     title: "Company Launches New Product Line",
+//     date: "January 7, 2025",
+//     content:
+//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
+//   },
+//   {
+//     title: "Company Launches New Product Line",
+//     date: "January 7, 2025",
+//     content:
+//       "We are excited to announce the launch of our new product line that is set to revolutionize the industry. The new products include cutting-edge technology, and we believe they will provide immense value to our customers.",
+//   },
+// ];
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
@@ -83,13 +83,7 @@ const App = () => {
           render={() => <Home landingPageData={landingPageData} />}
         />
 
-        <Route
-          exact
-          path="/blog"
-          render={() =>
-            <BlogPage />
-          }
-        />
+        <Route exact path="/blog" render={() => <BlogPage />} />
         <Route
           path="/blog/:id"
           render={(props) =>
@@ -101,10 +95,7 @@ const App = () => {
           }
           exact
         />
-        <Route
-          path="/add-blog"
-          render={() => <AddBlogForm />}
-        />
+        <Route path="/add-blog" render={() => <AddBlogForm />} />
 
         <Route
           path="/gallery/:galleryId"
@@ -164,17 +155,12 @@ const App = () => {
         />
         <Route exact path="/user/login" render={() => <Login />} />
         <Route exact path="/register" render={() => <Register />} />
+        <Route path="/promotion" render={() => <PromotionList />} />
+        <Route path="/add-promotion" render={() => <AddPromotionForm />} />
+        <Route path="/pressrelease" render={() => <PressRelease />} />
         <Route
-          path="/promotion"
-          render={() => <PromotionList />}
-        />
-        <Route
-          path="/add-promotion"
-          render={() => <AddPromotionForm />}
-        />
-        <Route
-          path="/pressrelease"
-          render={() => <PressRelease release={pressReleaseData} />}
+          path="/add-pressrelease"
+          render={() => <AddPressReleaseForm />}
         />
       </Switch>
     </Router>
