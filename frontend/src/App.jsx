@@ -15,7 +15,7 @@ import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
 // import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
-import AddPressReleaseForm from "./components/AddPressReleaseForm";
+import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
 import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";

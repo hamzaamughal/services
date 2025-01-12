@@ -27,7 +27,7 @@ const AddBlogForm = () => {
     };
 
     try {
-      const response = await api.post("/blogs", newBlog);
+      await api.post("/blogs", newBlog);
       // If success (2xx), show toast, navigate, etc.
       toast.success("Blog added successfully!");
       setTitle("");

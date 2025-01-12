@@ -1,90 +1,89 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import api from "../../api";
 import "./AddPressReleaseForm.css";
+import api from "../../api";
 
-const AddPressReleaseForm = ({ onAddPressRelease }) => {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [publicationDate, setPublicationDate] = useState("");
-  const [image, setImage] = useState(""); // Optional image upload
-  const [error, setError] = useState("");
+const AddPressReleaseForm = ({ onSubmit }) => {
+  const [newPressRelease, setNewPressRelease] = useState({
+    title: "new press release",
+    content: "adding from form",
+    date: "",
+    image:
+      "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  });
 
-  const handleSubmit = async (e) => {
+  // Handle form field changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewPressRelease({ ...newPressRelease, [name]: value });
+  };
+
+  // Handle form submission
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-
-    const newPressRelease = {
-      title,
-      content,
-      // image: image || "https://via.placeholder.com/150", // Default placeholder image if none provided
-      publicationDate,
-    };
 
     try {
       const response = await api.post("/press-releases", newPressRelease);
-      onAddPressRelease(response.data); // Pass the new press release to the parent
+      onSubmit(response);
+      setNewPressRelease({ title: "", content: "", date: "", image: "" }); // Reset form
     } catch (err) {
       console.error("Error adding press release:", err);
-      setError("Failed to add press release. Please try again.");
     }
   };
 
   return (
-    <div className="add-press-release-container">
-      <form className="add-press-release-form" onSubmit={handleSubmit}>
-        <h3>Add New Press Release</h3>
-        {error && <p className="error-message">{error}</p>}
-        <div className="form-group">
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Content:</label>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Publication Date:</label>
-          <input
-            type="date"
-            value={publicationDate}
-            onChange={(e) => setPublicationDate(e.target.value)}
-            required
-          />
-        </div>
-        {/* <div className="form-group">
-          <label>Image (Optional):</label>
-          <input
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            placeholder="Image URL (Optional)"
-          />
-        </div> */}
-        <button
-          type="submit"
-          className="submit-button"
-          onClick={() => {
-            console.log("Added Press Release Successfully");
-          }}
-        >
-          Add Press Release
+    <form className="add-press-release-form" onSubmit={handleFormSubmit}>
+      <div className="form-group">
+        <h2>Add New Press Release</h2>
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          value={newPressRelease.title}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="content">content</label>
+        <textarea
+          id="content"
+          name="content"
+          value={newPressRelease.content}
+          onChange={handleInputChange}
+          rows="4"
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="date">Date</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          value={newPressRelease.date}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-group">
+        <label htmlFor="image">Image URL</label>
+        <input
+          type="url"
+          id="image"
+          name="image"
+          value={newPressRelease.image}
+          onChange={handleInputChange}
+          required
+        />
+      </div>
+      <div className="form-actions">
+        <button type="submit" className="submit-button">
+          Add New Press Release
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   );
-};
-
-AddPressReleaseForm.propTypes = {
-  onAddPressRelease: PropTypes.func.isRequired,
 };
 
 export default AddPressReleaseForm;

@@ -178,7 +178,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
             >
               <a
-                href="#"
+                href="javascript:void(0)"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
@@ -401,7 +401,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             {/* User / Login / Logout */}
             <li className="dropdown">
               <a
-                href="#"
+                href="javascript:void(0)"
                 className="dropdown-toggle"
                 data-toggle="dropdown"
                 role="button"
@@ -409,10 +409,12 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 aria-expanded="false"
                 onClick={(e) => e.preventDefault()}
               >
-                <i className="fa fa-user" />{" "}
+                <i className="fa fa-user" style={{ marginRight: "5px" }} />
                 {isLoggedIn ? user?.name || "User" : ""}
                 <span className="caret" />
               </a>
+
+
               <ul className="dropdown-menu">
                 {!isLoggedIn && (
                   <>
