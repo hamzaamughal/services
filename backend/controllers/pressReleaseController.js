@@ -25,17 +25,17 @@ exports.getPressReleaseById = async (req, res) => {
   }
 };
 
-// Create a new press release
+// Add a new press release
 exports.createPressRelease = async (req, res) => {
   try {
-    const { title, content } = req.body;
+    const { title, content, image } = req.body;
+    console.log(req.body);
 
-    const newRelease = new PressRelease({ title, content });
-    await newRelease.save();
-
-    res.status(201).json(newRelease);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+    const newPressRelease = new PressRelease({ title, content, image });
+    await newPressRelease.save();
+    res.status(201).json(newPressRelease);
+  } catch (err) {
+    res.status(400).json({ message: "Failed to create press release" });
   }
 };
 

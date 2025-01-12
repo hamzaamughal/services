@@ -15,7 +15,7 @@ const serviceRoutes = require("./routes/serviceRoutes");
 const translationRoutes = require("./routes/translationRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const pressReleaseRoutes = require("./routes/pressReleaseRoutes");
-
+const emailRoutes = require("./routes/emailRoutes");
 console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
 
 const app = express();
@@ -41,6 +41,7 @@ app.use("/api/promotions", promotionRoutes);
 app.use("/api/press-releases", pressReleaseRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api/blogs", blogRoutes);
+app.use("/api/email", emailRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

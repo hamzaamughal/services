@@ -14,7 +14,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const navigate = useNavigate("/");
 
   const handleChange = (e) => {
     const { name, value } = e.target;

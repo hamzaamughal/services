@@ -1,105 +1,116 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import api from "../api";
-import "./PressRelease.css"; // Ensure the CSS file is correctly linked
-import Whatsapp from "./Whatsapp";
+import "./PressRelease.css";
+import { useNavigate } from "react-router-dom";
 
-const PressRelease = () => {
-  const [releases, setReleases] = useState([]); // Store fetched data
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
-  const [isAdmin, setIsAdmin] = useState(true); // Simulate admin status (hardcoded for now)
+/*************  ✨ Codeium Command ⭐  *************/
+/**
+ * A page for displaying press releases. It fetches press releases from the API on
+ * mount and displays them as cards. Each card contains the title, date, image,
+ * and content of the press release. If the user is an administrator, an "Add
+ * Press Release" button is displayed that allows them to create a new press
 
+/******  637f579e-c375-4469-9f2f-2b1d4fd109ce  *******/
+const PressReleases = () => {
+  const [pressReleases, setPressReleases] = useState([]);
+  const isAdmin = true; // Hardcoded admin login (for now)
   const navigate = useNavigate();
 
+  // Fetch press releases from the API
   useEffect(() => {
-    // Fetch data from the server
-    const fetchPressReleases = async () => {
-      try {
-        const response = await api.get("/press-releases"); // Fetch from your server URL
-        console.log(response.data);
-        setReleases(response.data); // Store the fetched data
-        setLoading(false);
-      } catch (err) {
-        setError(err.message || "Failed to fetch data");
-        setLoading(false);
-      }
-    };
+    api
+      .get("/press-releases")
+      .then((response) => {
+        setPressReleases(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching press releases:", error);
+      });
+  }, []);
 
-    fetchPressReleases();
-  }, []); // Empty dependency array ensures this runs only once on component mount
-
-  const handleDelete = async (id) => {
-    try {
-      await api.delete(`/press-releases/${id}`); // Delete from your server
-      setReleases(releases.filter((release) => release._id !== id)); // Update state after deletion
-    } catch (err) {
-      console.error("Failed to delete press release:", err.message);
-    }
+  // Handle delete post
+  const deletePost = (id) => {
+    api
+      .delete(`/api/press-releases/${id}`)
+      .then(() => {
+        setPressReleases((prevPosts) =>
+          prevPosts.filter((post) => post._id !== id)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting post:", error);
+      });
   };
 
-  // Handle loading state
-  if (loading) {
-    return <p>Loading press releases...</p>;
-  }
-
-  // Handle error state
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
-
-  // Handle empty data
-  if (!releases.length) {
-    return <p>No press releases available.</p>;
-  }
+  // Handle "Add Press Release" button click
+  const addPressRelease = () => {
+    // For now, simulate an action or navigate to an "Add Press Release" page
+    navigate("/only");
+    // alert("Navigate to 'Add Press Release' form (Feature to be implemented)");
+  };
 
   return (
-    <div className="press-release-list">
-      {/* Show "Add New Press Release" button for admins */}
-      {isAdmin && (
-        <div className="press-release-actions">
+    <div className="press-releases-page">
+      <div className="press-releases-header">
+        <h1>Our Press Releases</h1>
+        {isAdmin && (
           <button
-            className="add-new-press-release"
-            // Use navigate("/add-pressrelease") instead of navigate.push(...)
-            onClick={() => navigate("/add-pressrelease")}
+            className="add-press-release-button"
+            onClick={addPressRelease}
           >
-            Add New Press Release
+            Add Press Release
           </button>
-        </div>
-      )}
-
-      {/* Render list of press releases */}
-      {releases.map((release) => (
-        <div
-          className="press-release-container"
-          key={release.id || release._id}
-        >
-          <div className="press-release-header">
-            <h1 className="press-release-title">{release.title}</h1>
-            <p className="press-release-date">
-              {new Date(release.date).toLocaleDateString()}
-            </p>
-          </div>
-
-          <div className="press-release-content">
-            <p>{release.content}</p>
-          </div>
-
-          {/* Delete button visible only for admins */}
-          {isAdmin && (
+        )}
+      </div>
+      <div className="press-releases-container">
+        {pressReleases.map((post) => (
+          <div className="press-release-card" key={post._id}>
             <button
-              className="delete-press-release"
-              onClick={() => handleDelete(release._id)}
+              className="close-button"
+              onClick={() => deletePost(post._id)}
             >
-              ✖
+              &times;
             </button>
-          )}
-        </div>
-      ))}
-
-      <Whatsapp />
+            <img
+              src={post.image}
+              alt={post.title}
+              className="press-release-image"
+            />
+            <div className="press-release-content">
+              <h2>{post.title}</h2>
+              <p className="press-release-date">
+                {new Date(post.date).toLocaleDateString()}
+              </p>
+              {/* Handle description truncation and "Load More" functionality */}
+              <Description content={post.content} />
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
-export default PressRelease;
+// Component for handling truncation and "Load More" functionality
+const Description = ({ content }) => {
+  const [showFull, setShowFull] = useState(false);
+
+  const toggleShowFull = () => {
+    setShowFull(!showFull);
+  };
+
+  const shortContent = content.slice(0, 100); // Truncate to 100 characters
+
+  return (
+    <div>
+      <p className="press-release-description">
+        {showFull ? content : `${shortContent}...`}
+      </p>
+      <button className="load-more-button" onClick={toggleShowFull}>
+        {showFull ? "Show Less" : "Load More"}
+      </button>
+    </div>
+  );
+};
+
+export default PressReleases;

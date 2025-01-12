@@ -1,40 +1,80 @@
-import { useState } from "react";
-import emailjs from "emailjs-com";
-import React from "react";
+import React, { useState } from "react";
+import api from "../api";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
   name: "",
   email: "",
   message: "",
 };
+
 export const Contact = (props) => {
-  const [{ name, email, message }, setState] = useState(initialState);
+  const [formData, setFormData] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setState((prevState) => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
-  const clearState = () => setState({ ...initialState });
 
+  const clearState = () => setFormData(initialState);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, message);
+    try {
+      const response = await api.post("email/send", formData, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-    emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
-      .then(
-        (result) => {
-          console.log(result.text);
-          clearState();
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+      if (response.status === 200) {
+        toast.success("Message sent successfully!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        clearState();
+      } else {
+        toast.error(`Error: ${response.data.error}`, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred. Please try again.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.error("Error:", error);
+    }
   };
+
   return (
     <div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <div id="contact">
         <div className="container">
           <div className="col-md-8">
@@ -46,7 +86,7 @@ export const Contact = (props) => {
                   get back to you as soon as possible.
                 </p>
               </div>
-              <form name="sentMessage" validate onSubmit={handleSubmit}>
+              <form name="sentMessage" validate="true" onSubmit={handleSubmit}>
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -57,9 +97,9 @@ export const Contact = (props) => {
                         className="form-control"
                         placeholder="Name"
                         required
+                        value={formData.name}
                         onChange={handleChange}
                       />
-                      <p className="help-block text-danger"></p>
                     </div>
                   </div>
                   <div className="col-md-6">
@@ -71,9 +111,9 @@ export const Contact = (props) => {
                         className="form-control"
                         placeholder="Email"
                         required
+                        value={formData.email}
                         onChange={handleChange}
                       />
-                      <p className="help-block text-danger"></p>
                     </div>
                   </div>
                 </div>
@@ -85,11 +125,10 @@ export const Contact = (props) => {
                     rows="4"
                     placeholder="Message"
                     required
+                    value={formData.message}
                     onChange={handleChange}
                   ></textarea>
-                  <p className="help-block text-danger"></p>
                 </div>
-                <div id="success"></div>
                 <button type="submit" className="btn btn-custom btn-lg">
                   Send Message
                 </button>
@@ -99,7 +138,7 @@ export const Contact = (props) => {
           <div className="col-md-3 col-md-offset-1 contact-info">
             <div className="contact-item">
               <h3>Contact Info</h3>
-              <p style={{ fontFamily: 'Arial, sans-serif' }}>
+              <p style={{ fontFamily: "Arial, sans-serif" }}>
                 <span>
                   <i className="fa fa-map-marker"></i> Address
                 </span>
@@ -107,7 +146,7 @@ export const Contact = (props) => {
               </p>
             </div>
             <div className="contact-item">
-              <p style={{ fontFamily: 'Arial, sans-serif' }}>
+              <p style={{ fontFamily: "Arial, sans-serif" }}>
                 <span>
                   <i className="fa fa-phone"></i> Phone
                 </span>{" "}
@@ -115,7 +154,7 @@ export const Contact = (props) => {
               </p>
             </div>
             <div className="contact-item">
-              <p style={{ fontFamily: 'Arial, sans-serif' }}>
+              <p style={{ fontFamily: "Arial, sans-serif" }}>
                 <span>
                   <i className="fa fa-envelope-o"></i> Email
                 </span>{" "}
@@ -148,16 +187,6 @@ export const Contact = (props) => {
           </div>
         </div>
       </div>
-      {/* <div id="footer">
-        <div className="container text-center">
-          <p>
-            &copy; 2023 Issaaf Kattan React Land Page Template. Design by{" "}
-            <a href="http://www.templatewire.com" rel="nofollow">
-              TemplateWire
-            </a>
-          </p>
-        </div>
-      </div> */}
     </div>
   );
 };

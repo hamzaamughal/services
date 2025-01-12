@@ -110,7 +110,7 @@
   font-size: 20px;
   color: #ec9f05;
   margin-right: 15px;
-} 
+}
 
 .benefits-list li::marker {
   color: #ec9f05; /* Set bullet color to orange  */

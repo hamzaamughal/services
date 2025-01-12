@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+// const bcrypt = require("bcrypt");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -16,7 +17,7 @@ const registerController = async (req, res) => {
     }
 
     // 2) Check if user already exists by name OR email
-    const existingUser = await User.findOne({ $or: [{ name }, { email }] });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -25,16 +26,16 @@ const registerController = async (req, res) => {
     }
 
     // 3) Generate salt and hash password
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // var salt = bcrypt.genSaltSync(10);
+    // const hashedPassword = await bcrypt.hashSync(password, salt);
 
-    console.log("hashedPassword:", hashedPassword);
+    // console.log("hashedPassword:", hashedPassword);
 
     // 4) Create a new user
     const newUser = new User({
       name,
       email,
-      password: hashedPassword,
+      password,
       role: role || "user",
     });
 
@@ -66,6 +67,7 @@ const registerController = async (req, res) => {
 const loginUserController = async (req, res) => {
   try {
     const { email, password } = req.body;
+
     console.log("req.body (login):", req.body);
 
     // 1) Validate input
@@ -86,7 +88,8 @@ const loginUserController = async (req, res) => {
     // 3) Compare the plain text password with hashed password in DB
     console.log("user.password:", user.password);
     console.log("password:", password);
-    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    const isPasswordMatch = await bcrypt.compareSync(password, user.password);
     console.log("isPasswordMatch:", isPasswordMatch);
     if (!isPasswordMatch) {
       return res

@@ -14,7 +14,8 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
-import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
+// import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
+import AddPressReleaseForm from "./components/AddPressReleaseForm";
 import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";
@@ -113,7 +114,7 @@ const App = () => {
         <Route path="/promotion" element={<PromotionList />} />
         <Route path="/add-promotion" element={<AddPromotionForm />} />
         <Route path="/pressrelease" element={<PressRelease />} />
-        <Route path="/add-pressrelease" element={<AddPressReleaseForm />} />
+        <Route path="/only" element={<AddPressReleaseForm />} />
       </Routes>
 
       {/* Place the ToastContainer once in your app (often near the end) */}
