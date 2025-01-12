@@ -42,7 +42,7 @@ const PromotionList = () => {
       try {
         await api.delete(`/promotions/${id}`);
         setPromotions((prevPromotions) =>
-          prevPromotions.filter((promotion) => promotion.id !== id)
+          prevPromotions.filter((promotion) => promotion._id !== id)
         );
         alert("Promotion deleted successfully!");
       } catch (err) {
@@ -57,13 +57,14 @@ const PromotionList = () => {
       <div className="promotion-list-container">
         <h2 className="promotion-title">Our Promotions</h2>
         <div className="add-promotion-container">
-          {
-            isAdmin && <button
+          {isAdmin && (
+            <button
               className="add-promotion-button"
               onClick={() => navigate("/add-promotion")}
             >
               Add New Promotion
-            </button>}
+            </button>
+          )}
         </div>
 
         {loading ? (
@@ -96,7 +97,7 @@ const PromotionList = () => {
                 {isAdmin && (
                   <motion.button
                     className="delete-promotion-button"
-                    onClick={() => handleDelete(promotion.id)}
+                    onClick={() => handleDelete(promotion._id)}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
                   >

@@ -114,7 +114,7 @@ const App = () => {
         <Route path="/promotion" element={<PromotionList />} />
         <Route path="/add-promotion" element={<AddPromotionForm />} />
         <Route path="/pressrelease" element={<PressRelease />} />
-        <Route path="/only" element={<AddPressReleaseForm />} />
+        <Route path="/add-pressrelease" element={<AddPressReleaseForm />} />
       </Routes>
 
       {/* Place the ToastContainer once in your app (often near the end) */}

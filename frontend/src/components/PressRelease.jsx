@@ -2,18 +2,12 @@ import React, { useState, useEffect } from "react";
 import api from "../api";
 import "./PressRelease.css";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
-/*************  ✨ Codeium Command ⭐  *************/
-/**
- * A page for displaying press releases. It fetches press releases from the API on
- * mount and displays them as cards. Each card contains the title, date, image,
- * and content of the press release. If the user is an administrator, an "Add
- * Press Release" button is displayed that allows them to create a new press
-
-/******  637f579e-c375-4469-9f2f-2b1d4fd109ce  *******/
 const PressReleases = () => {
   const [pressReleases, setPressReleases] = useState([]);
-  const isAdmin = true; // Hardcoded admin login (for now)
+
+  const { isAdmin } = useAuth();
   const navigate = useNavigate();
 
   // Fetch press releases from the API
@@ -31,7 +25,7 @@ const PressReleases = () => {
   // Handle delete post
   const deletePost = (id) => {
     api
-      .delete(`/api/press-releases/${id}`)
+      .delete(`/press-releases/${id}`)
       .then(() => {
         setPressReleases((prevPosts) =>
           prevPosts.filter((post) => post._id !== id)
@@ -45,7 +39,7 @@ const PressReleases = () => {
   // Handle "Add Press Release" button click
   const addPressRelease = () => {
     // For now, simulate an action or navigate to an "Add Press Release" page
-    navigate("/only");
+    navigate("/add-pressrelease");
     // alert("Navigate to 'Add Press Release' form (Feature to be implemented)");
   };
 
@@ -65,12 +59,14 @@ const PressReleases = () => {
       <div className="press-releases-container">
         {pressReleases.map((post) => (
           <div className="press-release-card" key={post._id}>
-            <button
-              className="close-button"
-              onClick={() => deletePost(post._id)}
-            >
-              &times;
-            </button>
+            {isAdmin && (
+              <button
+                className="close-button"
+                onClick={() => deletePost(post._id)}
+              >
+                &times;
+              </button>
+            )}
             <img
               src={post.image}
               alt={post.title}

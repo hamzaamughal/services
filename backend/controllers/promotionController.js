@@ -58,8 +58,12 @@ exports.updatePromotion = async (req, res) => {
 // Delete a promotion
 exports.deletePromotion = async (req, res) => {
   try {
-    console.log(req.params.id, "id");
-    const deletedPromotion = await Promotion.findByIdAndDelete(req.params.id);
+    const id = req.params.id;
+    console.log(req.body, "boduyyyyyyyy");
+
+    console.log(id, "id");
+
+    const deletedPromotion = await Promotion.findByIdAndDelete(id);
     if (!deletedPromotion)
       return res.status(404).json({ message: "Promotion not found" });
     res.status(200).json({ message: "Promotion deleted successfully" });

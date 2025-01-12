@@ -19,7 +19,7 @@
 
 /* "Add Promotion" button container + button */
 .add-promotion-container {
-  text-align: center;
+  /* text-align: center; */
   margin-bottom: 1.5rem;
 }
 
@@ -56,7 +56,7 @@
 /* Each promotion card: image on left, content on right */
 .promotion-card {
   position: relative; /* for the delete button to be top-right */
-  display: flex;      /* row layout: image (left), content (right) */
+  display: flex; /* row layout: image (left), content (right) */
   flex-direction: row;
   background-color: #fff;
   border-radius: 16px;
