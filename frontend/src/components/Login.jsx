@@ -30,7 +30,7 @@ const Login = () => {
       return;
     }
 
-    setError(""); // Clear previous errors
+    setError("");
 
     try {
       const response = await api.post("/users/login", {
@@ -39,16 +39,17 @@ const Login = () => {
       });
 
       // Typically returns { token, isAdmin, user }
-      const { token, isAdmin, user } = response.data;
+      const { token, user } = response.data;
 
       // Save login info in localStorage
-      localStorage.setItem("token", token);
-      localStorage.setItem("isAdmin", isAdmin);
+      localStorage.setItem("token", JSON.stringify(token));
+      localStorage.setItem("isAdmin", JSON.stringify(user.role));
       localStorage.setItem("user", JSON.stringify(user));
 
       toast.success("Login successful! Redirecting...");
       setTimeout(() => {
         navigate("/");
+        window.location.reload();
       }, 2000);
     } catch (err) {
       console.error("Login error:", err);

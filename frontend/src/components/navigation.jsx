@@ -1,11 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
+import useAuth from "../hooks/useAuth";
 import "./navigation.css"; // Ensure CSS is correctly imported
 
 export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
   const location = useLocation();
   const { pathname, hash } = location;
+
+  // Destructure auth values
+  const { user, isLoggedIn, logout } = useAuth();
 
   // Helper function to check if a main link is active
   const isActiveLink = (linkPath, isHash = false, hashLink = "") => {
@@ -394,9 +398,51 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               <Link to="/pressrelease">Press Release</Link>
             </li>
 
-            {/* Login */}
-            <li>
-              <Link to="/user/login">Login</Link>
+            {/* User / Login / Logout */}
+            <li className="dropdown">
+              <a
+                href="#"
+                className="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                onClick={(e) => e.preventDefault()}
+              >
+                <i className="fa fa-user" />{" "}
+                {isLoggedIn ? user?.name || "User" : ""}
+                <span className="caret" />
+              </a>
+              <ul className="dropdown-menu">
+                {!isLoggedIn && (
+                  <>
+                    <li>
+                      <Link to="/user/login">Login</Link>
+                    </li>
+                    <li>
+                      <Link to="/register">Register</Link>
+                    </li>
+                  </>
+                )}
+                {isLoggedIn && (
+                  <>
+                    <li>
+                      <Link to="/">Profile</Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          logout();
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </li>
+                  </>
+                )}
+              </ul>
             </li>
           </ul>
         </div>

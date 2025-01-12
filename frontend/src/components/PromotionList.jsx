@@ -8,6 +8,8 @@ import Whatsapp from "./Whatsapp";
 // 1) Import Framer Motion
 import { motion } from "framer-motion";
 
+import useAuth from "../hooks/useAuth";
+
 const PromotionList = () => {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -15,6 +17,8 @@ const PromotionList = () => {
 
   // useNavigate from React Router v6
   const navigate = useNavigate();
+
+  const { isAdmin } = useAuth();
 
   useEffect(() => {
     const fetchPromotions = async () => {
@@ -53,12 +57,13 @@ const PromotionList = () => {
       <div className="promotion-list-container">
         <h2 className="promotion-title">Our Promotions</h2>
         <div className="add-promotion-container">
-          <button
-            className="add-promotion-button"
-            onClick={() => navigate("/add-promotion")}
-          >
-            Add New Promotion
-          </button>
+          {
+            isAdmin && <button
+              className="add-promotion-button"
+              onClick={() => navigate("/add-promotion")}
+            >
+              Add New Promotion
+            </button>}
         </div>
 
         {loading ? (
@@ -88,14 +93,16 @@ const PromotionList = () => {
                 transition={{ duration: 0.3 }}
               >
                 {/* Delete button at top-right */}
-                <motion.button
-                  className="delete-promotion-button"
-                  onClick={() => handleDelete(promotion.id)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  &times;
-                </motion.button>
+                {isAdmin && (
+                  <motion.button
+                    className="delete-promotion-button"
+                    onClick={() => handleDelete(promotion.id)}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    &times;
+                  </motion.button>
+                )}
 
                 {/* Image on the left */}
                 <div className="promotion-image-container">

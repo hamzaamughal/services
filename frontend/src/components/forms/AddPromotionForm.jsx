@@ -12,8 +12,7 @@ const AddPromotionForm = () => {
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [image, setImage] = useState(""); // State for image URL
-  const [error, setError] = useState("");
+  const [image, setImage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -48,11 +47,9 @@ const AddPromotionForm = () => {
       setStartDate("");
       setEndDate("");
       setImage("");
-      setError("");
       navigate("/promotion");
     } catch (err) {
       console.error("Error adding promotion:", err);
-      setError("Failed to add promotion. Please try again.");
       toast.error("Failed to add promotion. Please try again.");
     }
   };
@@ -61,7 +58,6 @@ const AddPromotionForm = () => {
     <div className="add-promotion-container">
       <form className="add-promotion-form" onSubmit={handleSubmit}>
         <h3>Add New Promotion</h3>
-        {error && <p className="error-message">{error}</p>}
 
         <div className="form-group">
           <label>Title:</label>

@@ -8,6 +8,8 @@ import Whatsapp from "../components/Whatsapp";
 // Framer Motion for animations
 import { motion } from "framer-motion";
 
+import useAuth from "../hooks/useAuth";
+
 const BlogPage = () => {
  const [blogs, setBlogs] = useState([]);
  const [loading, setLoading] = useState(true);
@@ -15,8 +17,8 @@ const BlogPage = () => {
 
  const navigate = useNavigate();
 
- // Hardcoded admin flag for now
- const admin = true;
+ const { isAdmin } = useAuth();
+ console.log("isAdmin:", isAdmin);
 
  // Fetch blogs on mount
  useEffect(() => {
@@ -54,11 +56,8 @@ const BlogPage = () => {
   <div className="service-page-container">
    <h2 className="service-page-title">Our Blogs</h2>
 
-   {admin && (
-    <button
-     className="add-blog-button"
-     onClick={() => navigate("/add-blog")}
-    >
+   {isAdmin && (
+    <button className="add-blog-button" onClick={() => navigate("/add-blog")}>
      Add New Blog
     </button>
    )}
@@ -87,7 +86,7 @@ const BlogPage = () => {
        transition={{ duration: 0.3 }}
       >
        {/* Delete icon top-right */}
-       {admin && (
+       {isAdmin && (
         <motion.button
          className="delete-icon"
          onClick={(e) => {
