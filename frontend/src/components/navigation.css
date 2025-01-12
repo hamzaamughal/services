@@ -302,3 +302,23 @@
   text-decoration: underline;
   color: #007bff;
 }
+
+/* Make button look like the original <a> link */
+.navbar-default .navbar-nav > li > button.dropdown-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 15px 10px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.navbar-default .navbar-nav > li > button.dropdown-toggle:hover,
+.navbar-default .navbar-nav > li > button.dropdown-toggle:focus {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  background-color: transparent;
+}

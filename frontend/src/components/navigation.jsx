@@ -177,8 +177,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               className={`dropdown ${juridictionsDropdownOpen ? "open" : ""
                 } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
             >
-              <a
-                href="javascript:void(0)"
+              <button
+                type="button"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
@@ -187,7 +187,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 }}
               >
                 Jurisdictions <span className="caret" />
-              </a>
+              </button>
               <AnimatePresence>
                 {juridictionsDropdownOpen && (
                   <motion.ul
@@ -278,8 +278,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               className={`dropdown ${servicesDropdownOpen ? "open" : ""
                 } ${isActiveLink("/services") ? "active" : ""}`}
             >
-              <a
-                href="#"
+              <button
+                type="button"
                 className="dropdown-toggle page-scroll"
                 onClick={(e) => {
                   e.preventDefault();
@@ -289,7 +289,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 }}
               >
                 Services <span className="caret" />
-              </a>
+              </button>
               <AnimatePresence>
                 {servicesDropdownOpen && (
                   <motion.ul
@@ -400,11 +400,10 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* User / Login / Logout */}
             <li className="dropdown">
-              <a
-                href="javascript:void(0)"
+              <button
+                type="button"
                 className="dropdown-toggle"
                 data-toggle="dropdown"
-                role="button"
                 aria-haspopup="true"
                 aria-expanded="false"
                 onClick={(e) => e.preventDefault()}
@@ -412,7 +411,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 <i className="fa fa-user" style={{ marginRight: "5px" }} />
                 {isLoggedIn ? user?.name || "User" : ""}
                 <span className="caret" />
-              </a>
+              </button>
 
 
               <ul className="dropdown-menu">
