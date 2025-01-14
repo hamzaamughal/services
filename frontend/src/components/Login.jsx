@@ -97,7 +97,7 @@ const Login = () => {
               required
             />
             <i
-              className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+              className={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>

@@ -46,7 +46,7 @@ const PressReleases = () => {
   return (
     <div className="press-releases-page">
       <div className="press-releases-header">
-        <h1>Our Press Releases</h1>
+        <h1>OUR PRESS RELEASES</h1>
         {isAdmin && (
           <button
             className="add-press-release-button"

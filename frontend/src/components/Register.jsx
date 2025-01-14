@@ -108,7 +108,7 @@ const Register = () => {
               required
             />
             <i
-              className={showPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+              className={showPassword ? "fa fa-eye" : "fa fa-eye-slash"}
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
@@ -128,7 +128,7 @@ const Register = () => {
               required
             />
             <i
-              className={showConfirmPassword ? "fa fa-eye-slash" : "fa fa-eye"}
+              className={showConfirmPassword ? "fa fa-eye" : "fa fa-eye-slash"}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             />
           </div>
