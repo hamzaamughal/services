@@ -25,6 +25,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
   const letters = currentWord.split("");
 
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
+
   const [juridictionsDropdownOpen, setJuridictionsDropdownOpen] =
     useState(false);
   const [openServicesIndex, setOpenServicesIndex] = useState(null);
@@ -58,8 +59,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Rotate the word every 3 seconds
@@ -80,8 +80,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
-    return () =>
-      document.removeEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Framer Motion variants for the animated letters
@@ -174,8 +173,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""
-                } ${isActiveLink("/jurisdictions") ? "active" : ""}`}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
+                isActiveLink("/jurisdictions") ? "active" : ""
+              } `}
             >
               <button
                 type="button"
@@ -275,8 +275,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Services Dropdown (Simple Dropdown) */}
             <li
-              className={`dropdown ${servicesDropdownOpen ? "open" : ""
-                } ${isActiveLink("/services") ? "active" : ""}`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
+                isActiveLink("/services") ? "active" : ""
+              }`}
             >
               <button
                 type="button"
@@ -328,7 +329,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                             }}
                           >
                             {/* Optional icon */}
-                            {category.icon && <i className={category.icon} />}{" "}
+                            {category.icon && (
+                              <i className={category.icon} />
+                            )}{" "}
                             {category.mainCategory}
                             {/* Display arrow if subCategories exist */}
                             {category.subCategories && (
@@ -406,13 +409,17 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
-                onClick={(e) => e.preventDefault()}
+                onClick={(e) => {
+                  e.preventDefault();
+                }}
               >
-                <i className="fa fa-user" style={{ marginRight: "5px" }} />
+                <i
+                  className="fa fa-user"
+                  style={{ marginRight: "5px", marginTop: "2px" }}
+                />
                 {isLoggedIn ? user?.name || "User" : ""}
                 <span className="caret" />
               </button>
-
 
               <ul className="dropdown-menu">
                 {!isLoggedIn && (

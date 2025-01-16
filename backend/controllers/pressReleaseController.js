@@ -29,9 +29,17 @@ exports.getPressReleaseById = async (req, res) => {
 exports.createPressRelease = async (req, res) => {
   try {
     const { title, content, image } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
 
-    const newPressRelease = new PressRelease({ title, content, image });
+    const imagePath = req.file
+      ? `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`
+      : null;
+
+    const newPressRelease = new PressRelease({
+      title,
+      content,
+      image: imagePath,
+    });
     await newPressRelease.save();
     res.status(201).json(newPressRelease);
   } catch (err) {

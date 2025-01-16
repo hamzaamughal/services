@@ -6,45 +6,80 @@ import useAuth from "../hooks/useAuth";
 
 const PressReleases = () => {
   const [pressReleases, setPressReleases] = useState([]);
-
+  const [loading, setLoading] = useState(true); // Universal loading state
+  const [error, setError] = useState(null); // Error state
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
 
   // Fetch press releases from the API
   useEffect(() => {
-    api
-      .get("/press-releases")
-      .then((response) => {
+    const fetchPressReleases = async () => {
+      try {
+        setLoading(true);
+        const response = await api.get("/press-releases");
         setPressReleases(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching press releases:", error);
-      });
+        setError(null); // Clear any errors
+      } catch (err) {
+        console.error("Error fetching press releases:", err);
+        setError("Failed to load press releases. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPressReleases();
   }, []);
 
   // Handle delete post
-  const deletePost = (id) => {
-    api
-      .delete(`/press-releases/${id}`)
-      .then(() => {
-        setPressReleases((prevPosts) =>
-          prevPosts.filter((post) => post._id !== id)
-        );
-      })
-      .catch((error) => {
-        console.error("Error deleting post:", error);
-      });
+  const deletePost = async (id) => {
+    try {
+      setLoading(true);
+      await api.delete(`/press-releases/${id}`);
+      setPressReleases((prevPosts) =>
+        prevPosts.filter((post) => post._id !== id)
+      );
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      setError("Failed to delete the press release.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   // Handle "Add Press Release" button click
   const addPressRelease = () => {
-    // For now, simulate an action or navigate to an "Add Press Release" page
     navigate("/add-pressrelease");
-    // alert("Navigate to 'Add Press Release' form (Feature to be implemented)");
   };
 
+  // Show loading message
+  if (loading) {
+    return (
+      <div
+        className="container"
+        style={{ marginTop: "100px", textAlign: "center" }}
+      >
+        <p>Loading...</p>
+      </div>
+    );
+  }
+
+  // Show error message
+  if (error) {
+    return (
+      <div
+        className="container"
+        style={{ marginTop: "100px", textAlign: "center" }}
+      >
+        <h1>{error}</h1>
+        <button onClick={() => navigate(-1)} className="btn back-btn">
+          ← Back
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="press-releases-page">
+    <div className="press-releases-page" style={{ marginTop: "100px" }}>
       <div className="press-releases-header">
         <h1>OUR PRESS RELEASES</h1>
         {isAdmin && (
@@ -57,31 +92,34 @@ const PressReleases = () => {
         )}
       </div>
       <div className="press-releases-container">
-        {pressReleases.map((post) => (
-          <div className="press-release-card" key={post._id}>
-            {isAdmin && (
-              <button
-                className="close-button"
-                onClick={() => deletePost(post._id)}
-              >
-                &times;
-              </button>
-            )}
-            <img
-              src={post.image}
-              alt={post.title}
-              className="press-release-image"
-            />
-            <div className="press-release-content">
-              <h2>{post.title}</h2>
-              <p className="press-release-date">
-                {new Date(post.date).toLocaleDateString()}
-              </p>
-              {/* Handle description truncation and "Load More" functionality */}
-              <Description content={post.content} />
+        {pressReleases.length === 0 ? (
+          <p>No press releases available.</p>
+        ) : (
+          pressReleases.map((post) => (
+            <div className="press-release-card fade-in" key={post._id}>
+              {isAdmin && (
+                <button
+                  className="close-button"
+                  onClick={() => deletePost(post._id)}
+                >
+                  &times;
+                </button>
+              )}
+              <img
+                src={post.image}
+                alt={post.title}
+                className="press-release-image"
+              />
+              <div className="press-release-content">
+                <h2>{post.title}</h2>
+                <p className="press-release-date">
+                  {new Date(post.date).toLocaleDateString()}
+                </p>
+                <Description content={post.content} />
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );

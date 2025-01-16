@@ -3,14 +3,15 @@ import { useNavigate } from "react-router-dom";
 import "./AddPressReleaseForm.css";
 import api from "../../api";
 
-const AddPressReleaseForm = ({ onSubmit }) => {
+const AddPressReleaseForm = () => {
   const [newPressRelease, setNewPressRelease] = useState({
     title: "",
     content: "",
     date: "",
-    image:
-      "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+    image: null, // Include image in the same state object
   });
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   // Handle form field changes
@@ -19,34 +20,56 @@ const AddPressReleaseForm = ({ onSubmit }) => {
     setNewPressRelease({ ...newPressRelease, [name]: value });
   };
 
+  // Handle image file selection
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setNewPressRelease({ ...newPressRelease, image: file }); // Update image in the same object
+  };
+
   // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
+    const { title, content, date, image } = newPressRelease;
+    if (!title || !content || !date || !image) {
+      setError("All fields, including an image, are required.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("date", date);
+    formData.append("image", image); // Append the image file
+
     try {
-      const response = await api.post("/press-releases", newPressRelease);
-      if (onSubmit) {
-        onSubmit(response);
-      }
+      await api.post("/press-releases", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
       setNewPressRelease({
         title: "",
         content: "",
         date: "",
-        image:
-          "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+        image: null,
       });
-
-      // Navigate to the press release page
+      setError("");
       navigate("/pressrelease");
     } catch (err) {
       console.error("Error adding press release:", err);
+      setError("Failed to add press release. Please try again.");
     }
   };
 
   return (
-    <form className="add-press-release-form" onSubmit={handleFormSubmit}>
+    <form
+      className="add-press-release-form"
+      onSubmit={handleFormSubmit}
+      encType="multipart/form-data"
+    >
       <div className="form-group">
         <h2>Add New Press Release</h2>
+        {error && <p className="error-message">{error}</p>}
         <label htmlFor="title">Title</label>
         <input
           type="text"
@@ -80,13 +103,13 @@ const AddPressReleaseForm = ({ onSubmit }) => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="image">Image URL</label>
+        <label htmlFor="image">Image</label>
         <input
-          type="url"
+          type="file"
           id="image"
           name="image"
-          value={newPressRelease.image}
-          onChange={handleInputChange}
+          accept="image/*"
+          onChange={handleImageChange}
           required
         />
       </div>

@@ -6,11 +6,15 @@ import "./AddBlogForm.css";
 
 const AddBlogForm = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(null);
+  const [image, setImage] = useState("");
   const [error, setError] = useState("");
 
   const navigate = useNavigate();
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -19,19 +23,22 @@ const AddBlogForm = () => {
       return;
     }
 
-    const newBlog = {
-      title,
-      description,
-      image:
-        "https://images.unsplash.com/photo-1487611459768-bd414656ea10?w=900&auto=format&fit=crop&q=60",
-    };
+    const formdata = new FormData();
+    formdata.append("title", title);
+    formdata.append("description", description);
+    formdata.append("image", image);
 
     try {
-      await api.post("/blogs", newBlog);
+      await api.post("/blogs", formdata, {
+        headers: {
+          "Content-Type": "multipart/form-data,",
+        },
+      });
       // If success (2xx), show toast, navigate, etc.
       toast.success("Blog added successfully!");
       setTitle("");
       setDescription("");
+      setImage(null);
       setError("");
       navigate("/blog");
     } catch (err) {
@@ -68,10 +75,10 @@ const AddBlogForm = () => {
         <div className="form-group">
           <label>Image (Hardcoded):</label>
           <input
-            type="text"
-            value="https://images.unsplash.com/photo-1487611459768-bd414656ea10?w=900&auto=format&fit=crop&q=60"
-            disabled
-            readOnly
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            required
           />
         </div>
         <button type="submit" className="submit-button">

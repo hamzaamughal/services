@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { toast } from "react-toastify"; // <-- Import toast
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import api from "../../api";
 import "./AddPromotionForm.css";
@@ -12,33 +12,38 @@ const AddPromotionForm = () => {
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null); // File object
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Create promotion object
-    const newPromotion = {
-      title,
-      description,
-      image:
-        image ||
-        "https://www.shutterstock.com/image-vector/special-offer-banner-vector-template-260nw-2474802375.jpg",
-      startDate,
-      endDate,
-    };
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("startDate", startDate);
+    formData.append("endDate", endDate);
+
+    // Append the file only if it exists
+    if (image) {
+      formData.append("image", image);
+    }
 
     try {
-      const response = await api.post("/promotions", newPromotion);
+      const response = await api.post("/promotions", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       console.log("Server response:", response);
 
-      // If status not in 2xx range, show error
+      // If the response status is not in the 2xx range, show an error
       if (response.status < 200 || response.status >= 300) {
         toast.error("Failed to add promotion. Please try again.");
         return;
       }
 
-      // Otherwise, success
+      // Success
       toast.success("Promotion added successfully!");
 
       // Clear form fields
@@ -46,7 +51,7 @@ const AddPromotionForm = () => {
       setDescription("");
       setStartDate("");
       setEndDate("");
-      setImage("");
+      setImage(null);
       navigate("/promotion");
     } catch (err) {
       console.error("Error adding promotion:", err);
@@ -99,12 +104,11 @@ const AddPromotionForm = () => {
         </div>
 
         <div className="form-group">
-          <label>Image (URL for now):</label>
+          <label>Image:</label>
           <input
-            type="text"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            placeholder="Paste an Image URL (optional)"
+            type="file"
+            accept="image/*"
+            onChange={(e) => setImage(e.target.files[0])} // Capture the selected file
           />
         </div>
 

@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const morgan = require("morgan");
+const path = require("path");
 
 // Routes
 const userRoutes = require("./routes/userRoutes");
@@ -42,7 +43,8 @@ app.use("/api/press-releases", pressReleaseRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/email", emailRoutes);
-
+// Serve static files from the uploads directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}🚀🚀`));
