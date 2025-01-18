@@ -79,7 +79,7 @@ const PressReleases = () => {
   }
 
   return (
-    <div className="press-releases-page" style={{ marginTop: "100px" }}>
+    <div className="press-releases-page" style={{ marginTop: "40px" }}>
       <div className="press-releases-header">
         <h1>OUR PRESS RELEASES</h1>
         {isAdmin && (
