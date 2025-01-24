@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./SubServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
+import ContactForm from "./ContactForm";
 
 export const SubServiceDetailPage = ({ jurisdictionsData }) => {
   // 1) Hooks
@@ -11,6 +12,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
   // We'll track "see more" toggles separately for Key Benefits and Why Choose points
   const [showAllKeyBenefits, setShowAllKeyBenefits] = useState(false);
   const [showAllWhyChoose, setShowAllWhyChoose] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
   // 2) Extract subService route from the URL
   // subServiceRoute comes directly from useParams()
@@ -72,6 +74,9 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
     ? whyChoosePoints
     : whyChoosePoints.slice(0, 3);
 
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
   // 7) Render
   return (
     <div>
@@ -153,8 +158,18 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
             </div>
           )}
         </div>
+        <button className="start-now-button" onClick={() => setShowForm(true)}>
+          Start Now
+        </button>
       </div>
       <Whatsapp />
+      {showForm && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <ContactForm handleCloseForm={handleCloseForm} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };

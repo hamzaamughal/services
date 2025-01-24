@@ -17,6 +17,7 @@ const translationRoutes = require("./routes/translationRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const pressReleaseRoutes = require("./routes/pressReleaseRoutes");
 const emailRoutes = require("./routes/emailRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 console.log("Stripe Secret Key:", process.env.STRIPE_SECRET_KEY);
 
 const app = express();
@@ -43,6 +44,7 @@ app.use("/api/press-releases", pressReleaseRoutes);
 app.use("/api", serviceRoutes);
 app.use("/api/blogs", blogRoutes);
 app.use("/api/email", emailRoutes);
+app.use("/api/contact", contactRoutes);
 // Serve static files from the uploads directory
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Start server

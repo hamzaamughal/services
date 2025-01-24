@@ -31,7 +31,7 @@ const AddBlogForm = () => {
     try {
       await api.post("/blogs", formdata, {
         headers: {
-          "Content-Type": "multipart/form-data,",
+          "Content-Type": "multipart/form-data",
         },
       });
       // If success (2xx), show toast, navigate, etc.

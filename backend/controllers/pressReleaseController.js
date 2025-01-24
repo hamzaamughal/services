@@ -5,7 +5,6 @@ exports.getAllPressReleases = async (req, res) => {
   try {
     const releases = await PressRelease.find();
     console.log(releases);
-
     res.status(200).json(releases);
   } catch (error) {
     res.status(500).json({ error: error.message });

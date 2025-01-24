@@ -20,6 +20,9 @@ import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";
 
+// import GetInTouchForm from "./components/GetInTouchForm";
+import ContactForm from "./components/ContactForm";
+
 // Import ToastContainer and CSS
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -75,6 +78,7 @@ const App = () => {
           }
         />
 
+        {/* <GetInTouchForm /> */}
         {/* Jurisdiction Detail Route */}
         <Route
           path="/jurisdictions/:jurisdictionRoute"
@@ -115,6 +119,7 @@ const App = () => {
         <Route path="/add-promotion" element={<AddPromotionForm />} />
         <Route path="/pressrelease" element={<PressRelease />} />
         <Route path="/add-pressrelease" element={<AddPressReleaseForm />} />
+        <Route path="/contactform" element={<ContactForm />} />
       </Routes>
 
       {/* Place the ToastContainer once in your app (often near the end) */}

@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./ServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
+import ContactForm from "./ContactForm";
 
 /**
  * Utility function to parse the HTML description string.
@@ -39,6 +40,11 @@ function parseDescriptionIntoSections(html) {
 export const ServiceDetailPage = ({ servicesData }) => {
   const navigate = useNavigate();
   const { serviceRoute } = useParams();
+  const [showForm, setShowForm] = useState(true); // State to toggle the form popup
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
 
   if (!servicesData || servicesData.length === 0) {
     return <div className="loading">Loading...</div>;
@@ -102,9 +108,7 @@ export const ServiceDetailPage = ({ servicesData }) => {
             )}
             {selectedService.zoneName && (
               <div className="zone-block">
-                <h3 className="zone-title">
-                  Zone: {selectedService.zoneName}
-                </h3>
+                <h3 className="zone-title">Zone: {selectedService.zoneName}</h3>
                 <p className="zone-description">
                   {selectedService.zoneDescription}
                 </p>
@@ -124,8 +128,21 @@ export const ServiceDetailPage = ({ servicesData }) => {
             </div>
           ))}
         </div>
+        <button
+          className="start-now-button-service"
+          onClick={() => setShowForm(true)}
+        >
+          Start Now
+        </button>
       </div>
       <Whatsapp />
+      {showForm && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+            <ContactForm handleCloseForm={handleCloseForm} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
