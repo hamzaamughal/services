@@ -82,6 +82,7 @@
 /* Cards Container */
 .cards-container {
   display: flex;
+
   flex-wrap: wrap;
   gap: 20px;
   padding: 30px 20px;
@@ -113,9 +114,14 @@
 .benefits-list strong {
   color: #4169e1;
 }
+.start-now-button-parent {
+  position: relative;
+  overflow: hidden;
+}
 
 .start-now-button {
-  position: absolute;
+  position: fixed;
+  z-index: 100000;
   right: 5px;
   top: 20px;
   background: green;

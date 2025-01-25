@@ -87,9 +87,14 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
             </ul>
           </div>
         </div>
-        <button className="start-now-button" onClick={() => setShowForm(true)}>
-          Start Now
-        </button>
+        <div className="start-now-button-parent">
+          <button
+            className="start-now-button"
+            onClick={() => setShowForm(true)}
+          >
+            Start Now
+          </button>
+        </div>
       </div>
 
       {/* WhatsApp Component */}
