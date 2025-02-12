@@ -9,7 +9,6 @@ export const BlogDetailPage = () => {
   const { id } = useParams(); // Get blog ID from URL parameters
   const [blog, setBlog] = useState(null); // Store the blog data
   const [loading, setLoading] = useState(true); // Track loading state
-  // const [error, setError] = useState(null); // Track error state
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -17,10 +16,8 @@ export const BlogDetailPage = () => {
         setLoading(true);
         const response = await api.get(`/blogs/${id}`);
         setBlog(response.data); // Assuming API returns the blog object
-        setError(null); // Clear any previous errors
       } catch (err) {
         console.error("Error fetching blog:", err);
-        setError("Failed to load blog post. Please try again later.");
       } finally {
         setLoading(false);
       }
