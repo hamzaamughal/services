@@ -38,7 +38,7 @@ function parseDescriptionIntoSections(html) {
 }
 
 export const ServiceDetailPage = ({ servicesData }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { serviceRoute } = useParams();
   const [showForm, setShowForm] = useState(true); // State to toggle the form popup
 
@@ -81,9 +81,9 @@ export const ServiceDetailPage = ({ servicesData }) => {
       <div className="service-detail-container fade-in">
         <div className="back-button-container">
           {/* Use navigate(-1) to simulate a "go back" action */}
-          <button onClick={() => navigate(-1)} className="btn back-btn">
+          {/* <button onClick={() => navigate(-1)} className="btn back-btn">
             ← Back
-          </button>
+          </button> */}
         </div>
 
         <div className="service-top-section fade-in">

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./SubServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
 import ContactForm from "./ContactForm";
 
 export const SubServiceDetailPage = ({ jurisdictionsData }) => {
   // 1) Hooks
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { subServiceRoute } = useParams(); // <-- useParams hook instead of match.params
 
   // We'll track "see more" toggles separately for Key Benefits and Why Choose points
@@ -81,13 +81,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
   return (
     <div>
       <div className="subservice-detail-container fade-in">
-        {/* Back button */}
-        <div className="fixed-back-button">
-          {/* Use navigate(-1) to go one step back in history */}
-          <button onClick={() => navigate(-1)} className="btn back-btn">
-            ← Back
-          </button>
-        </div>
+        
 
         {/* Hero / Background Image Section */}
         <div
@@ -120,7 +114,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
                 ))}
               </ul>
 
-              {keyBenefits.length > 3 && (
+              {/* {keyBenefits.length > 3 && (
                 <div className="see-more-container">
                   <button
                     className="btn see-more-btn"
@@ -129,7 +123,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
                     {showAllKeyBenefits ? "See Less" : "See More"}
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           )}
 
@@ -145,7 +139,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
                 ))}
               </ul>
 
-              {whyChoosePoints.length > 3 && (
+              {/* {whyChoosePoints.length > 3 && (
                 <div className="see-more-container">
                   <button
                     className="btn see-more-btn"
@@ -154,7 +148,7 @@ export const SubServiceDetailPage = ({ jurisdictionsData }) => {
                     {showAllWhyChoose ? "See Less" : "See More"}
                   </button>
                 </div>
-              )}
+              )} */}
             </div>
           )}
         </div>

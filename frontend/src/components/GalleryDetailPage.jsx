@@ -32,9 +32,9 @@ export const GalleryDetailPage = ({ galleryData }) => {
    <div className="row">
     <div className="col-12">
      {/* Use navigate(-1) to go back in history */}
-     <button onClick={() => navigate(-1)} className="btn back-btn">
+     {/* <button onClick={() => navigate(-1)} className="btn back-btn">
       ← Back
-     </button>
+     </button> */}
     </div>
    </div>
 

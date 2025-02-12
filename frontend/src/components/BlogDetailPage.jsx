@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom"; // Updated for react-router-dom v6+
+import { useParams } from "react-router-dom"; // Updated for react-router-dom v6+
 import "./BlogDetailPage.css"; // For the fade-in animation and any extra styles.
 import Whatsapp from "./Whatsapp";
 import api from "../api";
 
 export const BlogDetailPage = () => {
-  const navigate = useNavigate(); // Replaced useHistory with useNavigate
+  // const navigate = useNavigate(); // Replaced useHistory with useNavigate
   const { id } = useParams(); // Get blog ID from URL parameters
   const [blog, setBlog] = useState(null); // Store the blog data
   const [loading, setLoading] = useState(true); // Track loading state
-  const [error, setError] = useState(null); // Track error state
+  // const [error, setError] = useState(null); // Track error state
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -38,16 +38,16 @@ export const BlogDetailPage = () => {
     );
   }
 
-  if (error || !blog) {
-    return (
-      <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
-        <h1>{error || "Blog Post not found"}</h1>
-        <button onClick={() => navigate(-1)} className="btn back-btn">
-          ← Back
-        </button>
-      </div>
-    );
-  }
+  // if (error || !blog) {
+  //   return (
+  //     <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
+  //       <h1>{error || "Blog Post not found"}</h1>
+  //       <button onClick={() => navigate(-1)} className="btn back-btn">
+  //         ← Back
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <>
@@ -55,9 +55,9 @@ export const BlogDetailPage = () => {
         <div className="row">
           <div className="col-12">
             {/* Back Button */}
-            <button onClick={() => navigate(-1)} className="btn back-btn">
+            {/* <button onClick={() => navigate(-1)} className="btn back-btn">
               ← Back
-            </button>
+            </button> */}
           </div>
         </div>
         <div className="row fade-in" style={{ marginTop: "20px" }}>

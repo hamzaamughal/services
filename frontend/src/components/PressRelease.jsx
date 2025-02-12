@@ -71,9 +71,9 @@ const PressReleases = () => {
         style={{ marginTop: "100px", textAlign: "center" }}
       >
         <h1>{error}</h1>
-        <button onClick={() => navigate(-1)} className="btn back-btn">
+        {/* <button onClick={() => navigate(-1)} className="btn back-btn">
           ← Back
-        </button>
+        </button> */}
       </div>
     );
   }

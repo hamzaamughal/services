@@ -4,7 +4,6 @@ import { Features } from "../components/features";
 import { About } from "../components/about";
 import { Services } from "../components/services";
 import { Testimonials } from "../components/testimonials";
-import { Team } from "../components/Team";
 import { Contact } from "../components/contact";
 import { Blog } from "../components/blog";
 import Whatsapp from "../components/Whatsapp";
@@ -35,7 +34,7 @@ export const Home = ({ landingPageData }) => {
       <Services data={landingPageData?.Services} />
       <Blog data={landingPageData?.Blog} />
       <Testimonials data={landingPageData?.Testimonials} />
-      <Team data={landingPageData?.Team} />
+      {/* <Team data={landingPageData?.Team} /> */}
       <Contact data={landingPageData?.Contact} />
 
       {/* WhatsApp Floating Button */}

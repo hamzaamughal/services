@@ -27,54 +27,20 @@ export const Contact = (props) => {
       });
 
       if (response.status === 200) {
-        toast.success("Message sent successfully!", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.success("Message sent successfully!");
         clearState();
       } else {
-        toast.error(`Error: ${response.data.error}`, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
+        toast.error(`Error: ${response.data.error}`);
       }
     } catch (error) {
-      toast.error("An unexpected error occurred. Please try again.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+      toast.error("An unexpected error occurred. Please try again.");
       console.error("Error:", error);
     }
   };
 
   return (
     <div>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
+      <ToastContainer />
       <div id="contact">
         <div className="container">
           <div className="col-md-8">
@@ -135,18 +101,31 @@ export const Contact = (props) => {
               </form>
             </div>
           </div>
+
           <div className="col-md-3 col-md-offset-1 contact-info">
             <div className="contact-item">
               <h3>Contact Info</h3>
-              <p style={{ fontFamily: "Arial, sans-serif" }}>
+              <p>
                 <span>
                   <i className="fa fa-map-marker"></i> Address
                 </span>
+                <div className="google-map">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3613.1123315581026!2d55.1563586774692!3d25.0980585538996!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6b4164e9f477%3A0x873c65b1c9eb0f7e!2sConcord%20Tower%20-%20Al%20Sufouh%20-%20Al%20Sufouh%202%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1739365525536!5m2!1sen!2s"
+                width="100%"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Google Map"
+              ></iframe>
+            </div>
                 {props.data ? props.data.address : "loading"}
               </p>
             </div>
             <div className="contact-item">
-              <p style={{ fontFamily: "Arial, sans-serif" }}>
+              <p>
                 <span>
                   <i className="fa fa-phone"></i> Phone
                 </span>{" "}
@@ -154,14 +133,16 @@ export const Contact = (props) => {
               </p>
             </div>
             <div className="contact-item">
-              <p style={{ fontFamily: "Arial, sans-serif" }}>
+              <p>
                 <span>
                   <i className="fa fa-envelope-o"></i> Email
                 </span>{" "}
                 {props.data ? props.data.email : "loading"}
               </p>
             </div>
+            
           </div>
+
           <div className="col-md-12">
             <div className="row">
               <div className="social">
@@ -185,8 +166,10 @@ export const Contact = (props) => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   );
 };
+

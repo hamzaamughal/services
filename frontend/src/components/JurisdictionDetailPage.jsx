@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./JurisdictionDetailPage.css";
 import Whatsapp from "./Whatsapp";
 import ContactForm from "./ContactForm";
 
 export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
   const [showForm, setShowForm] = useState(true); // State to toggle the form popup
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { jurisdictionRoute } = useParams();
 
   const routeParam = jurisdictionRoute.replace("/", "");
@@ -48,11 +48,6 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
     <div>
       <div className="jurisdiction-detail-container fade-in">
         {/* Back button */}
-        <div className="fixed-back-button">
-          <button onClick={() => navigate(-1)} className="btn back-btn">
-            ← Back
-          </button>
-        </div>
 
         {/* Hero Section */}
         <div

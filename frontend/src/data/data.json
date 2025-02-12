@@ -256,7 +256,7 @@
             {
               "name": "DMCC",
               "route": "/freezone-authorities/dmcc",
-              "image": "/img/dubai3.jpg",
+              "image": "/img/dmcc.jpg",
               "content": {
                 "title": "DMCC Free Zone - A Gateway to Global Business",
                 "introParagraphs": [
@@ -283,7 +283,7 @@
             {
               "name": "JAFZA",
               "route": "/freezone-authorities/jafza",
-              "image": "/img/dubai4.jpg",
+              "image": "/img/jafza.jpg",
               "content": {
                 "title": "JAFZA - Your Gateway to Global Trade and Business Growth",
                 "introParagraphs": [
@@ -312,7 +312,7 @@
             {
               "name": "DAFZA",
               "route": "/freezone-authorities/dafza",
-              "image": "/img/dubai5.jpg",
+              "image": "/img/dafza.jpg",
               "content": {
                 "title": "DAFZA - A Premium Business Hub for Global Connectivity and Innovation",
                 "introParagraphs": [
@@ -340,7 +340,7 @@
             {
               "name": "Dubai Silicon Oasis (DSO)",
               "route": "/freezone-authorities/dso",
-              "image": "/img/dubai.jpg",
+              "image": "/img/dso.jpg",
               "content": {
                 "title": "Dubai Silicon Oasis (DSO) – Empowering Innovation and Shaping the Future of Technology",
                 "introParagraphs": [
@@ -370,7 +370,7 @@
             {
               "name": "Dubai International Financial Centre (DIFC)",
               "route": "/freezone-authorities/difc",
-              "image": "/img/dubai2.jpg",
+              "image": "/img/difc.jpg",
               "content": {
                 "title": "Dubai International Financial Centre (DIFC) – The Heart of Global Finance and Innovation",
                 "introParagraphs": [
@@ -399,7 +399,7 @@
             {
               "name": "Dubai Healthcare City (DHCC)",
               "route": "/freezone-authorities/dhcc",
-              "image": "/img/dubai3.jpg",
+              "image": "/img/dhcc.jpg",
               "content": {
                 "title": "Dubai Healthcare City (DHCC) – A Leading Hub for Healthcare and Life Sciences Innovation",
                 "introParagraphs": [
@@ -428,7 +428,7 @@
             {
               "name": "Dubai Design District (D3)",
               "route": "/freezone-authorities/d3",
-              "image": "/img/dubai4.jpg",
+              "image": "/img/d3.jpg",
               "content": {
                 "title": "Dubai Design District (D3) – Where Creativity Meets Innovation",
                 "introParagraphs": [
@@ -515,7 +515,7 @@
             {
               "name": "Dubai Knowledge Park (DKP)",
               "route": "/freezone-authorities/dkp",
-              "image": "/img/Dubai_Knowledge_Park.jpg",
+              "image": "/img/dkp.webp",
               "content": {
                 "title": "Dubai Knowledge Park (DKP) – Empowering Education, Innovation, and Professional Growth",
                 "introParagraphs": [
@@ -544,7 +544,7 @@
             {
               "name": "Dubai Production City (DPC)",
               "route": "/freezone-authorities/dpc",
-              "image": "/img/dubai_production_city.jpg",
+              "image": "/img/dpc.avif",
               "content": {
                 "title": "Dubai Production City (DPC) – The Ultimate Hub for Manufacturing, Media, and Production Excellence",
                 "introParagraphs": [
@@ -573,7 +573,7 @@
             {
               "name": "Dubai World Trade Centre (DWTC)",
               "route": "/freezone-authorities/dwtc",
-              "image": "/img/Dubai_World_Trade_Center.webp",
+              "image": "/img/dwtc.jpg",
               "content": {
                 "title": "Dubai World Trade Centre (DWTC) – A Gateway to Global Business and Trade Excellence",
                 "introParagraphs": [
@@ -689,7 +689,7 @@
             {
               "name": "Dubai Maritime City (DMC)",
               "route": "/freezone-authorities/dmc-maritime",
-              "image": "/img/dubai3.jpg",
+              "image": "/img/DMC.jpg",
               "content": {
                 "title": "Dubai Maritime City – The Premier Destination for Maritime and Marine Businesses",
                 "introParagraphs": [
