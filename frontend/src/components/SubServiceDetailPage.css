@@ -87,7 +87,7 @@
   max-width: 500px; /* optional max width */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .card-title {
