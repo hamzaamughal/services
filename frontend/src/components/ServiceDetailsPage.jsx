@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./ServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
 import ContactForm from "./ContactForm";

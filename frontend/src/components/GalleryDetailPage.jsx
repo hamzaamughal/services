@@ -1,9 +1,8 @@
 import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './GalleryDetailPage.css';
 
 export const GalleryDetailPage = ({ galleryData }) => {
- const navigate = useNavigate();
  const { galleryId } = useParams();           // <-- useParams replaces match.params.galleryId
  const galleryIndex = parseInt(galleryId, 10);
 
