@@ -110,7 +110,7 @@
     },
     {
       "mainCategory": "Visa Services",
-      "icon": "fa fa-cc-visa",
+      "icon": "fa fa-home",
       "subCategories": [
         {
           "name": "Residence Visa Services",
@@ -122,7 +122,7 @@
     },
     {
       "mainCategory": " Golden Visa",
-      "icon": "fa fa-cc-visa",
+      "icon": "fa fa-magic",
       "subCategories": [
         {
           "name": "Golden Visa Services",
