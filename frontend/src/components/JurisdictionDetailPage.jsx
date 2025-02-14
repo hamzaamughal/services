@@ -1,21 +1,25 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "./Loader"; // <-- Adjust the path as needed
 import "./JurisdictionDetailPage.css";
 import Whatsapp from "./Whatsapp";
 import ContactForm from "./ContactForm";
 
 export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
-  const [showForm, setShowForm] = useState(true); // State to toggle the form popup
-  // const navigate = useNavigate();
+  const [showForm, setShowForm] = useState(true);
   const { jurisdictionRoute } = useParams();
 
+  // Clean up the route param
   const routeParam = jurisdictionRoute.replace("/", "");
 
+  // If no data, show the Loader
   if (!jurisdictionsData || jurisdictionsData.length === 0) {
-    return <div className="loading">Loading...</div>;
+    return <Loader />;
   }
 
   let selectedJurisdiction = null;
+
+  // Find the matching sub-category
   jurisdictionsData.forEach((category) => {
     if (category.subCategories) {
       category.subCategories.forEach((sub) => {
@@ -27,13 +31,16 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
     }
   });
 
+  // If not found, show an error
   if (!selectedJurisdiction) {
     return <h1>Jurisdiction not found</h1>;
   }
 
+  // Destructure relevant data
   const { name, image, content } = selectedJurisdiction;
   const { title, table } = content || {};
 
+  // Prepare table data
   const tableItems = table || [];
   const half = Math.ceil(tableItems.length / 2);
   const tableFirstHalf = tableItems.slice(0, half);
@@ -47,8 +54,6 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
   return (
     <div>
       <div className="jurisdiction-detail-container fade-in">
-        {/* Back button */}
-
         {/* Hero Section */}
         <div
           className="hero-section"
@@ -71,7 +76,6 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
               ))}
             </ul>
           </div>
-
           <div className="card">
             <ul className="benefits-list">
               {tableSecondHalf.map((item, index) => (
@@ -82,11 +86,9 @@ export const JurisdictionDetailPage = ({ jurisdictionsData }) => {
             </ul>
           </div>
         </div>
+
         <div className="start-now-button-parent">
-          <button
-            className="start-now-button"
-            onClick={() => setShowForm(true)}
-          >
+          <button className="start-now-button" onClick={() => setShowForm(true)}>
             Start Now
           </button>
         </div>

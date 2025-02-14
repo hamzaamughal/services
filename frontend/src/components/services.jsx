@@ -1,6 +1,7 @@
 import React from "react";
 import "./services.css";
 import { Link } from "react-router-dom";
+import Loader from "./Loader";
 
 export const Services = (props) => {
   return (
@@ -42,7 +43,7 @@ export const Services = (props) => {
               </div>
             ))
           ) : (
-            <p>loading</p>
+            <Loader />
           )}
         </div>
       </div>

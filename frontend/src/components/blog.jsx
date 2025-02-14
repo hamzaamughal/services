@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Image } from "./image";
 import api from "../api";
 import { Link } from "react-router-dom";
+import Loader from "./Loader"; // <-- Adjust path as needed
 
 export const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -10,8 +11,8 @@ export const Blog = () => {
     const getBlogData = async () => {
       try {
         const { data } = await api.get("/blogs");
-        // Assuming the blogs are sorted by latest first. If not, sort them before slicing.
-        setBlogs(data.slice(0, 6)); // Take only the first 6 blogs
+        // Take only the first 6 blogs
+        setBlogs(data.slice(0, 6));
       } catch (err) {
         console.error("Error fetching blogs:", err);
       }
@@ -38,7 +39,7 @@ export const Blog = () => {
                 </div>
               ))
             ) : (
-              <p>Loading...</p>
+              <Loader />
             )}
           </div>
         </div>

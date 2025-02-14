@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "./ServiceDetailPage.css";
 import Whatsapp from "./Whatsapp";
 import ContactForm from "./ContactForm";
+import Loader from "./Loader";
 
 /**
  * Utility function to parse the HTML description string.
@@ -47,7 +48,9 @@ export const ServiceDetailPage = ({ servicesData }) => {
   };
 
   if (!servicesData || servicesData.length === 0) {
-    return <div className="loading">Loading...</div>;
+    return <div>
+      <Loader />
+    </div>;
   }
 
   let selectedService = null;

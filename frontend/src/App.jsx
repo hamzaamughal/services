@@ -14,21 +14,17 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PromotionList from "./components/PromotionList";
 import PressRelease from "./components/PressRelease";
-// import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
 import AddPressReleaseForm from "./components/forms/AddPressReleaseForm";
 import AddPromotionForm from "./components/forms/AddPromotionForm";
 import AddBlogForm from "./components/forms/AddBlogForm";
 import BlogPage from "./pages/BlogPage";
-
-// import GetInTouchForm from "./components/GetInTouchForm";
 import ContactForm from "./components/ContactForm";
 
 // Import ToastContainer and CSS
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// If you have a Footer component, import it here:
-// import { Footer } from "./components/footer";
+import Loader from "./components/Loader";
 
 export const scroll = new SmoothScroll('a[href*="#"]', {
   speed: 1000,
@@ -37,6 +33,7 @@ export const scroll = new SmoothScroll('a[href*="#"]', {
 
 const App = () => {
   const [landingPageData, setLandingPageData] = useState({});
+
   useEffect(() => {
     setLandingPageData(JsonData);
   }, []);
@@ -54,6 +51,7 @@ const App = () => {
         {/* Home Route */}
         <Route path="/" element={<Home landingPageData={landingPageData} />} />
 
+        {/* Blog */}
         <Route path="/blog" element={<BlogPage />} />
         <Route
           path="/blog/:id"
@@ -61,25 +59,25 @@ const App = () => {
             landingPageData.Blog ? (
               <BlogDetailPage />
             ) : (
-              <div className="loading">Loading...</div>
+              <Loader />
             )
           }
         />
         <Route path="/add-blog" element={<AddBlogForm />} />
 
+        {/* Gallery */}
         <Route
           path="/gallery/:galleryId"
           element={
             landingPageData.Gallery ? (
               <GalleryDetailPage galleryData={landingPageData.Gallery} />
             ) : (
-              <div className="loading">Loading...</div>
+              <Loader />
             )
           }
         />
 
-        {/* <GetInTouchForm /> */}
-        {/* Jurisdiction Detail Route */}
+        {/* Jurisdictions */}
         <Route
           path="/jurisdictions/:jurisdictionRoute"
           element={
@@ -88,11 +86,10 @@ const App = () => {
                 jurisdictionsData={landingPageData.Jurisdictions}
               />
             ) : (
-              <div className="loading">Loading...</div>
+              <Loader />
             )
           }
         />
-
         <Route
           path="/jurisdictions/freezone-authorities/:subServiceRoute"
           element={
@@ -102,27 +99,35 @@ const App = () => {
           }
         />
 
-        {/* Service Detail Route */}
+        {/* Services */}
         <Route
           path="/services/:serviceRoute"
           element={
             landingPageData.Services ? (
               <ServiceDetailPage servicesData={landingPageData.Services} />
             ) : (
-              <div>Loading.......</div>
+              <Loader />
             )
           }
         />
+
+        {/* User */}
         <Route path="/user/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* Promotions */}
         <Route path="/promotion" element={<PromotionList />} />
         <Route path="/add-promotion" element={<AddPromotionForm />} />
+
+        {/* Press Releases */}
         <Route path="/pressrelease" element={<PressRelease />} />
         <Route path="/add-pressrelease" element={<AddPressReleaseForm />} />
+
+        {/* Contact Form */}
         <Route path="/contactform" element={<ContactForm />} />
       </Routes>
 
-      {/* Place the ToastContainer once in your app (often near the end) */}
+      {/* ToastContainer (use once at the root level) */}
       <ToastContainer />
 
       {/* If you have a Footer component, place it here */}

@@ -4,11 +4,12 @@ import moment from "moment";
 import api from "../api";
 import "./BlogPage.css";
 import Whatsapp from "../components/Whatsapp";
-
-// Framer Motion for animations
 import { motion } from "framer-motion";
-
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
+
+// Import your Loader component (adjust path if needed)
+import Loader from "../components/Loader";
 
 const BlogPage = () => {
  const [blogs, setBlogs] = useState([]);
@@ -16,9 +17,7 @@ const BlogPage = () => {
  const [error, setError] = useState(null);
 
  const navigate = useNavigate();
-
  const { isAdmin } = useAuth();
- console.log("isAdmin:", isAdmin);
 
  // Fetch blogs on mount
  useEffect(() => {
@@ -30,6 +29,7 @@ const BlogPage = () => {
    } catch (err) {
     console.error("Error fetching blogs:", err);
     setError("Failed to fetch blogs. Please try again later.");
+    toast.error("Failed to fetch blogs. Please try again later.");
    } finally {
     setLoading(false);
    }
@@ -42,13 +42,15 @@ const BlogPage = () => {
   navigate(`/blog/${blogId}`);
  };
 
+ // Delete blog
  const handleDelete = async (blogId) => {
   try {
    await api.delete(`/blogs/${blogId}`);
    setBlogs((prevBlogs) => prevBlogs.filter((b) => b._id !== blogId));
+   toast.success("Blog deleted successfully!");
   } catch (err) {
    console.error("Error deleting blog:", err);
-   alert("Failed to delete blog. Please try again.");
+   toast.error("Failed to delete blog. Please try again.");
   }
  };
 
@@ -62,14 +64,14 @@ const BlogPage = () => {
     </button>
    )}
 
+   {/* Render Loader, Error, or Blog content */}
    {loading ? (
-    <p className="loading-message">Loading blogs...</p>
+    <Loader />
    ) : error ? (
     <p className="error-message">{error}</p>
    ) : blogs.length === 0 ? (
     <p className="no-blogs-message">No blogs available at the moment.</p>
    ) : (
-    // Use motion.div or motion.ul for the container
     <motion.div
      className="blog-cards-container"
      initial={{ opacity: 0 }}
@@ -85,7 +87,7 @@ const BlogPage = () => {
        exit={{ opacity: 0, y: 20 }}
        transition={{ duration: 0.3 }}
       >
-       {/* Delete icon top-right */}
+       {/* Delete icon top-right (only if admin) */}
        {isAdmin && (
         <motion.button
          className="delete-icon"

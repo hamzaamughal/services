@@ -19,19 +19,37 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     return pathname.startsWith(linkPath);
   };
 
+  // Words for the dynamic brand animation
   const words = ["Services", "Consulting", "Commercial"];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const currentWord = words[currentWordIndex];
   const letters = currentWord.split("");
 
+  // Dropdown states
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
-
   const [juridictionsDropdownOpen, setJuridictionsDropdownOpen] =
     useState(false);
   const [openServicesIndex, setOpenServicesIndex] = useState(null);
   const [freezoneOpenIndex, setFreezoneOpenIndex] = useState(null);
+
+  // Ref for detecting outside clicks
   const navRef = useRef(null);
 
+  // ------------------------------------------
+  // 1) Helper: Close the mobile navbar
+  // ------------------------------------------
+  const closeMobileMenu = () => {
+    const collapseElement = document.getElementById(
+      "bs-example-navbar-collapse-1"
+    );
+    if (collapseElement && collapseElement.classList.contains("in")) {
+      collapseElement.classList.remove("in");
+    }
+  };
+
+  // ------------------------------------------
+  // 2) Services & Freezone toggles
+  // ------------------------------------------
   const handleServicesHover = (index) => {
     setOpenServicesIndex(openServicesIndex === index ? null : index);
   };
@@ -40,29 +58,28 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     setFreezoneOpenIndex(freezoneOpenIndex === index ? null : index);
   };
 
-  // Close dropdowns if clicked outside
+  // ------------------------------------------
+  // 3) Close dropdowns if clicked outside
+  // ------------------------------------------
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (navRef.current && !navRef.current.contains(e.target)) {
         setServicesDropdownOpen(false);
         setJuridictionsDropdownOpen(false);
         setFreezoneOpenIndex(null);
+        setOpenServicesIndex(null);
 
-        // Close the mobile menu if open
-        const collapseElement = document.getElementById(
-          "bs-example-navbar-collapse-1"
-        );
-        if (collapseElement && collapseElement.classList.contains("in")) {
-          collapseElement.classList.remove("in");
-        }
+        // Also close the mobile menu if open
+        closeMobileMenu();
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Rotate the word every 3 seconds
+  // ------------------------------------------
+  // 4) Rotate the word every 3 seconds
+  // ------------------------------------------
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentWordIndex((prevIndex) => (prevIndex + 1) % words.length);
@@ -70,27 +87,17 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
     return () => clearInterval(intervalId);
   }, [words.length]);
 
-  // Another listener in case you want to specifically close dropdown on clicks
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setServicesDropdownOpen(false);
-        setJuridictionsDropdownOpen(false);
-        setFreezoneOpenIndex(null);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Framer Motion variants for the animated letters
+  // ------------------------------------------
+  // 5) Framer Motion variants
+  // ------------------------------------------
+  // Letter animations
   const letterVariants = {
     initial: { y: 10, opacity: 0 },
     animate: { y: 0, opacity: 1 },
     exit: { y: -10, opacity: 0 },
   };
 
-  // Framer Motion variants for the dropdown menus
+  // Dropdown animations
   const dropdownVariants = {
     initial: { opacity: 0, height: 0 },
     animate: { opacity: 1, height: "auto" },
@@ -104,6 +111,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
       ref={navRef}
     >
       <div className="container conatiner_Box">
+        {/* -------------------------------- */}
+        {/* 6) Navbar Header / Brand         */}
+        {/* -------------------------------- */}
         <div className="navbar-header">
           {/* Mobile toggle button */}
           <button
@@ -112,9 +122,11 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1"
             onClick={() => {
+              // Reset states when toggling menu
               setServicesDropdownOpen(false);
               setJuridictionsDropdownOpen(false);
               setFreezoneOpenIndex(null);
+              setOpenServicesIndex(null);
             }}
           >
             <span className="sr-only">Toggle navigation</span>
@@ -128,10 +140,14 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
             to="/"
             className="navbar-brand page-scroll"
             style={{ color: "#4169e1" }}
+            onClick={() => {
+              // Close menu on brand click (mobile)
+              closeMobileMenu();
+            }}
           >
             <span className="mpriveColor">MPRIVE </span>
             <span className="dynamic-word-container">
-              {/* AnimatePresence to handle letter animations */}
+              {/* AnimatePresence for letter animations */}
               <AnimatePresence mode="popLayout">
                 {letters.map((letter, index) => (
                   <motion.span
@@ -151,6 +167,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
           </Link>
         </div>
 
+        {/* -------------------------------- */}
+        {/* 7) Collapse Navbar               */}
+        {/* -------------------------------- */}
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"
@@ -165,6 +184,9 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                   setServicesDropdownOpen(false);
                   setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
+                  // Close menu on mobile
+                  closeMobileMenu();
                 }}
               >
                 About Us
@@ -173,9 +195,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Jurisdictions Dropdown */}
             <li
-              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${
-                isActiveLink("/jurisdictions") ? "active" : ""
-              } `}
+              className={`dropdown ${juridictionsDropdownOpen ? "open" : ""} ${isActiveLink("/jurisdictions") ? "active" : ""
+                } `}
             >
               <button
                 type="button"
@@ -184,6 +205,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                   e.preventDefault();
                   setJuridictionsDropdownOpen(!juridictionsDropdownOpen);
                   setServicesDropdownOpen(false);
+                  setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
                 }}
               >
                 Jurisdictions <span className="caret" />
@@ -217,20 +240,22 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                                 : `/jurisdictions${jurisdiction.route}`
                             }
                             onClick={() => {
-                              // On click, toggle or navigate
                               if (jurisdiction.subServices) {
                                 setFreezoneOpenIndex(
                                   freezoneOpenIndex === idx ? null : idx
                                 );
                               } else {
+                                // If it doesn't have subServices, we are navigating
                                 setJuridictionsDropdownOpen(false);
                                 setServicesDropdownOpen(false);
+                                setFreezoneOpenIndex(null);
+                                setOpenServicesIndex(null);
+                                closeMobileMenu();
                               }
                             }}
                           >
                             {/* Icon for the main jurisdiction */}
-                            <i className={jurisdiction.icon} />{" "}
-                            {jurisdiction.name}
+                            <i className={jurisdiction.icon} /> {jurisdiction.name}
                             {jurisdiction.subServices && (
                               <span className=" arrow-right" />
                             )}
@@ -256,6 +281,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                                           setJuridictionsDropdownOpen(false);
                                           setServicesDropdownOpen(false);
                                           setFreezoneOpenIndex(null);
+                                          setOpenServicesIndex(null);
+                                          closeMobileMenu();
                                         }}
                                       >
                                         <i className={sub.icon} /> {sub.name}
@@ -273,11 +300,10 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
               </AnimatePresence>
             </li>
 
-            {/* Services Dropdown (Simple Dropdown) */}
+            {/* Services Dropdown (Simple) */}
             <li
-              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${
-                isActiveLink("/services") ? "active" : ""
-              }`}
+              className={`dropdown ${servicesDropdownOpen ? "open" : ""} ${isActiveLink("/services") ? "active" : ""
+                }`}
             >
               <button
                 type="button"
@@ -287,6 +313,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                   setServicesDropdownOpen(!servicesDropdownOpen);
                   setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
                 }}
               >
                 Services <span className="caret" />
@@ -324,14 +351,14 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                                 );
                               } else {
                                 setServicesDropdownOpen(false);
+                                setJuridictionsDropdownOpen(false);
                                 setFreezoneOpenIndex(null);
+                                setOpenServicesIndex(null);
+                                closeMobileMenu();
                               }
                             }}
                           >
-                            {/* Optional icon */}
-                            {category.icon && (
-                              <i className={category.icon} />
-                            )}{" "}
+                            {category.icon && <i className={category.icon} />}{" "}
                             {category.mainCategory}
                             {/* Display arrow if subCategories exist */}
                             {category.subCategories && (
@@ -339,7 +366,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                             )}
                           </Link>
 
-                          {/* Nested Sub-Menu for subCategories */}
+                          {/* Nested Sub-Menu */}
                           <AnimatePresence>
                             {category.subCategories &&
                               openServicesIndex === idx && (
@@ -357,8 +384,10 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                                         to={`/services${sub.route}`}
                                         onClick={() => {
                                           setServicesDropdownOpen(false);
+                                          setJuridictionsDropdownOpen(false);
                                           setFreezoneOpenIndex(null);
                                           setOpenServicesIndex(null);
+                                          closeMobileMenu();
                                         }}
                                       >
                                         {sub.icon && <i className={sub.icon} />}{" "}
@@ -385,6 +414,8 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                   setServicesDropdownOpen(false);
                   setJuridictionsDropdownOpen(false);
                   setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
+                  closeMobileMenu();
                 }}
               >
                 Blogs
@@ -393,12 +424,34 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
 
             {/* Promotions */}
             <li>
-              <Link to="/promotion">Promotions</Link>
+              <Link
+                to="/promotion"
+                onClick={() => {
+                  setServicesDropdownOpen(false);
+                  setJuridictionsDropdownOpen(false);
+                  setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
+                  closeMobileMenu();
+                }}
+              >
+                Promotions
+              </Link>
             </li>
 
             {/* Press Release */}
             <li>
-              <Link to="/pressrelease">Press Release</Link>
+              <Link
+                to="/pressrelease"
+                onClick={() => {
+                  setServicesDropdownOpen(false);
+                  setJuridictionsDropdownOpen(false);
+                  setFreezoneOpenIndex(null);
+                  setOpenServicesIndex(null);
+                  closeMobileMenu();
+                }}
+              >
+                Press Release
+              </Link>
             </li>
 
             {/* User / Login / Logout */}
@@ -425,17 +478,38 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                 {!isLoggedIn && (
                   <>
                     <li>
-                      <Link to="/user/login">Login</Link>
+                      <Link
+                        to="/user/login"
+                        onClick={() => {
+                          closeMobileMenu();
+                        }}
+                      >
+                        Login
+                      </Link>
                     </li>
                     <li>
-                      <Link to="/register">Register</Link>
+                      <Link
+                        to="/register"
+                        onClick={() => {
+                          closeMobileMenu();
+                        }}
+                      >
+                        Register
+                      </Link>
                     </li>
                   </>
                 )}
                 {isLoggedIn && (
                   <>
                     <li>
-                      <Link to="/">Profile</Link>
+                      <Link
+                        to="/"
+                        onClick={() => {
+                          closeMobileMenu();
+                        }}
+                      >
+                        Profile
+                      </Link>
                     </li>
                     <li>
                       <Link
@@ -443,6 +517,7 @@ export const Navigation = ({ servicesData, jurisdictionsData, loginData }) => {
                         onClick={(e) => {
                           e.preventDefault();
                           logout();
+                          closeMobileMenu();
                         }}
                       >
                         Logout

@@ -4,20 +4,20 @@ import moment from "moment";
 import api from "../api";
 import "./PromotionList.css";
 import Whatsapp from "./Whatsapp";
-
-// 1) Import Framer Motion
 import { motion } from "framer-motion";
-
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+// Import your Loader component (adjust path as needed)
+import Loader from "./Loader";
 
 const PromotionList = () => {
   const [promotions, setPromotions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // useNavigate from React Router v6
   const navigate = useNavigate();
-
   const { isAdmin } = useAuth();
 
   useEffect(() => {
@@ -44,10 +44,10 @@ const PromotionList = () => {
         setPromotions((prevPromotions) =>
           prevPromotions.filter((promotion) => promotion._id !== id)
         );
-        alert("Promotion deleted successfully!");
+        toast.error("Promotion deleted successfully!");
       } catch (err) {
         console.error("Error deleting promotion:", err);
-        alert("Failed to delete the promotion. Please try again.");
+        toast.info("Failed to delete the promotion. Please try again.");
       }
     }
   };
@@ -67,8 +67,9 @@ const PromotionList = () => {
           )}
         </div>
 
+        {/* Conditional Rendering for loading/error or the list */}
         {loading ? (
-          <p className="loading-message">Loading promotions...</p>
+          <Loader />
         ) : error ? (
           <p className="error-message">{error}</p>
         ) : promotions.length === 0 ? (
@@ -76,7 +77,6 @@ const PromotionList = () => {
             No promotions available at the moment.
           </p>
         ) : (
-          // 2) Use a motion.div container for the grid
           <motion.div
             className="promotion-grid"
             initial={{ opacity: 0 }}
@@ -84,16 +84,14 @@ const PromotionList = () => {
             transition={{ duration: 0.5 }}
           >
             {promotions.map((promotion) => (
-              // 3) Animate each promotion card
               <motion.div
-                key={promotion.id}
+                key={promotion._id}
                 className="promotion-card"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                {/* Delete button at top-right */}
                 {isAdmin && (
                   <motion.button
                     className="delete-promotion-button"
@@ -104,8 +102,6 @@ const PromotionList = () => {
                     &times;
                   </motion.button>
                 )}
-
-                {/* Image on the left */}
                 <div className="promotion-image-container">
                   <img
                     src={promotion.image}
@@ -113,13 +109,9 @@ const PromotionList = () => {
                     className="promotion-image"
                   />
                 </div>
-
-                {/* Content on the right */}
                 <div className="promotion-content">
                   <h3 className="promotion-name">{promotion.title}</h3>
-                  <p className="promotion-description">
-                    {promotion.description}
-                  </p>
+                  <p className="promotion-description">{promotion.description}</p>
                   <p className="promotion-expiry">
                     Offer valid until:{" "}
                     <span>
@@ -130,9 +122,7 @@ const PromotionList = () => {
                   </p>
                   <motion.button
                     className="claim-promotion-button"
-                    onClick={() =>
-                      alert(`Claimed promotion: ${promotion.title}`)
-                    }
+                    onClick={() => toast.success("Claimed successfully!")}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

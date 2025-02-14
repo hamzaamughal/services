@@ -1,45 +1,51 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import api from "../../api";
 import "./AddBlogForm.css";
 
 const AddBlogForm = () => {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState(null);
-  const [image, setImage] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
     setImage(e.target.files[0]);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Basic Validation
     if (!title.trim() || !description.trim()) {
       setError("Title and description cannot be empty.");
       return;
     }
 
-    const formdata = new FormData();
-    formdata.append("title", title);
-    formdata.append("description", description);
-    formdata.append("image", image);
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("image", image);
 
     try {
-      await api.post("/blogs", formdata, {
+      await api.post("/blogs", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      // If success (2xx), show toast, navigate, etc.
+      // Success toast
       toast.success("Blog added successfully!");
+
+      // Clear form
       setTitle("");
       setDescription("");
       setImage(null);
       setError("");
+
+      // Navigate back to the blog listing page
       navigate("/blog");
     } catch (err) {
       console.error("Error adding blog:", err);
@@ -73,7 +79,7 @@ const AddBlogForm = () => {
           />
         </div>
         <div className="form-group">
-          <label>Image (Hardcoded):</label>
+          <label>Image:</label>
           <input
             type="file"
             accept="image/*"

@@ -3,11 +3,14 @@ import api from "../api";
 import "./PressRelease.css";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Loader from "../components/Loader"; // Adjust path if needed
 
 const PressReleases = () => {
   const [pressReleases, setPressReleases] = useState([]);
-  const [loading, setLoading] = useState(true); // Universal loading state
-  const [error, setError] = useState(null); // Error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
 
@@ -18,7 +21,7 @@ const PressReleases = () => {
         setLoading(true);
         const response = await api.get("/press-releases");
         setPressReleases(response.data);
-        setError(null); // Clear any errors
+        setError(null);
       } catch (err) {
         console.error("Error fetching press releases:", err);
         setError("Failed to load press releases. Please try again later.");
@@ -34,12 +37,14 @@ const PressReleases = () => {
   const deletePost = async (id) => {
     try {
       setLoading(true);
-      await api.delete(`/press-releases/${id}`);
+      await api.delete(`/press-releases/${id}`); // Use correct string interpolation
+      toast.success("Press release deleted successfully!");
       setPressReleases((prevPosts) =>
         prevPosts.filter((post) => post._id !== id)
       );
     } catch (error) {
       console.error("Error deleting post:", error);
+      toast.error("Failed to delete the press release.");
       setError("Failed to delete the press release.");
     } finally {
       setLoading(false);
@@ -51,14 +56,11 @@ const PressReleases = () => {
     navigate("/add-pressrelease");
   };
 
-  // Show loading message
+  // Show loader while fetching or deleting
   if (loading) {
     return (
-      <div
-        className="container"
-        style={{ marginTop: "100px", textAlign: "center" }}
-      >
-        <p>Loading...</p>
+      <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
+        <Loader />
       </div>
     );
   }
@@ -66,14 +68,8 @@ const PressReleases = () => {
   // Show error message
   if (error) {
     return (
-      <div
-        className="container"
-        style={{ marginTop: "100px", textAlign: "center" }}
-      >
+      <div className="container" style={{ marginTop: "100px", textAlign: "center" }}>
         <h1>{error}</h1>
-        {/* <button onClick={() => navigate(-1)} className="btn back-btn">
-          ← Back
-        </button> */}
       </div>
     );
   }
@@ -83,10 +79,7 @@ const PressReleases = () => {
       <div className="press-releases-header">
         <h1>OUR PRESS RELEASES</h1>
         {isAdmin && (
-          <button
-            className="add-press-release-button"
-            onClick={addPressRelease}
-          >
+          <button className="add-press-release-button" onClick={addPressRelease}>
             Add Press Release
           </button>
         )}
