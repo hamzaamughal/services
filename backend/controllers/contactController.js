@@ -9,27 +9,32 @@ exports.submitContactForm = async (req, res) => {
 
   try {
     const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "smtp.zoho.com",
       port: 587,
       secure: false,
       auth: {
-        user: process.env.EMAIL_USER, // Replace with your admin email
-        pass: process.env.EMAIL_PASS, // Replace with your email password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: email,
-      to: process.env.EMAIL_USER, // Replace with your admin email
+      from: process.env.EMAIL_USER, // Use your admin email for sending
+      replyTo: email, // User's email as reply-to
+      to: process.env.EMAIL_USER, // Your admin email receiving the message
       subject: "New Contact Form Submission",
       text: `You have received a new message:\n\nFull Name: ${fullName}\nEmail: ${email}\nPhone: ${phone}\nMessage: ${message}`,
     };
 
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Form submitted successfully!" });
+    const info = await transporter.sendMail(mailOptions);
+    
+    console.log("Email sent successfully:", info);
+    return res.status(200).json({ message: "Form submitted successfully!" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error sending email. Please try again later." });
+    console.error("Error sending email:", error);
+
+    return res.status(500).json({
+      message: "Error sending email. Please try again later."
+    });
   }
 };
