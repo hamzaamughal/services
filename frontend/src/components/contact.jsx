@@ -136,8 +136,21 @@ export const Contact = (props) => {
               <p>
                 <span>
                   <i className="fa fa-envelope-o"></i> Email
-                </span>{" "}
-                {props.data ? props.data.email : "loading"}
+                </span>
+                {props.data && props.data.email && props.data.email.length > 0 ? (
+                  props.data.email.map((email, index) => (
+                    <div key={index}>
+                       <a
+                        href={`mailto:${email}`}
+                        style={{ color: "white", backgroundColor: "transparent" }}
+                      >
+                        - {email}
+                      </a>
+                    </div>
+                  ))
+                ) : (
+                  "loading"
+                )}
               </p>
             </div>
             

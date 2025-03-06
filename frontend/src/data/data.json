@@ -810,7 +810,7 @@
   "Contact": {
     "address": "Unit 701, Concord Tower, Media City, Dubai, UAE",
     "phone": "+97145572251",
-    "email": "Office@mprive.com",
+    "email": ["consulting@mprivecb.com", "Inf@mprivecb.com"],
     "facebook": "fb.com",
     "twitter": "twitter.com",
     "youtube": "youtube.com"
