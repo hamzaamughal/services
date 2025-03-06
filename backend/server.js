@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
-  res.json({ message: "Hello from MPRIVE backend🎖️" });
+  res.json({ message: "Hello from MPRIVE backend Updated🎖️" });
 });
 
 app.use("/api", translationRoutes);

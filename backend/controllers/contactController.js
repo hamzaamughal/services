@@ -28,7 +28,6 @@ exports.submitContactForm = async (req, res) => {
 
     const info = await transporter.sendMail(mailOptions);
     
-    console.log("Email sent successfully:", info);
     return res.status(200).json({ message: "Form submitted successfully!" });
   } catch (error) {
     console.error("Error sending email:", error);
